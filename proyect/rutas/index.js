@@ -1,8 +1,8 @@
 import express from "express";
-import {paginaInicio,pagHoteles,pagGerentes,paginaHabitaciones,crearHoteles,crearGerentes,crearHabitaciones} from '../controller/paginasController.js';
+import {paginaInicio,pagHoteles,pagGerentes,paginaHabitaciones,crearHoteles,crearGerentes} from '../controller/paginasController.js';
 import {getGerentes,putGerente,postGerente,deleteGerente} from '../controller/controladorGerente.js';
 import {getHoteles,putHoteles,postHoteles,deleteHoteles} from '../controller/controladorHotel.js';
-import {getHabitacion,putHabitacion,deleteHabitacion,verMas,postHabitacion,cancelarHab} from '../controller/controladorHabitacion.js';
+import {getHabitacion,putHabitacion,deleteHabitacion,verMas,postHabitacion,cancelarHab,paginaCraerHabitacion} from '../controller/controladorHabitacion.js';
 
 
 const rutas = express.Router();
@@ -26,7 +26,7 @@ rutas.post('/gerentes',postGerente);
 rutas.post('/gerentes/modificar',putGerente);
 rutas.get('/gerentes/eliminar',deleteGerente);
 // rutas crud habitaciones
-rutas.get('/crearHabitacion',crearHabitaciones);
+rutas.get('/crearHabitacion',paginaCraerHabitacion);
 rutas.post('/crearHabitacion',postHabitacion);
 rutas.get('/modificarHabitacion',getHabitacion);
 rutas.post('/habitacion/modificar',putHabitacion);

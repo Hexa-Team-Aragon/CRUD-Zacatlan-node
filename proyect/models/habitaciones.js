@@ -7,17 +7,10 @@ const Habitaciones = db.define('habitaciones', {
         primaryKey: true,
     },
     id_ht: {
-        type: Sequelize.INTEGER,
-        foreignKey: true,
+        type: Sequelize.INTEGER
     },
-    piso: {
-        type: Sequelize.STRING
-    },
-    nombre: {
-        type: Sequelize.STRING
-    },
-    refrigerador: {
-        type: Sequelize.BOOLEAN
+    id_cat:{
+        type: Sequelize.INTEGER
     }
 }, { timestamps: false });
 

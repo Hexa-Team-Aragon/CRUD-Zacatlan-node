@@ -47,14 +47,6 @@ const paginaHabitaciones = (req, res) => {
     pagina: "Habitaciones",
   });
 }
-const crearHabitaciones = (req, res) => {
-  res.render('crearHabitacion', {
-    pagina: 'Registro de habitación',
-    
-  });
-}
-
-
 
 export {
   paginaInicio,
@@ -63,6 +55,5 @@ export {
   paginaHabitaciones,
   crearHoteles,
   crearGerentes,
-  crearHabitaciones,
 }
 
