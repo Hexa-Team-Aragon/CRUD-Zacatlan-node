@@ -1,0 +1,31 @@
+extends ./layout/index.pug 
+block compartircontenido 
+    h1.text-center.pt-4.fw-bold #{pagina}
+    main.container.mt-5#text2
+        .container.text-center.mb-4.mt-0
+            a(href='/crearHotel', class='btn btn-success btn-clock') Registrar hotel
+        
+        .row
+            each hotel in hoteles 
+                .col-ms.col-lg-4.mv-4.d-flex.align-items-sm-stretch
+                    .container-fluid.card.mb-4.px-2#cardHotel
+                        .container-fluid.d-flex.pt-3
+                            span.container-fluid.d-flex
+                                img.card-img-center.pe-1(src='/images/hotel_4.png', alt='...',width='50px',height='50px')
+                                p.fs-4.my-auto.mx-auto=`${hotel.nombre}`
+                        .card-body.pt-1 
+                            fieldset.pt-1
+                                label.form-label.mb-1(for='readOnlyInput') Dirección:
+                                input#readOnlyInput.form-control(type='text', readonly='', value=hotel.direccion)
+                            fieldset.mt-2
+                                label.form-label.mb-1(for='readOnlyInput') E-mail:
+                                input#readOnlyInput.form-control(type='text', readonly='', value=hotel.correo)
+                            fieldset.mt-2
+                                label.form-label.mb-1(for='readOnlyInput') Teléfono:
+                                input#readOnlyInput.form-control(type='number', readonly='', value=hotel.telefono)
+                              
+                            .container-fluid.d-flex.pt-3.text-center.justify-content-center
+                                .btn-group.p-0.my-auto(role='group' aria-label='Basic mixed styles example')
+                                    a(href=`/verMas?id=${hotel.id_ht}`, class='btn btn-primary btn-clock') Detalles
+                                    a(href=`/modificarHotel?id=${hotel.id_ht}`, class='btn btn-warning btn-clock') Editar 
+                                    a(href=`/hoteles/eliminar?id=${hotel.id_ht}`, class='btn btn-danger btn-clock') Eliminar

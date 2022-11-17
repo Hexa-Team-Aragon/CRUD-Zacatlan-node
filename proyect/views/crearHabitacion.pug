@@ -1,0 +1,28 @@
+extends ./layout/index.pug
+block compartircontenido 
+    main.container.mt-5
+        .row 
+            
+                .col-md-12 
+                    h2.d.block.w-100.text-center.fw-bold #{pagina} 
+                    if (errores)
+                        each error in errores
+                            .alert.col.alert-danger.text-center=error.mensaje 
+                .row.justify-content-center 
+                    .col-md-5 
+                        form(action="/crearHabitacion",method="post")
+                            .form-group.mt-4.mb-2
+                                label.mb-1(for="nombre") Nombre de la habitación:  
+                                input(type="text",required maxlength="30", placeholder="Nombre de la habitación", name="nombre",class="form-control",value=nombre)
+                            .container-fluid.d-flex.py-auto.px-0
+                                .container.flex-row.ps-0
+                                    .form-group.mt-2.container-fluid.d-flex.px-0
+                                        label.my-1.col-3(for="piso") Piso:
+                                        input.h-100(type="text", required maxlength="10", placeholder="Piso", name="piso",class="form-control",value=piso)
+                                .container.flex-row
+                                    fieldset.mt-2
+                                        label.form-check-label.col-6.me-3.mt-1(for='flexCheckDefault') Refrigerador: 
+                                        input#flexCheckDefault.form-check-input.mt-2(type='checkbox', name="refrigerador", value=refrigerador)
+                            .container-fluid.d-flex.justify-content-center.my-4
+                                input.btn.btn-success.btn-block.me-5(type="submit",value="Registrar")
+                                a(href=`/cancelarHab`, class='btn btn-danger btn-clock') Cancelar

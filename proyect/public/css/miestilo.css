@@ -1,0 +1,226 @@
+@font-face {
+  font-family: sec;
+  src: url(../fonts/Secular_One/SecularOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: rubikB;
+  src: url(../fonts/Rubik/Rubik-Bold.ttf);
+}
+
+@font-face {
+  font-family: rubik;
+  src: url(../fonts/Rubik/Rubik-Regular.ttf);
+}
+
+@font-face {
+  font-family: nunitoBI;
+  src: url(../fonts/Nunito/Nunito-BlackItalic.ttf);
+}
+
+@font-face {
+  font-family: nunitoSB;
+  src: url(../fonts/Nunito/Nunito-SemiBold.ttf);
+}
+@font-face {
+  font-family: nunito;
+  src: url(../fonts/Nunito/Nunito-Regular.ttf);
+}
+#titulo {
+  font-family: sec;
+  font-size: 25px;
+}
+a#titulo:hover{
+  outline: auto;
+
+}
+
+.selec{
+  outline: auto;
+}
+
+#header {
+  background-image: url(../images/barra2.jpg);
+  background-size: contain;
+  height: 80px;
+}
+
+footer{
+  background-image: url(../images/barra2.jpg);
+  background-size: contain;
+  margin-top: auto;
+  width: 100%;
+}
+
+body{
+  background-image: url(../images/fondo3.jpg);
+  background-size: contain;
+  
+  font-family: rubik;
+  background-repeat: repeat;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#image {
+  background-image: url(../images/reloj.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 410px;
+  align-items: flex-end;
+
+}
+
+#texto1 {
+  color: white;
+  background-size: 500px 600px;
+  font-family: sec;
+  font-style: italic;
+  font-size: 70px;
+  width: 670px;
+}
+
+#image2 {
+  background-image: url(../images/patron16.jpg);
+  background-size: contain;
+  height: 40px;
+  position: relative;
+}
+
+#card1 {
+  background-color: #ffbe33;
+  border-radius: 8px;
+  color: azure;
+  border-width: 5px;
+  border-color: #ba8b27;
+  text-align: justify;
+  font-family: nunitoSB;
+}
+
+#h1 {
+  border-radius: 20px;
+  border: solid 7px #ba8b27;
+  background-color: #ffbe33;
+  color: azure;
+  font-family: nunitoBI;
+}
+
+#bi1 {
+  border-radius: 20px;
+  border: groove 10px #ba8b27;
+}
+
+#card2 {
+  background-color: #cd6ab2;
+  border-radius: 6px;
+  color: azure;
+  border-width: 5px;
+  border-color: #a63889df;
+  text-align: justify;
+  font-family: nunitoSB;
+}
+
+#h2 {
+  border-radius: 20px;
+  border: solid 7px #a63889df;
+  background-color: #cd6ab2;
+  color: azure;
+  font-family: nunitoBI;
+}
+
+#bi2 {
+  border-radius: 20px;
+  border: groove 10px #a63889df;
+}
+
+#card3 {
+  background-color: #eb4362;
+  border-radius: 5px 7%;
+  color: azure;
+  border-width: 5px;
+  font-family: nunitoSB;
+}
+
+#li1 {
+  background-color: #eb4362;
+  border-bottom: 5px solid;
+  border-color: #c23751;
+  color: azure;
+  text-align: justify;
+  font-family: nunito;
+}
+
+#li1-2 {
+  background-color: #eb4362;
+  border-radius: 20px 100%;
+  color: azure;
+  text-align: justify;
+  font-family: nunito;
+}
+
+#card4 {
+  background-color: #ff8a3c;
+  border-radius: 5px 7%;
+  color: azure;
+  border-width: 5px;
+  font-family: nunitoSB;
+}
+#li2 {
+  background-color: #ff8a3c;
+  border-bottom: 5px solid;
+  border-color: #d27231;
+  color: azure;
+  text-align: justify;
+  font-family: nunito;
+}
+
+#li2-2 {
+  background-color: #ff8a3c;
+  border-radius: 20px 100%;
+  color: azure;
+  text-align: justify;
+  font-family: nunito;
+}
+
+
+
+#cardHotel {
+  background-color: #fae46b;
+  border-radius: 10px 15%;
+  border: groove 10px #a68b39;
+}
+
+#detHotel {
+  background-color: #fae46b;
+  border-radius: 10px;
+  border: groove 10px #a68b39;
+}
+
+#cardGerente {
+  background-color: #fea963;
+  border-radius: 10px 20%;
+  border: groove 10px #c74a24;
+}
+
+#cardHabitacion {
+  background-color: #f48e8e;
+  border-radius: 10px 15%;
+  border: groove 10px #f82c2c;
+}
+
+#detGerente {
+  background-color: #fea963;
+  border-radius: 10px;
+  border: groove 10px #dc5931;
+}
+
+#text {
+  font-family: nunito;
+}
+
+#text2 {
+  font-family: rubik;
+}

@@ -1,0 +1,70 @@
+extends ./layout/index.pug 
+block compartircontenido 
+    h1.text-center.pt-4.fw-bold #{pagina}
+    main.container.mt-4
+        .container.text-center.mb-3.mt-0
+            a.mx-2.px-1(href=`crearHabitacion?id=${hotel.id_ht}`, class='btn btn-success btn-clock') Registrar habitación
+        .container-fluid
+            .row
+                .container.d-flex
+                    .card.mb-4.m-3.p-0.container-fluid#detHotel
+                        .card-header.text-center.h4 Detalles del hotel
+                        .card-body.py-1
+                            p.card-text
+                                .form-group.mx-2
+                                    fieldset.mt-2
+                                        label.form-label.mb-1(for='readOnlyInput') Nombre:
+                                        input#readOnlyInput.form-control(type='text', readonly='', value=hotel.nombre)
+                                    fieldset.mt-2
+                                        label.form-label.mb-1(for='readOnlyInput') Dirección: 
+                                        input#readOnlyInput.form-control(type='text', readonly='', value=hotel.direccion)
+                                    fieldset.mt-2
+                                        label.form-label.mb-1(for='readOnlyInput') E-mail:
+                                        input#readOnlyInput.form-control(type='text', readonly='', value=hotel.correo)
+                                    fieldset.mt-2
+                                        label.form-label.mb-1(for='readOnlyInput') Teléfono:
+                                        input#readOnlyInput.form-control(type='text', readonly='', value=hotel.telefono)
+                    .container.d-flex
+                        each gerente in gerentes
+                            .card.mb-4.m-3.p-0.container-fluid#detGerente
+                                .card-header.text-center.h5 Detalles del gerente
+                                .card-body.py-1
+                                    p.card-text
+                                        .form-group.mx-2
+                                            fieldset
+                                                label.form-label(for='readOnlyInput') Nombre: 
+                                                input#readOnlyInput.form-control(type='text', readonly='', value=gerente.nombre)  
+                                            fieldset.mt-2
+                                                label.form-label(for='readOnlyInput') Apellido paterno: 
+                                                input#readOnlyInput.form-control(type='text', readonly='', value=gerente.apellido_paterno)
+                                            fieldset.mt-2
+                                                label.form-label(for='readOnlyInput') Apellido materno:
+                                                input#readOnlyInput.form-control(type='text', readonly='', value=gerente.apellido_materno)
+                                            fieldset.mt-2
+                                                label.form-label(for='readOnlyInput') Teléfono:
+                                                input#readOnlyInput.form-control(type='text', readonly='', value=gerente.telefono)
+    .container   
+        .row
+            each habitacion in habitaciones 
+                .col-ms.col-lg-4.mv-4
+                    .card.mb-4.p-0.container-fluid#cardHabitacion
+                        .card-header.text-center.h4 Detalles de la habitación
+                        .card-body.py-1
+                            p.card-text
+                                .form-group.mx-2
+                                    fieldset.mt-2
+                                        label.mb-1(for="nombre") Nombre de la habitación:
+                                        input(type="text", required maxlength="40", readonly='' ,placeholder="Nombre de habitación",name="nombre",class="form-control",value=habitacion.nombre)
+                                    .container-fluid.d-flex.p-0
+                                        .container.flex-row.p-0   
+                                            fieldset.mt-3.container-fluid.d-flex.ps-0
+                                                label.me-2.mt-2(for="piso") Piso:
+                                                input(type="text", required maxlength="10", readonly='', placeholder="Piso",name="piso",class="form-control",value=habitacion.piso)    
+                                        .container.flex-row
+                                            fieldset.mt-4                        
+                                                label.form-check-label.pe-2.ms-0(for='flexCheckDefault') Refrigerador 
+                                                input#flexCheckDefault.form-check-input(type='checkbox', checked=habitacion.refrigerador, onclick="return false")
+                            .container-fluid.d-flex.pb-2.justify-content-center
+                                .btn-group(role='group' aria-label='Basic mixed styles example')
+                                    a(href=`/modificarHabitacion?id=${habitacion.id_hbt}`, class='btn btn-success btn-clock') Editar
+                                    a(href=`/habitacion/eliminar?id=${habitacion.id_hbt}`, class='btn btn-danger btn-clock') Eliminar

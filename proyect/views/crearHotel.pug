@@ -1,0 +1,27 @@
+extends ./layout/index.pug
+block compartircontenido 
+    main.container.mt-5
+        .row 
+            .col-md-12 
+                h2.d.block.w-100.text-center.fw-bold #{pagina} 
+                if (errores)
+                    each error in errores
+                        .alert.col.alert-danger.text-center=error.mensaje 
+            .row.justify-content-center
+                .col-md-5
+                    form(action="/hoteles",method="post")
+                        .form-group
+                            label.mb-1(for="nombre") Nombre del hotel:
+                            input(type="text",required maxlength="40" placeholder="Nombre del hotel", name="nombre",class="form-control",value=nombre)
+                        .form-group.mt-2
+                            label.mb-1(for="direccion") Dirección del hotel:
+                            input(type="text",required maxlength="100" placeholder="Dirección", name="direccion",class="form-control",value=direccion)
+                        .form-group.mt-2
+                            label.mb-1(for="telefono") Teléfono del hotel: 
+                            input(type="text", required minlength="10" maxlength="10", onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false", placeholder="Teléfono", name="telefono",class="form-control",value=telefono)
+                        .form-group.mt-2
+                            label(for="correo") E-mail del hotel: 
+                            input(type="email", required maxlength="50" placeholder="Correo electrónico", name="correo",class="form-control",value=correo)
+                        .container-fluid.d-flex.justify-content-center.my-4
+                            input.btn.btn-success.btn-block.me-5(type="submit",value="Registrar")
+                            a(href=`/hoteles`, class='btn btn-danger btn-clock') Cancelar

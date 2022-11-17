@@ -1,0 +1,22 @@
+extends ./layout/index.pug 
+block compartircontenido 
+    h1.text-center.pt-4.fw-bold #{pagina}
+    main.container.mt-5#text2
+        .container.text-center.mb-4.mt-0
+                a(href='/crearGerente', class='btn btn-success btn-clock') Registrar gerente
+        .row 
+            each gerente in gerentes
+                .col-ms.col-lg-4.mv-4.d-flex.align-items-sm-stretch
+                    .container-fluid.card.mb-4#cardGerente
+                        .container-fluid.d-flex.pt-2
+                            span.container-fluid.d-flex.p-0
+                                img.card-img-center.pe-1(src='/images/hombre.png', alt='', width='50', height='50')
+                                p.fs-4.my-auto.mx-auto=`${gerente.nombre} ${gerente.apellido_paterno} ${gerente.apellido_materno}`
+                        .card-body.pt-1
+                            fieldset
+                                label.form-label.mb-1(for='readOnlyInput') Teléfono:
+                                input#readOnlyInput.form-control(type='text', readonly='', value=gerente.telefono)
+                            .container-fluid.d-flex.pt-3.justify-content-center
+                                .btn-group(role='group' aria-label='Basic mixed styles example')
+                                    a(href=`/modificarGerente?id=${gerente.id_gr}`, class='btn btn-warning btn-clock') Editar 
+                                    a(href=`/gerentes/eliminar?id=${gerente.id_gr}`, class='btn btn-danger btn-clock') Eliminar
