@@ -1,8 +1,8 @@
-import hoteles from '../models/hoteles.js';
+import modeloHoteles from '../models/hoteles.js';
 
-//Función para obtener los hoteles
+//Metodo para obtener los hoteles
 const getHoteles = async (req, res) => {
-  const hotel = await hoteles.findByPk(req.query.id);
+  const hotel = await modeloHoteles.findByPk(req.query.id);
   try {
     res.render("modificarHotel", {
       pagina: "Editar datos del hotel",
@@ -29,7 +29,7 @@ const putHoteles = async (req, res) => {
   if (correo.trim() === "") {
     errores.push({ mensaje: "El correo esta vacío" });
   }
-  const hotel = await hoteles.findByPk(req.query.id);
+  const hotel = await modeloHoteles.findByPk(req.query.id);
   hotel.nombre = nombre;
   hotel.direccion = direccion;
   hotel.telefono = telefono;
@@ -66,7 +66,7 @@ const postHoteles = async (req, res) => {
   } else {
     //Almacenar en la base de datos
     try {
-      await hoteles.create({
+      await modeloHoteles.create({
         nombre,
         direccion,
         telefono,
@@ -81,7 +81,7 @@ const postHoteles = async (req, res) => {
 
 //Función para eliminar un objeto del tipo hotel
 const deleteHoteles = async (req, res) => {
-  await hoteles.destroy({
+  await modeloHoteles.destroy({
     where: {
       id_ht: req.query.id
     },
