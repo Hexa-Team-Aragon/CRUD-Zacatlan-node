@@ -66,13 +66,13 @@ const postHoteles = async (req, res) => {
   } else {
     //Almacenar en la base de datos
     try {
-      await modeloHoteles.create({
+     const query = await modeloHoteles.create({
         nombre,
         direccion,
         telefono,
         correo,
       });
-      res.redirect('/hoteles');
+      res.redirect(`/pagRegistrarImagenesHoteles?id=${query.null}`);
     } catch (error) {
       console.log(error);
     }

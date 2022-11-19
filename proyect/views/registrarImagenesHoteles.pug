@@ -7,7 +7,7 @@ block compartircontenido
                     label(for="Archivo") Archivo 
                     input#myFiles(type="file", accept='image/*' multiple)
                 input.btn.btn-success.btn-block(type="submit" value='Subir Archivo')
-        h2
+        h2#status
         h3
         script.
             const form = document.getElementById('uploadForm')
@@ -34,7 +34,13 @@ block compartircontenido
                 const h3 =  document.querySelector('h3')
                 h3.textContent = json?.message
 
-                //console.log(json)
+                if (json?.status === "success"){
+                    console.log('entro')
+                    location.assign(json?.ruta)
+                }else{
+                    console.log('no entro')
+                }
+
             }
             form.addEventListener('submit', (e) => {
                 e.preventDefault()

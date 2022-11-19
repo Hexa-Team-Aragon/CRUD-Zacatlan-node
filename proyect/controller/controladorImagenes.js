@@ -11,8 +11,8 @@ const guardarId = async(req,res,next) => {
 }
 
 const pagRegistrarImagenesHoteles = async (req, res) => {
-  res.render("registrarImagenes", {
-    pagina: "Registrar Imagenes"
+  res.render("registrarImagenesHoteles", {
+    pagina: "Registrar Imagenes Hoteles"
   })
 }
 
@@ -25,7 +25,7 @@ const filesPayloadExists = (req, res, next) => {
 
 const upload = fileUpload({ createParentPath: true })
 
-const postImagenes = (tabla,nombreId) => {
+const postImagenes = (tabla,nombreId,nextRuta) => {
   return async (req, res) => {
     const files = req.files
     Object.keys(files).forEach(async (key) => {
@@ -39,8 +39,7 @@ const postImagenes = (tabla,nombreId) => {
         nombreImagen: files[key].name,
       })*/
     })
-  
-    return res.json({ status: 'success', message: Object.keys(files).toString() })
+    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
   }
 }
 
