@@ -13,7 +13,13 @@ const guardarId = async(req,res,next) => {
 const pagRegistrarImagenesHoteles = async (req, res) => {
   res.render("registrarImagenesHoteles", {
     pagina: "Registrar Imagenes Hoteles"
-  })
+  });
+}
+
+const pagRegistarImagenesGerentes = async (req,res) => {
+  res.render("registrarImagenesGerentes", {
+    pagina: "Registrar Imagenes Gerentes"
+  });
 }
 
 const filesPayloadExists = (req, res, next) => {
@@ -85,4 +91,4 @@ const fileExtLimiter = (allowedExtArray) => {
   }
 }
 
-export { pagRegistrarImagenesHoteles, upload, postImagenes, fileExtLimiter, fileSizeLimiter, filesPayloadExists, guardarId }
+export { pagRegistrarImagenesHoteles, pagRegistarImagenesGerentes , upload, postImagenes, fileExtLimiter, fileSizeLimiter, filesPayloadExists, guardarId }

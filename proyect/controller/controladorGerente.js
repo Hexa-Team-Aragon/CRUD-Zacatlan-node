@@ -49,14 +49,14 @@ const postGerente = async (req, res) => {
   } else {
     //Almacenar en la base de datos
     try {
-      await modeloGerentes.create({
+      const query = await modeloGerentes.create({
         id_ht,
         nombre,
         apellido_paterno,
         apellido_materno,
         telefono
       });
-      res.redirect('/gerentes');
+      res.redirect(`/pagRegistrarImagenesGerentes?id=${query.null}`);
     } catch (error) {
       console.log(error);
     }
@@ -106,7 +106,7 @@ const putGerente = async (req, res) => {
 
 //Función para eliminar un objeto del tipo gerente
 const deleteGerente = async (req, res) => {
-  await gerentes.destroy({
+  await modeloGerentes.destroy({
     where: {
       id_gr: req.query.id
     },

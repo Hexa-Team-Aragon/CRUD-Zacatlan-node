@@ -3,7 +3,7 @@ import {paginaInicio,pagHoteles,pagGerentes,crearHoteles,crearGerentes} from '..
 import {getGerentes,putGerente,postGerente,deleteGerente} from '../controller/controladorGerente.js';
 import {getHoteles,putHoteles,postHoteles,deleteHoteles} from '../controller/controladorHotel.js';
 import {getHabitacion,putHabitacion,deleteHabitacion,verMas,postHabitacion,cancelarHab,paginaCraerHabitacion} from '../controller/controladorHabitacion.js';
-import {fileExtLimiter,fileSizeLimiter,postImagenes,upload,filesPayloadExists,guardarId, pagRegistrarImagenesHoteles} from '../controller/controladorImagenes.js';
+import {fileExtLimiter,fileSizeLimiter,postImagenes,upload,filesPayloadExists,guardarId,pagRegistrarImagenesHoteles,pagRegistarImagenesGerentes} from '../controller/controladorImagenes.js';
 
 const rutas = express.Router();
 
@@ -34,6 +34,9 @@ rutas.get('/cancelarHab',cancelarHab);
 // rutas imagenes
 rutas.get('/pagRegistrarImagenesHoteles',guardarId,pagRegistrarImagenesHoteles);
 rutas.post('/pagRegistrarImagenesHoteles',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,postImagenes('img_hoteles','id_ht','/hoteles'));
+
+rutas.get('/pagRegistrarImagenesGerentes',guardarId,pagRegistarImagenesGerentes);
+rutas.post('/pagRegistrarImagenesGerentes',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,postImagenes('img_gerentes','id_gr','/gerentes'));
 
 
 export default rutas;
