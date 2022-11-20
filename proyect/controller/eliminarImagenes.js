@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import { rutaImagenesDataBases } from '../direcciones.js';
 import modeloImgGerente from '../models/imgGerentes.js';
 import modeloImgHotel from '../models/imgHoteles.js';
+import modeloImgHabitacion from '../models/imgHabitaciones.js';
 
 const deleteImagenGerente = async (idGerente) => {
   const img = await modeloImgGerente.findByPk(idGerente);
@@ -27,4 +28,18 @@ const deleteImagenesHotel = async (idHotel) => {
   });
 }
 
-export {deleteImagenGerente,deleteImagenesHotel}
+const deleteImagenesHabitacion = async (idHabitacion) => {
+  const img_habitaciones = await modeloImgHabitacion.findAll({
+    where: {id_hbt: idHabitacion}
+  });
+  await img_habitaciones.map(img => {
+    try {
+      fs.unlink(`${rutaImagenesDataBases}/${img.nombreImagen}`);
+      console.log(`Imagen ${img.nombreImagen} eliminada`);
+    } catch (err) {
+      console.log(err);
+    }
+  })
+}
+
+export {deleteImagenGerente,deleteImagenesHotel,deleteImagenesHabitacion}

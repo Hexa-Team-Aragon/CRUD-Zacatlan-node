@@ -3,6 +3,7 @@ import modeloHotel from '../models/hoteles.js';
 import modeloGerente from '../models/gerentes.js';
 import modeloCategoria from '../models/categorias.js';
 import modeloHabitacionCategorias from '../models/habitacionCategorias.js';
+import {deleteImagenesHabitacion} from './eliminarImagenes.js';
 import db from '../config/db.js';
 
 //Metodo para mostrar todos los detalles del hotel seleccionado - pagina ver mas
@@ -97,6 +98,7 @@ const putHabitacion = async (req, res) => {
 
 //Metodo para eliminar una habitacion
 const deleteHabitacion = async (req, res) => {
+  await deleteImagenesHabitacion(req.query.id_habitacion);
   try {
     await modeloHabitaciones.destroy({
       where: {

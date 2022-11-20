@@ -1,6 +1,7 @@
 import modeloHoteles from '../models/hoteles.js';
-import {deleteImagenesHotel,deleteImagenGerente} from './eliminarImagenes.js';
+import {deleteImagenesHotel,deleteImagenGerente,deleteImagenesHabitacion} from './eliminarImagenes.js';
 import modeloGerente from '../models/gerentes.js';
+import modeloHabitacion from '../models/habitaciones.js';
 import db from '../config/db.js';
 
 //Metodo para obtener los hoteles
@@ -85,10 +86,17 @@ const postHoteles = async (req, res) => {
 //Función para eliminar un objeto del tipo hotel
 const deleteHoteles = async (req, res) => {
   await deleteImagenesHotel(req.query.id);
-  const gerente = await db.query(
-    `select * from gerentes where id_ht = ${req.query.id};`
+
+  const gerente = await db.query(`select * from gerentes where id_ht = ${req.query.id};`
     ,{ model: modeloGerente, mapToModel: true });
-  await deleteImagenGerente(gerente.id_gr);
+  await deleteImagenGerente(gerente[0].dataValues.id_gr);
+
+  const habitaciones = await db.query(`select * from habitaciones where id_ht = ${req.query.id};`,
+    {model:modeloHabitacion, mapToModel: true});
+  await habitaciones.map(habitacion => {
+    deleteImagenesHabitacion(habitacion.dataValues.id_hbt);
+  });
+
   await modeloHoteles.destroy({
     where: {
       id_ht: req.query.id
