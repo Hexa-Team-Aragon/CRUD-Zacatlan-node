@@ -5,115 +5,197 @@ block compartircontenido
         .container.img-fluid.d-flex#image
             h1.container-fluid.d-flex#texto1 ZACATLÁN, PUEBLA
         
-        .container-fluid.p-0#image2
-        .container-fluid.ps-5.pe-3.pt-3
-            h3.text-center.mt-3.mb-3.p-2.m-4#h1 Un lugar mágico...
-            .container-fluid.d-flex
-                .card.text-white.mb-3.d-flex.ms-4#card1(style='max-width: 20rem;')
-                    h4.card-header.text-center Descripción
-                    .card-body
-                        p.text-justify.fw-nunito#text Zacatlán es un Municipio ubicado al borde de la Barranca de los Jilgueros en el estado de Puebla, México. Este municipio se carecteriza por tener un clima frío acompañado de neblina. En este bonito municipio se tienen las costumbres de hornear pan todos los días, fabricar relojes monumentales y cultivar frutas. Este municipio es uno de los principales productores de manzanas del país; esta fruta tiene tanta relevancia en Zacatlán, que anualmente se lleva a cabo la feria de la manzana.
-                .container-fluid.d-flex.ms-5.pe-5
-                    #carouselExampleControls.carousel.slide(data-bs-ride='carousel')
-                        .carousel-inner#bi1
-                            .carousel-item.active
-                                img.d-block(src='/images/image (1).jpeg',alt='', width='700', height='430')
-                            .carousel-item
-                                img.d-block(src='/images/image (2).jpeg',alt='',width='700', height='430')
-                            .carousel-item
-                                img.d-block(src='/images/zac3.jpg',alt='', width='700', height='430')
-                            .carousel-item
-                                img.d-block(src='/images/zac1.jpg',alt='', width='700', height='430')
-                            .carousel-item
-                                img.d-block(src='/images/zac2.jpeg',alt='', width='700', height='430')
-                        button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
-                            span.carousel-control-prev-icon(aria-hidden='true')
-                            span.visually-hidden Previous
-                        button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
-                            span.carousel-control-next-icon(aria-hidden='true')
-                            span.visually-hidden Next
-                   
-        .container-fluid.ps-5.pe-5
-            h3.text-center.mt-3.mb-3.p-2.m-4#h2 La celebración mas importante
-            .container.d-flex
-                .container-fluid.d-flex.ms-2.pe-5
-                    #carouselExampleControls1.carousel.slide(data-bs-ride='carousel')
-                        .carousel-inner#bi2
-                            .carousel-item.active
-                                img.d-block(src='/images/f1.jpg',alt='', width='700', height='400')
-                            .carousel-item
-                                img.d-block(src='/images/f2.jpg',alt='',width='700', height='400')
-                            .carousel-item
-                                img.d-block(src='/images/f3.jpg',alt='', width='700', height='400')
-                            .carousel-item
-                                img.d-block(src='/images/f4.jpg',alt='', width='700', height='400')
-                        button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='prev')
-                            span.carousel-control-prev-icon(aria-hidden='true')
-                            span.visually-hidden Previous
-                        button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='next')
-                            span.carousel-control-next-icon(aria-hidden='true')
-                            span.visually-hidden Next
-                .card.text-white.mb-3.d-flex.me-3#card2(style='max-width: 20rem;')
-                    h4.card-header.text-center Feria de la Manzana
-                    .card-body
-                        p.text-justify.fw-nunito#text Celebrada desde 1941, con la finalidad de dar relevancia a los productos naturales de la localidad. Esta feria es el evento mas importante de Zacatlán. La celebración inicia el 15 de agosto con la bendición de la manzana en una misa en honor a la virgen de la Asunción, patrona de los fritucultores. Durante está celebración hay conciertos, bailes, juegos mécanicos. Actividades como rutas en bicicleta de montaña, exhibición de artesanías y desfile de carros alegóricos.
+        .container-fluid.p-0#image2 
+        .container-fluid.col-12.px-5.container-md
+            .container-fluid.d-flex.justify-content-center.border.border-info
+                .card.mx-5.my-4.border.border-success 
+                    .card-body.p-0            
+                        .container-lg.d-flex.align-items-start.align-items-center.m-0#info 
+                            #v-pills-tab.nav.flex-column.nav-pills(role='tablist' aria-orientation='vertical') 
+                                button#v-pills-description-tab.boton.nav-link.active(data-bs-toggle='pill' data-bs-target='#v-pills-description' type='button' role='tab' aria-controls='v-pills-description' aria-selected='true' ) Descripción
+                                button#v-pills-feria-tab.nav-link(data-bs-toggle='pill' data-bs-target='#v-pills-feria' type='button' role='tab' aria-controls='v-pills-feria' aria-selected='false') Feria de la manzana
+                                button#v-pills-atracciones-tab.nav-link(data-bs-toggle='pill' data-bs-target='#v-pills-atracciones' type='button' role='tab' aria-controls='v-pills-atracciones' aria-selected='false') Atracciones
+                                button#v-pills-settings-tab.nav-link(data-bs-toggle='pill' data-bs-target='#v-pills-restaurantes' type='button' role='tab' aria-controls='v-pills-restaurantes' aria-selected='false') Restaurantes
+                            #v-pills-tabContent.tab-content
+                                #v-pills-description.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='des' tabindex='0') 
+                                    .row.justify-content-center.border.py-4
+                                        .container-fluid.col-11.border.border-3.border-danger.border-radius#des
+                                            h4.fw-bold.text-center Descripción de Zacatlán
+                                        .container-fluid.d-flex.align-items-center.px-0.mx-0.pt-3
+                                            .container-sm.col-6.justify-content-start.px-0
+                                                .container-md.d-flex.justify-content-center.me-0.pe-0
+                                                    #carouselExampleControls.carousel.carousel-dark.slide(data-bs-ride='carousel')
+                                                        .carousel-inner.border.border-danger.border-3#bi1
+                                                            .carousel-item.active
+                                                                img.img-fluid.d-block(src='/images/im1.png',alt='')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/im2.png',alt='')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/im3.png',alt='')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/im4.png')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/im5.png',alt='')
+                                                        button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
+                                                            span.carousel-control-prev-icon(aria-hidden='true')
+                                                            span.visually-hidden Previous
+                                                        button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
+                                                            span.carousel-control-next-icon(aria-hidden='true')
+                                                            span.visually-hidden Next
+                                            .container-fluid.d-flex.col-5.ps-0.ms-0
+                                                p Zacatlán es un Municipio ubicado al borde de la Barranca de los Jilgueros en el estado de Puebla, México. Este municipio se carecteriza por tener un clima frío acompañado de neblina. En este bonito municipio se tienen las costumbres de hornear pan todos los días, fabricar relojes monumentales y cultivar frutas. Este municipio es uno de los principales productores de manzanas del país; esta fruta tiene tanta relevancia en Zacatlán, que anualmente se lleva a cabo la feria de la manzana.
+                                            
+                                #v-pills-feria.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-feria-tab' tabindex='0') 
+                                    .row.justify-content-center.py-4
+                                        .container-fluid.col-11#feria
+                                            h4.fw-bold.text-center Feria de la manzana
+                                        .container-fluid.d-flex.align-items-center.px-0.mx-0.pt-3
+                                            .container.d-flex.col-5.pe-0.me-0
+                                                p Celebrada desde 1941, con la finalidad de dar relevancia a los productos naturales de la localidad. Esta feria es el evento mas importante de Zacatlán. La celebración inicia el 15 de agosto con la bendición de la manzana en una misa en honor a la virgen de la Asunción, patrona de los fritucultores. Durante está celebración hay conciertos, bailes, juegos mécanicos. Actividades como rutas en bicicleta de montaña, exhibición de artesanías y desfile de carros alegóricos.
+                                            .container-sm.col-6.justify-content-start.px-0
+                                                .container-sm.d-flex.justify-content-center
+                                                    #carouselExampleControls1.carousel.carousel-dark.slide(data-bs-ride='carousel')
+                                                        .carousel-inner#bi2
+                                                            .carousel-item.active
+                                                                img.img-fluid.d-block(src='/images/fe1.png',alt='')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/fe2.png',alt='')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/fe3.png',alt='')
+                                                            .carousel-item
+                                                                img.img-fluid.d-block(src='/images/fe4.png',alt='')
+                                                        button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='prev')
+                                                            span.carousel-control-prev-icon(aria-hidden='false')
+                                                            span.visually-hidden Previous
+                                                        button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='next')
+                                                            span.carousel-control-next-icon(aria-hidden='false')
+                                                            span.visually-hidden Next
+                                        
+                                #v-pills-atracciones.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-atracciones-tab' tabindex='0') 
+                                    .container-sm.col-9.border
+                                        .container-fluid
+                                            #carouselExampleControls3.carousel.carousel-dark.slide(data-bs-ride='carousel')
+                                                .carousel-inner
+                                                    .carousel-item.active
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-10.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Reloj Centenario
+                                                            .container-fluid.d-flex.justify-content-center.col-11
+                                                                img.img-fluid.d-block(src='/images/at1.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p En Zacatlán se halla una fábrica de grandes relojes fundada en 1918, se llama Centenario.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-10.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Museo de Relojes y Autómatas Alberto Olvera Hernández
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/at2.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p En las instalaciones del Centenario se encuentra el Museo de Relojes y Autómatas Alberto Olvera Hernández.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Plaza de Armas
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/at3.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p La Plaza de Armas está adornada con un agigantado reloj Centenario, hecho de flores y con dos carátulas.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Show de autómatas
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/at4.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p Los fines de semana se presenta un show de autómatas, el cual sucede en los balcones del museo de relojería.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Mirador de cristal
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/at5.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p A unas cuadras de la plaza principal de Zacatlán, se encuentra el mirador de cristal, desde el cual se puede apreciar la vista del parque de Barranca de Jilgueros.
+                                                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls3', data-bs-slide='prev')
+                                                    span.carousel-control-prev-icon(aria-hidden='false')
+                                                    span.visually-hidden Previous
+                                                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls3', data-bs-slide='next')
+                                                    span.carousel-control-next-icon(aria-hidden='false')
+                                                    span.visually-hidden Next
+                                
+                                #v-pills-restaurantes.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-restaurantes-tab' tabindex='0') 
+                                    .container-sm.col-9
+                                        .container-fluid
+                                            #carouselExampleControls4.carousel.carousel-dark.slide(data-bs-ride='carousel')
+                                                .carousel-inner
+                                                    .carousel-item.active
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Turista Café Bar
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/res1.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p El Turista Café Bar es un buen lugar para comer y pasarla con los amigos.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold  Café Dos Aromas
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/res2.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p Ver la tarde pasar desde las mesas, al aire libre, en el Café Dos Aromas.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold Barrica y Artesa
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/res3.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p En el restaurante Barrica y Artesa se puede pasar momentos agradables en familia, mientras se disfruta de un delicioso desayuno.
+                                                    .carousel-item
+                                                        .row.justify-content-center
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                h5.text-center.fw-bold El Mirador
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                img.img-fluid.d-block(src='/images/res4.png',alt='')
+                                                            .container-fluid.col-11.m-3.border.border-2.border-danger
+                                                                p Si quieres disfrutar de un delicioso desayuno mientras contemplas una bonita vista, debes visitar el restaurante El Mirador.
+                                                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls4', data-bs-slide='prev')
+                                                    span.carousel-control-prev-icon(aria-hidden='true')
+                                                    span.visually-hidden Previous
+                                                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls4', data-bs-slide='next')
+                                                    span.carousel-control-next-icon(aria-hidden='true')
+                                                    span.visually-hidden Next
+            .container#barra
+            .container-md.px-3.border.py-4 
+                .container-fluid
+                    .container
+                        .card.bg-info.justify-content-center
+                            h4.text-center.fw-bold Hoteles
+                    .container-fluid.d-flexpy-4.justify-content-center  
+                            .container-fluid.pt-4
+                                .row
+                                    each hotel in hoteles 
+                                        .col-ms.col-lg-4.mv-4.d-flex.align-items-sm-stretch
+                                            .card.container-fluid.text-white.mb-2.d-flex.justify-content-center
+                                                img.img-fluid.card-img-center.pe-1(src='/images/houston.jpg', alt='...',width='100%',height='auto')
+                                                .card-img-overlay.bg-black.bg-opacity-50
+                                                    .container-fluid.d-flex.justify-content-center
+                                                        .row
+                                                            h6.card-title.text-center=`${hotel.nombre}`
+                                                            .container-fluid.d-flex.justify-content-center
+                                                                a.stretched-linka.text-white(href=`/verMas?id=${hotel.id_ht}`) Detalles
+                                  
+            .container#barra
+            .container-md.px-5.border.py-4 
+                .container-fluid
+                    .container
+                        .card.bg-info.justify-content-center
+                            h4.text-center.fw-bold ¿Cómo llegar?
+                    .container-fluid.d-flex.py-4.justify-content-center
+                        .container-md.d-flex.justify-content-center.mx-3.col-8
+                            iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7562.5783406230685!2d-97.96679978289356!3d19.931386711727825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d06f0924377771%3A0x8092cbf6e48afbae!2sZacatl%C3%A1n%20de%20las%20Manzanas!5e0!3m2!1ses-419!2smx!4v1668839394194!5m2!1ses-419!2smx' width='100%' height='100%' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade')
+                        .container-md-fluid.d-flex.justify-content-center.mx-3
+                            .card
+                                p.border Zacatlán de las Manzanas se encuentra a 124 kilómetros de la Angelópolis, a cuyo aeropuerto llegan los aviones de AeroMar, AeroMéxico y Volaris. A partir de allí, pueden abordarse los autobuses de las líneas ATAH y Verdes, o conducir en automóvil por las autopistas 119 o 117, o por la Carretera Federal 121.
         
-        .container-fluid.d-flex.p-3
-            .container-fluid
-                .card.mb-3.me-5.ms-5#card3
-                    h3.card-header.text-center Atracciones de Zacatlán
-                    .card-body
-                        .container-fluid.d-flex
-                            #carouselExampleControls3.carousel.slide(data-bs-ride='carousel')
-                                .carousel-inner
-                                    .carousel-item.active
-                                        img.d-block(src='/images/museo.jpg',alt='', width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/museo2.jpg',alt='',width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/plaza.jpg',alt='',width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/automatas.jpg',alt='', width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/image (3).jpeg',alt='', width='450', height='250')
-                                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls3', data-bs-slide='prev')
-                                    span.carousel-control-prev-icon(aria-hidden='true')
-                                    span.visually-hidden Previous
-                                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls3', data-bs-slide='next')
-                                    span.carousel-control-next-icon(aria-hidden='true')
-                                    span.visually-hidden Next
-
-                    ol.list-group.list-group-numbered.list-group-flush
-                        li.list-group-item#li1 En Zacatlán se halla una fábrica de grandes relojes fundada en 1918, se llama Centenario.
-                        li.list-group-item#li1 En las instalaciones del Centenario se encuentra el Museo de Relojes y Autómatas Alberto Olvera Hernández.
-                        li.list-group-item#li1 La Plaza de Armas está adornada con un agigantado reloj Centenario, hecho de flores y con dos carátulas.
-                        li.list-group-item#li1 Los fines de semana se presenta un show de autómatas, el cual sucede en los balcones del museo de relojería.
-                        li.list-group-item#li1-2 A unas cuadras de la plaza principal de Zacatlán, se encuentra el mirador de cristal, desde el cual se puede apreciar la vista del parque de Barranca de Jilgueros.
-
-            .container-fluid
-                .card.mb-3.me-5#card4
-                    h3.card-header.text-center Lugares para comer
-                    .card-body
-                        .container-fluid.d-flex
-                            #carouselExampleControls4.carousel.slide(data-bs-ride='carousel')
-                                .carousel-inner
-                                    .carousel-item.active
-                                        img.d-block(src='/images/turista.jpg',alt='', width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/cafe.jpg',alt='',width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/barrica.jpg',alt='',width='450', height='250')
-                                    .carousel-item
-                                        img.d-block(src='/images/res.jpg',alt='', width='450', height='250')
-                                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls4', data-bs-slide='prev')
-                                    span.carousel-control-prev-icon(aria-hidden='true')
-                                    span.visually-hidden Previous
-                                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls4', data-bs-slide='next')
-                                    span.carousel-control-next-icon(aria-hidden='true')
-                                    span.visually-hidden Next
-
-                    ol.list-group.list-group-numbered.list-group-flush.align-justify
-                        li.list-group-item#li2 El Turista Café Bar es un buen lugar para comer y pasarla con los amigos.
-                        li.list-group-item#li2 Ver la tarde pasar desde las mesas, al aire libre, en el Café Dos Aromas.
-                        li.list-group-item#li2 En el restaurante Barrica y Artesa se puede pasar momentos agradables en familia, mientras se disfruta de un delicioso desayuno.
-                        li.list-group-item#li2-2 Si quieres disfrutar de un delicioso desayuno mientras contemplas una bonita vista, debes visitar el restaurante El Mirador.

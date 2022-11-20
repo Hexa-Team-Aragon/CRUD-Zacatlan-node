@@ -2,10 +2,12 @@ import hotel from '../models/hoteles.js';
 import gerente from '../models/gerentes.js';
 import db from '../config/db.js';
 
-const paginaInicio = (req, res) => {
+const paginaInicio = async(req, res) => {
+  const hoteles = await hotel.findAll();
   res.render("inicio", {
     pagina: "Inicio",
-    selec:"selec"
+    hoteles: hoteles,
+    selec:"selec",
   });
 }
 const pagHoteles = async (req, res) => {

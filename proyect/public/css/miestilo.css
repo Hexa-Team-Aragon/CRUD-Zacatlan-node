@@ -32,21 +32,24 @@
 }
 a#titulo:hover{
   outline: auto;
+  background-color: #a68b39;
 
 }
 
 .selec{
   outline: auto;
+  background-color: #a68b39;
 }
 
 #header {
-  background-image: url(../images/barra2.jpg);
+  background-image: url(../images/barra3.png);
   background-size: contain;
   height: 80px;
 }
 
 footer{
-  background-image: url(../images/barra2.jpg);
+  /*background-image: url(../images/barra3.png);*/
+  background-color:#DC3545;
   background-size: contain;
   margin-top: auto;
   width: 100%;
@@ -100,17 +103,15 @@ body{
   font-family: nunitoSB;
 }
 
-#h1 {
-  border-radius: 20px;
-  border: solid 7px #ba8b27;
-  background-color: #ffbe33;
-  color: azure;
-  font-family: nunitoBI;
+
+p{
+  text-align: justify;
+  font-family: nunito;
 }
 
 #bi1 {
   border-radius: 20px;
-  border: groove 10px #ba8b27;
+  /*border: groove 10px #ba8b27;*/
 }
 
 #card2 {
@@ -133,7 +134,7 @@ body{
 
 #bi2 {
   border-radius: 20px;
-  border: groove 10px #a63889df;
+  /*border: groove 10px #a63889df;*/
 }
 
 #card3 {
@@ -223,4 +224,48 @@ body{
 
 #text2 {
   font-family: rubik;
+}
+
+#barra{
+  background-image: url(../images/patron7.jpg);
+  background-size: contain;
+  width: 92%;
+  height: 10px;
+  position: relative;
+}
+
+.carousel-control-prev, .carousel-control-next{
+  background-color: #efe2e2;
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  top: 45%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#info{
+  background-color: white;
+}
+
+#des{
+  background-color: #EEB4B3;
+ 
+}
+
+ button.nav-link:hover{
+  background-color: #f4cecd;
+  outline: none;
+
+}
+
+.boton{
+  background-color:  #f4cecd;
+  outline: none;
+}
+
+#feria{
+  background-color: #FFBF69;
+  border: solid 5px #FF9F1C;
+
 }
