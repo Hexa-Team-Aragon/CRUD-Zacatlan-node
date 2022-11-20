@@ -54,7 +54,7 @@ id_hbt                          INTEGER NOT NULL AUTO_INCREMENT,
 id_ht 							INTEGER NOT NULL,
 id_cat                          INTEGER NOT NULL,
 PRIMARY KEY(id_hbt),
-UNIQUE (id_cat),
+UNIQUE (id_ht,id_cat),
 FOREIGN KEY (id_ht) REFERENCES hoteles(id_ht) ON DELETE CASCADE,
 FOREIGN KEY (id_cat) REFERENCES categorias(id_cat) ON DELETE CASCADE
 )DEFAULT CHARACTER SET UTF8MB4;

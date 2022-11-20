@@ -14,19 +14,14 @@ block compartircontenido
 
             const sendFiles = async () =>{
 
-                const resId = await fetch('http://localhost:1800/obtenerId',{
-                    method: 'GET'
-                })
-
                 const myFiles = document.getElementById('myFiles').files
 
                 const formData = new FormData()
 
                 Object.keys(myFiles).forEach(key =>{
-                    formData.append(`${resId.json?.id}-${myFiles.item(key).name}`, myFiles.item(key))
+                    formData.append(myFiles.item(key).name, myFiles.item(key))
                 })
-
-                const response = await fetch('http://localhost:1800/pagRegistrarImagenesHoteles', {
+                const response = await fetch('http://localhost:1800/pagRegistrarImagenesHabitaciones', {
                     method: 'POST',
                     body: formData
                 }) 
@@ -41,7 +36,7 @@ block compartircontenido
 
                 if (json?.status === "success"){
                     console.log('entro')
-                    location.assign(json?.ruta)
+                    location.assign(`${json?.ruta}?id=${json.id}`)
                 }else{
                     console.log('no entro')
                 }

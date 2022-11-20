@@ -1,4 +1,7 @@
 import modeloHoteles from '../models/hoteles.js';
+import {deleteImagenesHotel,deleteImagenGerente} from './eliminarImagenes.js';
+import modeloGerente from '../models/gerentes.js';
+import db from '../config/db.js';
 
 //Metodo para obtener los hoteles
 const getHoteles = async (req, res) => {
@@ -72,7 +75,7 @@ const postHoteles = async (req, res) => {
         telefono,
         correo,
       });
-      res.redirect(`/pagRegistrarImagenesHoteles?id=${query.null}`);
+      res.redirect(`/pagRegistrarImagenesHoteles?id_create=${query.null}&id_mas=nada`);
     } catch (error) {
       console.log(error);
     }
@@ -81,6 +84,11 @@ const postHoteles = async (req, res) => {
 
 //Función para eliminar un objeto del tipo hotel
 const deleteHoteles = async (req, res) => {
+  await deleteImagenesHotel(req.query.id);
+  const gerente = await db.query(
+    `select * from gerentes where id_ht = ${req.query.id};`
+    ,{ model: modeloGerente, mapToModel: true });
+  await deleteImagenGerente(gerente.id_gr);
   await modeloHoteles.destroy({
     where: {
       id_ht: req.query.id

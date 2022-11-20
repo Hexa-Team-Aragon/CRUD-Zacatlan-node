@@ -1,6 +1,7 @@
 import modeloGerentes from '../models/gerentes.js';
 import modeloHotel from '../models/hoteles.js';
 import db from '../config/db.js';
+import {deleteImagenGerente} from './eliminarImagenes.js'
 
 const getGerentes = async (req, res) => {
   const gerente = await modeloGerentes.findByPk(req.query.id);
@@ -56,7 +57,7 @@ const postGerente = async (req, res) => {
         apellido_materno,
         telefono
       });
-      res.redirect(`/pagRegistrarImagenesGerentes?id=${query.null}`);
+      res.redirect(`/pagRegistrarImagenesGerentes?id_create=${query.null}&id_mas=nada`);
     } catch (error) {
       console.log(error);
     }
@@ -106,6 +107,7 @@ const putGerente = async (req, res) => {
 
 //Función para eliminar un objeto del tipo gerente
 const deleteGerente = async (req, res) => {
+  await deleteImagenGerente(req.query.id);
   await modeloGerentes.destroy({
     where: {
       id_gr: req.query.id

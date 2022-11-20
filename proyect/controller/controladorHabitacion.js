@@ -2,11 +2,8 @@ import modeloHabitaciones from '../models/habitaciones.js';
 import modeloHotel from '../models/hoteles.js';
 import modeloGerente from '../models/gerentes.js';
 import modeloCategoria from '../models/categorias.js';
+import modeloHabitacionCategorias from '../models/habitacionCategorias.js';
 import db from '../config/db.js';
-
-//Uso de las variables
-//let id_habi = 0;
-//let id_h = 0;
 
 //Metodo para mostrar todos los detalles del hotel seleccionado - pagina ver mas
 const verMas = async (req, res) => {
@@ -15,21 +12,19 @@ const verMas = async (req, res) => {
     attributes: ['id_gr', 'id_ht', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono'],
     where: { id_ht: req.query.id }
   });
-  const habitaciones = await modeloHabitaciones.findAll({
-    attributes: ['id_hbt', 'id_ht', 'id_cat'],
-    where: { id_ht: req.query.id }
-  });
-
+  const habitaciones= await db.query(
+    `select * from categorias a inner join habitaciones b on b.id_ht = ${req.query.id} where a.id_cat = b.id_cat;`
+    ,{ model: modeloHabitacionCategorias, mapToModel: true });
   if (hotel.id_gr != "null") {
     res.render("verMas", {
-      pagina: "Detalles",
+      pagina: `Detalles ${hotel.nombre}`,
       hotel,
       gerentes,
       habitaciones
     });
   } else {
     res.render("verMas", {
-      pagina: "Detalles",
+      pagina: `Detalles ${hotel.nombre}`,
       hotel,
       habitaciones
     });
@@ -52,11 +47,12 @@ const postHabitacion = async (req, res) => {
     });
   } else {
     try {
-      await modeloHabitaciones.create({
+      const query = await modeloHabitaciones.create({
         id_ht: req.query.id,
         id_cat: categoriaSeleccionada,
       });
-      res.redirect(`/verMas?id=${req.query.id}`);
+      //res.redirect(`/verMas?id=${req.query.id}`);
+      res.redirect(`/pagRegistrarImagenesHabitaciones?id_create=${query.null}&id_mas=${req.query.id}`);
     } catch (error) {
       console.log(error);
     }
@@ -66,13 +62,17 @@ const postHabitacion = async (req, res) => {
 //Metodo para obtener una habitacion por su id
 const getHabitacion = async (req, res) => {
   const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
+  const categorias = await db.query(
+    `select * from categorias where id_cat not in(select id_cat from habitaciones where id_ht = ${req.query.id_hotel});`
+    , { model: modeloCategoria, mapToModel: true });
+  const categoria = await modeloCategoria.findByPk(habitacion.id_cat);
   const idHotel = req.query.id_hotel;
-  //id_h = hab.id_ht;
-  //id_habi = hab.id_hbt;
   try {
     res.render(`modificarHabitacion`, {
       pagina: "Editar datos de la habitación",
       habitacion,
+      categoria,
+      categorias,
       idHotel
     });
   } catch (error) {
@@ -82,45 +82,23 @@ const getHabitacion = async (req, res) => {
 
 //Metodo que almacena las modificaciones realizadas de una habitación
 const putHabitacion = async (req, res) => {
-  const { piso, nombre, refrigerador } = req.body;
-  const errores = [];
-  if (piso.trim() === "") {
-    errores.push({ mensaje: "El piso no debe ser vacío" });
+  const { categoriaSeleccionada } = req.body;
+  //Modificar en la base de datos
+  try {
+    const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
+    console.log(categoriaSeleccionada)
+    habitacion.id_cat = categoriaSeleccionada
+    await habitacion.save();
+    res.redirect(`/verMas?id=${req.query.id_hotel}`);
+  } catch (error) {
+    console.log(error);
   }
-  if (nombre.trim() === "") {
-    errores.push({ mensaje: "La nombre no debe ser vacío" });
-  }
-  if (errores.length > 0) {
-    res.render("modificarHabitacion", {
-      pagina: "Editar datos de la habitación",
-      piso,
-      nombre
-    });
-  } else {
-    //Modificar en la base de datos
-    try {
-      let ref = 0
-      if (refrigerador === 'on') {
-        ref = 1
-      } else {
-        ref = 0
-      }
-      const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
-      habitacion.piso = piso;
-      habitacion.nombre = nombre;
-      habitacion.refrigerador = ref;
-      await habitacion.save();
-      res.redirect(`/verMas?id=${req.query.id_hotel}`);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-};
+}
 
 //Metodo para eliminar una habitacion
 const deleteHabitacion = async (req, res) => {
   try {
-    await habitaciones.destroy({
+    await modeloHabitaciones.destroy({
       where: {
         id_hbt: req.query.id_habitacion
       }

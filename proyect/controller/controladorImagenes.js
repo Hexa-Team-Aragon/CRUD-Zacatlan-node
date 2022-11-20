@@ -4,10 +4,16 @@ import {rutaImagenesDataBases} from '../direcciones.js';
 import db from '../config/db.js';
 
 let id = 0;
+let id_mas;
 
 const guardarId = async(req,res,next) => {
-  id = req.query.id;
+  id = req.query.id_create;
+  id_mas = req.query.id_mas;
   next();
+}
+
+const obtenerId = async (req,res,next) => {
+  return res.json({id: id}); 
 }
 
 const pagRegistrarImagenesHoteles = async (req, res) => {
@@ -20,6 +26,20 @@ const pagRegistarImagenesGerentes = async (req,res) => {
   res.render("registrarImagenesGerentes", {
     pagina: "Registrar Imagenes Gerentes"
   });
+}
+
+const pagRegistrarImagenesHabitaciones = async (req,res) => {
+  res.render("registrarImagenesHabitaciones", {
+    pagina: "Registrar Imagenes Habitaciones"
+  })
+}
+
+const maximoFiles = (req,res,next) => {
+  const files = req.files;
+  if (Object.keys(files).length > 1){
+    return res.status(400).json({ status: 'Error', message: 'Solo seleccione una imagen' });
+  }
+  next();
 }
 
 const filesPayloadExists = (req, res, next) => {
@@ -35,17 +55,17 @@ const postImagenes = (tabla,nombreId,nextRuta) => {
   return async (req, res) => {
     const files = req.files
     Object.keys(files).forEach(async (key) => {
-      const filepath = path.join(rutaImagenesDataBases, files[key].name)
+      const filepath = path.join(rutaImagenesDataBases, `${id}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
-      await db.query(`insert into ${tabla}(${nombreId},nombreImagen) values(${id},'${files[key].name}');`);
+      await db.query(`insert into ${tabla}(${nombreId},nombreImagen) values(${id},'${id}-${files[key].name}');`);
       /*await modelo.create({
         nombreId: id,
         nombreImagen: files[key].name,
       })*/
     })
-    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
+    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta, id: id_mas})
   }
 }
 
@@ -91,4 +111,4 @@ const fileExtLimiter = (allowedExtArray) => {
   }
 }
 
-export { pagRegistrarImagenesHoteles, pagRegistarImagenesGerentes , upload, postImagenes, fileExtLimiter, fileSizeLimiter, filesPayloadExists, guardarId }
+export { pagRegistrarImagenesHoteles, pagRegistarImagenesGerentes, pagRegistrarImagenesHabitaciones , upload, postImagenes, fileExtLimiter, fileSizeLimiter, filesPayloadExists, guardarId,obtenerId,maximoFiles }
