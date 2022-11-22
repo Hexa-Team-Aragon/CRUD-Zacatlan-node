@@ -106,13 +106,10 @@ body{
 
 p{
   text-align: justify;
-  font-family: nunito;
+  font-family: rubik;
 }
 
-#bi1 {
-  border-radius: 20px;
-  /*border: groove 10px #ba8b27;*/
-}
+
 
 #card2 {
   background-color: #cd6ab2;
@@ -132,10 +129,6 @@ p{
   font-family: nunitoBI;
 }
 
-#bi2 {
-  border-radius: 20px;
-  /*border: groove 10px #a63889df;*/
-}
 
 #card3 {
   background-color: #eb4362;
@@ -242,30 +235,65 @@ p{
   top: 45%;
   margin-left: 5%;
   margin-right: 5%;
+  border: solid 2px rgb(0, 0, 0);
+  
 }
 
 #info{
   background-color: white;
 }
-
 #des{
+  border-radius: 10px;
+  border: solid 4px rgb(204, 44, 44);
   background-color: #EEB4B3;
- 
+  /*border: groove 10px #ba8b27;*/
 }
 
- button.nav-link:hover{
-  background-color: #f4cecd;
-  outline: none;
-
-}
+/*button#v-pills-description-tab{
+  background-color:#EEB4B3;
+}*/
 
 .boton{
   background-color:  #f4cecd;
   outline: none;
 }
 
+
 #feria{
   background-color: #FFBF69;
-  border: solid 5px #FF9F1C;
+  border: solid 4px #FF9F1C;
+  border-radius: 10px;
 
 }
+
+#atrac{
+  border: solid 4px #a63889df;
+  background-color: #dd93c9;
+}
+
+#res{
+  border: solid 4px #ff8a3c;
+  background-color: #ffb787;
+}
+
+#titulos{
+  margin: 0px;
+  padding-top:5px ;
+  padding-bottom: 5px;
+}
+
+#des1{
+  border-radius: 10px;
+  border: solid 3px rgb(204, 44, 44);
+  padding: 10px;
+  font-size: 95%;
+}
+
+#feria1{
+  border-radius: 10px;
+  border: solid 3px #FF9F1C;
+  padding: 10px;
+  font-size: 95%;
+  margin: 0%;
+}
+

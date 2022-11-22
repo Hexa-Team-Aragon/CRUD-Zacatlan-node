@@ -14,18 +14,44 @@ const verMas = async (req, res) => {
     where: { id_ht: req.query.id }
   });
   const habitaciones= await db.query(
-    `select * from categorias a inner join habitaciones b on b.id_ht = ${req.query.id} where a.id_cat = b.id_cat;`
+    `select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${req.query.id} where a.id_cat = b.id_cat;`
     ,{ model: modeloHabitacionCategorias, mapToModel: true });
   if (hotel.id_gr != "null") {
     res.render("verMas", {
-      pagina: `Detalles ${hotel.nombre}`,
+      pagina: `${hotel.nombre}`,
       hotel,
       gerentes,
       habitaciones
     });
   } else {
     res.render("verMas", {
-      pagina: `Detalles ${hotel.nombre}`,
+      pagina: `${hotel.nombre}`,
+      hotel,
+      habitaciones
+    });
+  }
+}
+
+
+const adminDetalles = async (req, res) => {
+  const hotel = await modeloHotel.findByPk(req.query.id);
+  const gerentes = await modeloGerente.findAll({
+    attributes: ['id_gr', 'id_ht', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono'],
+    where: { id_ht: req.query.id }
+  });
+  const habitaciones= await db.query(
+    `select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${req.query.id} where a.id_cat = b.id_cat;`
+    ,{ model: modeloHabitacionCategorias, mapToModel: true });
+  if (hotel.id_gr != "null") {
+    res.render("adminDetalles", {
+      pagina: `${hotel.nombre}`,
+      hotel,
+      gerentes,
+      habitaciones
+    });
+  } else {
+    res.render("adminDetalles", {
+      pagina: `${hotel.nombre}`,
       hotel,
       habitaciones
     });
@@ -90,7 +116,7 @@ const putHabitacion = async (req, res) => {
     console.log(categoriaSeleccionada)
     habitacion.id_cat = categoriaSeleccionada
     await habitacion.save();
-    res.redirect(`/verMas?id=${req.query.id_hotel}`);
+    res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
   } catch (error) {
     console.log(error);
   }
@@ -108,12 +134,12 @@ const deleteHabitacion = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  res.redirect(`/verMas?id=${req.query.id_hotel}`);
+  res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
 };
 
 //Función para cancelar el registro o modificación de una habitación
 const cancelarHab = async (req, res) => {
-  res.redirect(`/verMas?id=${req.query.id_hotel}`);
+  res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
 };
 
 const paginaCraerHabitacion = async (req, res) => {
@@ -127,4 +153,4 @@ const paginaCraerHabitacion = async (req, res) => {
   });
 };
 
-export { getHabitacion, putHabitacion, deleteHabitacion, verMas, postHabitacion, cancelarHab, paginaCraerHabitacion }
+export { getHabitacion, putHabitacion, deleteHabitacion, verMas, adminDetalles, postHabitacion, cancelarHab, paginaCraerHabitacion }

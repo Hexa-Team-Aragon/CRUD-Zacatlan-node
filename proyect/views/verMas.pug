@@ -2,7 +2,7 @@ extends ./layout/index.pug
 block compartircontenido 
     h1.text-center.pt-4.fw-bold #{pagina}
     main.container.mt-4
-        .container.text-center.mb-3.mt-0
+        //-.container.text-center.mb-3.mt-0
             a.mx-2.px-1(href=`crearHabitacion?id=${hotel.id_ht}`, class='btn btn-success btn-clock') Registrar habitación
         .container-fluid
             .row
@@ -55,7 +55,7 @@ block compartircontenido
                                     fieldset.mt-2
                                         label.mb-1(for="nombre") Categoria de la habitación:
                                         input(type="text", required maxlength="40", readonly='' ,placeholder="Nombre de habitación",name="nombre",class="form-control",value=habitacion.nombre)
-                            .container-fluid.d-flex.pb-2.justify-content-center
+                            //-.container-fluid.d-flex.pb-2.justify-content-center
                                 .btn-group(role='group' aria-label='Basic mixed styles example')
                                     a(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`, class='btn btn-success btn-clock') Editar
                                     a(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`, class='btn btn-danger btn-clock') Eliminar

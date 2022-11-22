@@ -4,19 +4,33 @@ block compartircontenido
     main.container.mt-5#text2
         .container.text-center.mb-4.mt-0
                 a(href='/crearGerente', class='btn btn-success btn-clock') Registrar gerente
-        .row 
-            each gerente in gerentes
-                .col-ms.col-lg-4.mv-4.d-flex.align-items-sm-stretch
-                    .container-fluid.card.mb-4#cardGerente
-                        .container-fluid.d-flex.pt-2
-                            span.container-fluid.d-flex.p-0
-                                img.card-img-center.pe-1(src='/images/hombre.png', alt='', width='50', height='50')
-                                p.fs-4.my-auto.mx-auto=`${gerente.nombre} ${gerente.apellido_paterno} ${gerente.apellido_materno}`
-                        .card-body.pt-1
-                            fieldset
-                                label.form-label.mb-1(for='readOnlyInput') Teléfono:
-                                input#readOnlyInput.form-control(type='text', readonly='', value=gerente.telefono)
-                            .container-fluid.d-flex.pt-3.justify-content-center
-                                .btn-group(role='group' aria-label='Basic mixed styles example')
-                                    a(href=`/modificarGerente?id=${gerente.id_gr}`, class='btn btn-warning btn-clock') Editar 
-                                    a(href=`/gerentes/eliminar?id=${gerente.id_gr}`, class='btn btn-danger btn-clock') Eliminar
+        .container-fluid.d-flex.m-0.p-0 
+            table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
+                thead
+                    tr
+                    th(scope='col') Nombre del gerente
+                    th(scope='col') Apellido paterno
+                    th(scope='col') Apellido materno
+                    th(scope='col') Teléfono
+                    th.col-2(scope='col') Foto del gerente
+                    th(scope='col') Acciones
+                    
+                tbody
+                    each gerente in gerentes
+                        tr
+                        td=`${gerente.nombre}`
+                        td=`${gerente.apellido_paterno}`
+                        td=`${gerente.apellido_materno}`
+                        td=`${gerente.telefono}`
+                        td.col-2.align-middle
+                            .container-fluid.d-flex.justify-content-between.align-middle
+                                p.m-0=`${gerente.nombre}`
+                                a(href='#')
+                                    img.ms-2(src='/images/editar.png', alt='', width='25', height='25')
+                        td.col-1.align-middle
+                                    .container-fluid.d-flex.justify-content-between
+                                        a.pe-3(href=`/modificarGerente?id=${gerente.id_gr}`)
+                                            img(src='/images/editar.png', alt='', width='25', height='25')
+                                        a(href=`/gerentes/eliminar?id=${gerente.id_gr}`)
+                                            img(src='/images/eliminar.png', alt='', width='25', height='25')
+                        

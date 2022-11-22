@@ -39,7 +39,7 @@ const putHoteles = async (req, res) => {
   hotel.telefono = telefono;
   hotel.correo = correo;
   await hotel.save();
-  res.redirect('/hoteles');
+  res.redirect('/adminHoteles');
 }
 
 //Método que crea y almacena los gerentes en caso de que no haya errores
@@ -102,7 +102,7 @@ const deleteHoteles = async (req, res) => {
       id_ht: req.query.id
     },
   });
-  res.redirect('/hoteles');
+  res.redirect('/adminHoteles');
 }
 
 export { getHoteles, putHoteles, postHoteles, deleteHoteles };

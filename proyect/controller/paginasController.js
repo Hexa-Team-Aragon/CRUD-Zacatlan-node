@@ -10,10 +10,10 @@ const paginaInicio = async(req, res) => {
     selec:"selec",
   });
 }
-const pagHoteles = async (req, res) => {
+const adminHoteles = async (req, res) => {
   const hoteles = await hotel.findAll();
-  res.render("hoteles", {
-    pagina: "Hoteles",
+  res.render("adminHoteles", {
+    pagina: "Administración de los hoteles",
     hoteles: hoteles,
     selec2:"selec"
   });
@@ -52,7 +52,7 @@ const paginaHabitaciones = (req, res) => {
 
 export {
   paginaInicio,
-  pagHoteles,
+  adminHoteles,
   pagGerentes,
   paginaHabitaciones,
   crearHoteles,

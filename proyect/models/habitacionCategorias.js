@@ -12,10 +12,6 @@ const habitacionesCategorias = db.define('habitacionesCategorias', {
     id_cat:{
         type: Sequelize.INTEGER
     },
-    id_cat:{
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-    },
     nombre:{
         type: Sequelize.STRING,
     }
