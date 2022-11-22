@@ -16,6 +16,7 @@ const port = process.env.PORT || 1800;
 
 //definiendo pug para plantillas
 app.set("view engine","pug");
+app.use(express.json());
 
 app.use(morgan('tiny'));
 app.use(express.urlencoded({extended: false}));

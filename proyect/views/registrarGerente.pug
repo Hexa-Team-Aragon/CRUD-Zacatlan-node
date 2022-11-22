@@ -4,30 +4,93 @@ block compartircontenido
         .row 
             .col-md-12 
                 h2.d.block.w-100.text-center.fw-bold #{pagina}
-                if (errores)
-                    each error in errores
-                        .alert.col.alert-danger.text-center=error.mensaje 
+                h5#message.d.block.w-100.text-center.fw-bold
             .row.justify-content-center 
                 .col-md-5 
-                    form(action=`/gerentes`,method="post")
+                    form(id='uploadForm',method="post")
                         .form-group.mt-4
                             label.mb-1(for="gerente") Nombre del gerente: 
-                            input(type="text", required maxlength="40", placeholder="Nombre del gerente", name="nombre",class="form-control",value=nombre)
+                            input#nombre(type="text", required maxlength="40", placeholder="Nombre del gerente", name="nombre",class="form-control",value=nombre)
                         .form-group.mt-2
                             label.mb-1(for="apellidoPaterno") Apellido paterno:
-                            input(type="text",required maxlength="20", placeholder="Apellido paterno", name="apellido_paterno",class="form-control",value=apellido_paterno)
+                            input#paterno(type="text",required maxlength="20", placeholder="Apellido paterno", name="apellido_paterno",class="form-control",value=apellido_paterno)
                         .form-group.mt-2
                             label.mb-1(for="apellidoMaterno") Apellido materno: 
-                            input(type="text",required maxlength="20", placeholder="Apellido materno", name="apellido_materno",class="form-control",value=apellido_materno)
+                            input#materno(type="text",required maxlength="20", placeholder="Apellido materno", name="apellido_materno",class="form-control",value=apellido_materno)
                         .form-group.mt-2
                             label.mb-1(for="telefono") Teléfono:
-                            input(type="text",required minlength="10" maxlength="10", onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false",placeholder="Teléfono", name="telefono",class="form-control",value=telefono)
+                            input#telefono(type="text",required minlength="10" maxlength="10", onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false",placeholder="Teléfono", name="telefono",class="form-control",value=telefono)
                         .form-group.mt-2    
                             label.mb-1(for="hotel") Hotel:
-                        select.form-select(aria-label='Default select example' name="id_ht")
-                            option.text-muted(selected disabled ='',value='sin seleccionar') Seleccione un hotel
+                        select.form-select(id="hotel",aria-label='Default select example' name="id_ht")
+                            option(selected='',value='sin seleccionar') Seleccione un hotel
                             each hotel in hoteles
                                 option(value=hotel.id_ht) #{hotel.nombre}
+                        .form-group.mt-2
+                            label(for="Archivo") Imagen 
+                            input#myFiles(type="file", accept='image/*' multiple)
                         .container-fluid.d-flex.justify-content-center.my-4
-                            input.btn.btn-success.btn-block.me-5(type="submit",value="Registrar")
+                            input.btn.btn-success.btn-block(type="submit" value='Registrar')
                             a(href=`/gerentes`, class='btn btn-danger btn-clock') Cancelar
+                        
+        script.
+            const form = document.getElementById('uploadForm')
+            const sendFiles = async () =>{
+                // imagenes
+                const myFiles = document.getElementById('myFiles').files
+                const formData = new FormData()
+                Object.keys(myFiles).forEach(key =>{
+                    formData.append(myFiles.item(key).name, myFiles.item(key))
+                })
+                // Datos gerente
+                const gerente = {
+                    id_ht: document.getElementById('hotel').value,
+                    nombre: document.getElementById('nombre').value,
+                    apellido_paterno: document.getElementById('paterno').value,
+                    apellido_materno: document.getElementById('materno').value,
+                    telefono: document.getElementById('telefono').value
+                }
+                // Valida si selecciono un hotel
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(gerente)
+                }
+                const resSeleccionar = await fetch('http://localhost:1800/validarSeleccionarHotel',options);
+                const jsonSeleccionar = await resSeleccionar.json();
+                if (jsonSeleccionar?.status == 'Correcto'){
+
+                    const resFile = await fetch('http://localhost:1800/validarImagenesGerente', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const jsonFile = await resFile.json();
+                    if(jsonFile?.status == 'Correcto'){
+
+                        // crea el gerente
+                        const resDB = await fetch('http://localhost:1800/gerentes',options);
+                        const jsonDB = await resDB.json();
+                        // guarda la imagen
+                        const resImagen = await fetch(`http://localhost:1800/guardarImagenGerente?id_create=${jsonDB?.id_create}`,{
+                            method: 'POST',
+                            body: formData
+                        });
+                        const jsonImagen = await resImagen.json();
+                        location.assign(jsonImagen?.ruta);
+                    }else{
+                        const h5 =  document.getElementById('message')
+                        h5.textContent = `${jsonFile?.status}, ${jsonFile?.message}`
+                    }
+
+                }else{
+                    const h5 =  document.getElementById('message')
+                    h5.textContent = `${jsonSeleccionar?.status}, ${jsonSeleccionar?.message}`
+                }
+
+            }
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                sendFiles()
+            })

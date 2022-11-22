@@ -1,7 +1,7 @@
 import modeloGerentes from '../models/gerentes.js';
 import modeloHotel from '../models/hoteles.js';
 import db from '../config/db.js';
-import {deleteImagenGerente} from './eliminarImagenes.js'
+import { deleteImagenGerente } from './eliminarImagenes.js'
 
 const getGerentes = async (req, res) => {
   const gerente = await modeloGerentes.findByPk(req.query.id);
@@ -24,45 +24,31 @@ const getGerentes = async (req, res) => {
   }
 };
 
+// Middleware valida si se selecciona un hotel
+const validarSelector = async (req, res) => {
+  const { id_ht } = req.body;
+  if (id_ht == "sin seleccionar") {
+    return res.json({ status: 'error', message: 'Selecciona un hotel' });
+  } else {
+    return res.json({ status: 'Correcto', message: 'Se selecciono un hotel' });
+  }
+}
+
 //Método que crea y almacena los gerentes 
 const postGerente = async (req, res) => {
   const { id_ht, nombre, apellido_paterno, apellido_materno, telefono } = req.body;
-  const errores = [];
-  if (id_ht === "sin seleccionar") {
-    errores.push({ mensaje: "No has seleccionado un hotel" })
-  }
-  if (errores > 0) {
-    const hoteles = await db.query(
-      `select * from hoteles where id_ht not in(select id_ht from gerentes);`
-      , {
-        model: modeloHotel,
-        mapToModel: true
-      });
-    res.render("registrarGerente", {
-      pagina: "Registro de gerente",
-      errores,
-      hoteles,
+  try {
+    const query = await modeloGerentes.create({
+      id_ht,
       nombre,
       apellido_paterno,
       apellido_materno,
       telefono
     });
-  } else {
-    //Almacenar en la base de datos
-    try {
-      const query = await modeloGerentes.create({
-        id_ht,
-        nombre,
-        apellido_paterno,
-        apellido_materno,
-        telefono
-      });
-      res.redirect(`/pagRegistrarImagenesGerentes?id_create=${query.null}&id_mas=nada`);
-    } catch (error) {
-      console.log(error);
-    }
+    res.json({ id_create: query.null });
+  } catch (error) {
+    console.log(error);
   }
-
 }
 
 //Metodo que almacena las modificaciones de gerente
@@ -116,4 +102,4 @@ const deleteGerente = async (req, res) => {
   res.redirect('/gerentes');
 }
 
-export { getGerentes, postGerente, putGerente, deleteGerente };
+export { getGerentes, postGerente, putGerente, deleteGerente, validarSelector };

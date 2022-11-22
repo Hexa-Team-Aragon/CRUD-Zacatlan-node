@@ -1,10 +1,10 @@
 import modeloHoteles from '../models/hoteles.js';
-import {deleteImagenesHotel,deleteImagenGerente,deleteImagenesHabitacion} from './eliminarImagenes.js';
+import { deleteImagenesHotel, deleteImagenGerente, deleteImagenesHabitacion } from './eliminarImagenes.js';
 import modeloGerente from '../models/gerentes.js';
 import modeloHabitacion from '../models/habitaciones.js';
 import db from '../config/db.js';
 
-//Metodo para obtener los hoteles
+// Metodo para obtener los hoteles
 const getHoteles = async (req, res) => {
   const hotel = await modeloHoteles.findByPk(req.query.id);
   try {
@@ -17,22 +17,9 @@ const getHoteles = async (req, res) => {
   }
 };
 
-//Función que almacena las modificaciones realizadas en un objeto del tipo hotel en caso de que no haya errores
+// Metodo que almacena las modificaciones realizadas en un hotel
 const putHoteles = async (req, res) => {
   const { nombre, direccion, telefono, correo } = req.body;
-  const errores = [];
-  if (nombre.trim() === "") {
-    errores.push({ mensaje: "El nombre esta vacío" });
-  }
-  if (direccion.trim() === "") {
-    errores.push({ mensaje: "El direccion esta vacío" });
-  }
-  if (telefono.trim() === "") {
-    errores.push({ mensaje: "El telefono esta vacío" });
-  }
-  if (correo.trim() === "") {
-    errores.push({ mensaje: "El correo esta vacío" });
-  }
   const hotel = await modeloHoteles.findByPk(req.query.id);
   hotel.nombre = nombre;
   hotel.direccion = direccion;
@@ -42,64 +29,43 @@ const putHoteles = async (req, res) => {
   res.redirect('/adminHoteles');
 }
 
-//Método que crea y almacena los gerentes en caso de que no haya errores
+//Método que crea y almacena los hoteles
 const postHoteles = async (req, res) => {
   const { nombre, direccion, telefono, correo } = req.body;
-  const errores = [];
-  if (nombre.trim() === "") {
-    errores.push({ mensaje: "El nombre esta vacío" });
-  }
-  if (direccion.trim() === "") {
-    errores.push({ mensaje: "El direccion esta vacío" });
-  }
-  if (telefono.trim() === "") {
-    errores.push({ mensaje: "El telefono esta vacío" });
-  }
-  if (correo.trim() === "") {
-    errores.push({ mensaje: "El correo esta vacío" });
-  }
-  if (errores.length > 0) {
-    res.render("crearHotel", {
-      pagina: "Registro de hotel",
-      errores,
+  console.log(req.body)
+  //Almacenar en la base de datos
+  try {
+    const query = await modeloHoteles.create({
       nombre,
       direccion,
       telefono,
       correo,
     });
-  } else {
-    //Almacenar en la base de datos
-    try {
-     const query = await modeloHoteles.create({
-        nombre,
-        direccion,
-        telefono,
-        correo,
-      });
-      res.redirect(`/pagRegistrarImagenesHoteles?id_create=${query.null}&id_mas=nada`);
-    } catch (error) {
-      console.log(error);
-    }
+    res.json({ id_create: query.null });
+  } catch (error) {
+    console.log(error);
   }
 }
 
 //Función para eliminar un objeto del tipo hotel
 const deleteHoteles = async (req, res) => {
-  await deleteImagenesHotel(req.query.id);
-
-  const gerente = await db.query(`select * from gerentes where id_ht = ${req.query.id};`
-    ,{ model: modeloGerente, mapToModel: true });
-  await deleteImagenGerente(gerente[0].dataValues.id_gr);
-
-  const habitaciones = await db.query(`select * from habitaciones where id_ht = ${req.query.id};`,
-    {model:modeloHabitacion, mapToModel: true});
-  await habitaciones.map(habitacion => {
-    deleteImagenesHabitacion(habitacion.dataValues.id_hbt);
-  });
-
+  const idHotel = req.query.id
+  const gerente = await db.query(`select * from gerentes where id_ht = ${idHotel};`,
+    { model: modeloGerente, mapToModel: true });
+  const habitaciones = await db.query(`select * from habitaciones where id_ht = ${idHotel};`,
+    { model: modeloHabitacion, mapToModel: true });
+  if (gerente.length > 0) {
+    await deleteImagenGerente(gerente[0].dataValues.id_gr);
+  }
+  if (habitaciones.length > 0){
+    await habitaciones.map(habitacion => {
+      deleteImagenesHabitacion(habitacion.dataValues.id_hbt);
+    });  
+  }
+  await deleteImagenesHotel(idHotel);
   await modeloHoteles.destroy({
     where: {
-      id_ht: req.query.id
+      id_ht: idHotel
     },
   });
   res.redirect('/adminHoteles');

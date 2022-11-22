@@ -4,24 +4,75 @@ block compartircontenido
         .row 
             .col-md-12 
                 h2.d.block.w-100.text-center.fw-bold #{pagina} 
-                if (errores)
-                    each error in errores
-                        .alert.col.alert-danger.text-center=error.mensaje 
+                h5#message.d.block.w-100.text-center.fw-bold
             .row.justify-content-center
                 .col-md-5
-                    form(action="/hoteles",method="post")
+                    form(id='uploadForm',method="post")
                         .form-group
                             label.mb-1(for="nombre") Nombre del hotel:
-                            input(type="text",required maxlength="40" placeholder="Nombre del hotel", name="nombre",class="form-control",value=nombre)
+                            input#nombre(type="text",required maxlength="40" placeholder="Nombre del hotel", name="nombre",class="form-control",value=nombre)
                         .form-group.mt-2
                             label.mb-1(for="direccion") Dirección del hotel:
-                            input(type="text",required maxlength="100" placeholder="Dirección", name="direccion",class="form-control",value=direccion)
+                            input#direccion(type="text",required maxlength="100" placeholder="Dirección", name="direccion",class="form-control",value=direccion)
                         .form-group.mt-2
                             label.mb-1(for="telefono") Teléfono del hotel: 
-                            input(type="text", required minlength="10" maxlength="10", onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false", placeholder="Teléfono", name="telefono",class="form-control",value=telefono)
+                            input#telefono(type="text", required minlength="10" maxlength="10", onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false", placeholder="Teléfono", name="telefono",class="form-control",value=telefono)
                         .form-group.mt-2
                             label(for="correo") E-mail del hotel: 
-                            input(type="email", required maxlength="50" placeholder="Correo electrónico", name="correo",class="form-control",value=correo)
+                            input#correo(type="email", required maxlength="50" placeholder="Correo electrónico", name="correo",class="form-control",value=correo)
+                        .form-group.mt-2
+                            label(for="Archivo") Imagenes 
+                            input#myFiles(type="file", accept='image/*' multiple)
                         .container-fluid.d-flex.justify-content-center.my-4
-                            input.btn.btn-success.btn-block.me-5(type="submit",value="Registrar")
-                            a(href=`/adminHoteles`, class='btn btn-danger btn-clock') Cancelar
+                            input.btn.btn-success.btn-block(type="submit" value='Registrar')
+                            a(href=`/hoteles`, class='btn btn-danger btn-clock') Cancelar
+
+        script.
+            const form = document.getElementById('uploadForm')
+            const sendFiles = async () =>{
+                // imagenes
+                const myFiles = document.getElementById('myFiles').files
+                const formData = new FormData()
+                Object.keys(myFiles).forEach(key =>{
+                    formData.append(myFiles.item(key).name, myFiles.item(key))
+                })
+                // Datos gerente
+                const hotel = {
+                    nombre: document.getElementById('nombre').value,
+                    direccion: document.getElementById('direccion').value,
+                    telefono: document.getElementById('telefono').value,
+                    correo: document.getElementById('correo').value
+                }
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(hotel)
+                }
+                const resFile = await fetch('http://localhost:1800/validarImagenes', {
+                    method: 'POST',
+                    body: formData
+                });
+                const jsonFile = await resFile.json();
+                if(jsonFile?.status == 'Correcto'){
+
+                    // crea el gerente
+                    const resDB = await fetch('http://localhost:1800/hoteles',options);
+                    const jsonDB = await resDB.json();
+                    // guarda la imagen
+                    const resImagen = await fetch(`http://localhost:1800/guardarImagenHotel?id_create=${jsonDB?.id_create}`,{
+                        method: 'POST',
+                        body: formData
+                    });
+                    const jsonImagen = await resImagen.json();
+                    location.assign(jsonImagen?.ruta);
+                }else{
+                    const h5 =  document.getElementById('message')
+                    h5.textContent = `${jsonFile?.status}, ${jsonFile?.message}`
+                }
+            }
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                sendFiles()
+            })

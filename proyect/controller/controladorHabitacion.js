@@ -3,19 +3,19 @@ import modeloHotel from '../models/hoteles.js';
 import modeloGerente from '../models/gerentes.js';
 import modeloCategoria from '../models/categorias.js';
 import modeloHabitacionCategorias from '../models/habitacionCategorias.js';
-import {deleteImagenesHabitacion} from './eliminarImagenes.js';
+import { deleteImagenesHabitacion } from './eliminarImagenes.js';
 import db from '../config/db.js';
 
-//Metodo para mostrar todos los detalles del hotel seleccionado - pagina ver mas
+// Metodo para mostrar todos los detalles del hotel seleccionado - pagina ver mas
 const verMas = async (req, res) => {
   const hotel = await modeloHotel.findByPk(req.query.id);
   const gerentes = await modeloGerente.findAll({
     attributes: ['id_gr', 'id_ht', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono'],
     where: { id_ht: req.query.id }
   });
-  const habitaciones= await db.query(
+  const habitaciones = await db.query(
     `select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${req.query.id} where a.id_cat = b.id_cat;`
-    ,{ model: modeloHabitacionCategorias, mapToModel: true });
+    , { model: modeloHabitacionCategorias, mapToModel: true });
   if (hotel.id_gr != "null") {
     res.render("verMas", {
       pagina: `${hotel.nombre}`,
@@ -32,7 +32,17 @@ const verMas = async (req, res) => {
   }
 }
 
+// Middleware valida si se selecciona un hotel
+const validarSelectorCategoria = async (req, res) => {
+  const { id_cat } = req.body;
+  if (id_cat == "sin seleccionar") {
+    return res.json({ status: 'error', message: 'Selecciona un hotel' });
+  } else {
+    return res.json({ status: 'Correcto', message: 'Se selecciono un hotel' });
+  }
+}
 
+// Metodo que muestra admDetalles
 const adminDetalles = async (req, res) => {
   const hotel = await modeloHotel.findByPk(req.query.id);
   const gerentes = await modeloGerente.findAll({
@@ -58,35 +68,21 @@ const adminDetalles = async (req, res) => {
   }
 }
 
-//Método que crea y almacena las habitaciones
+// Método que crea y almacena las habitaciones
 const postHabitacion = async (req, res) => {
-  const { categoriaSeleccionada } = req.body;
-  const errores = [];
-  if (categoriaSeleccionada === "sin seleccionar") {
-    errores.push({ mensaje: "Debe seleccionar una categoria" });
-  }
-  if (errores.length > 0) {
-    const categorias = await modeloCategoria.findAll();
-    res.render("crearHabitacion", {
-      pagina: "Registro de habitacion",
-      errores,
-      categorias
+  const { id_cat } = req.body;
+  try {
+    const query = await modeloHabitaciones.create({
+      id_ht: req.query.id,
+      id_cat: id_cat,
     });
-  } else {
-    try {
-      const query = await modeloHabitaciones.create({
-        id_ht: req.query.id,
-        id_cat: categoriaSeleccionada,
-      });
-      //res.redirect(`/verMas?id=${req.query.id}`);
-      res.redirect(`/pagRegistrarImagenesHabitaciones?id_create=${query.null}&id_mas=${req.query.id}`);
-    } catch (error) {
-      console.log(error);
-    }
+    res.json({ id_create: query.null });
+  } catch (error) {
+    console.log(error);
   }
 };
 
-//Metodo para obtener una habitacion por su id
+// Metodo para obtener una habitacion por su id
 const getHabitacion = async (req, res) => {
   const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
   const categorias = await db.query(
@@ -107,7 +103,7 @@ const getHabitacion = async (req, res) => {
   }
 }
 
-//Metodo que almacena las modificaciones realizadas de una habitación
+// Metodo que almacena las modificaciones realizadas de una habitación
 const putHabitacion = async (req, res) => {
   const { categoriaSeleccionada } = req.body;
   //Modificar en la base de datos
@@ -122,7 +118,7 @@ const putHabitacion = async (req, res) => {
   }
 }
 
-//Metodo para eliminar una habitacion
+// Metodo para eliminar una habitacion
 const deleteHabitacion = async (req, res) => {
   await deleteImagenesHabitacion(req.query.id_habitacion);
   try {
@@ -137,11 +133,12 @@ const deleteHabitacion = async (req, res) => {
   res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
 };
 
-//Función para cancelar el registro o modificación de una habitación
+// Metodo para cancelar el registro o modificación de una habitación
 const cancelarHab = async (req, res) => {
   res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
 };
 
+// Metodo que muestra el formulario de registrar habitacion
 const paginaCraerHabitacion = async (req, res) => {
   const categorias = await db.query(
     `select * from categorias where id_cat not in(select id_cat from habitaciones where id_ht = ${req.query.id});`
@@ -153,4 +150,4 @@ const paginaCraerHabitacion = async (req, res) => {
   });
 };
 
-export { getHabitacion, putHabitacion, deleteHabitacion, verMas, adminDetalles, postHabitacion, cancelarHab, paginaCraerHabitacion }
+export { getHabitacion, putHabitacion, deleteHabitacion, verMas, postHabitacion, cancelarHab, paginaCraerHabitacion, validarSelectorCategoria,adminDetalles }
