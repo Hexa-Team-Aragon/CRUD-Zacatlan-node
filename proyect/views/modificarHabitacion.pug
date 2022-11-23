@@ -1,13 +1,13 @@
 extends ./layout/index.pug
 block compartircontenido 
     main.container.mt-5
-        .row 
+        .row.justify-content-center 
             .col-md-12 
                 h2.d.block.w-100.text-center.fw-bold #{pagina} 
                 if (errores)
                     each error in errores
                         .alert.col.alert-danger.text-center=error.mensaje 
-            .row.justify-content-center
+            .row.justify-content-between.col-9
                 .col-md-5
                     form(action=`/habitacion/modificar?id_habitacion=${habitacion.id_hbt}&id_hotel=${idHotel}`,method="post")
                         .form-group.mt-2    
@@ -19,3 +19,19 @@ block compartircontenido
                         .container-fluid.d-flex.justify-content-between.my-4.px-5
                             input.btn.btn-success.btn-block.me-5(type="submit",value="Guardar")
                             a(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-danger btn-clock') Cancelar
+                .container-fluid.m-0.p-0.mb-3.col-5
+                    table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
+                        thead
+                            tr
+                            th.col-2(scope='col') IMAGES
+                        tbody
+                            tr
+                            td.m-0.p-0  
+                                table.table.table-hover.m-0
+                                    tbody
+                                        tr
+                                        td.py-0
+                                            .container-fluid.d-flex.justify-content-between.py-2
+                                                p.align-middle.m-0 image
+                                                a.navbar-brand.d-flex.align-items-center(href='#')
+                                                    img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')

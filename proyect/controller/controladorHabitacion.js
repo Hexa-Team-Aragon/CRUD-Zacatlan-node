@@ -108,6 +108,7 @@ const putHabitacion = async (req, res) => {
   const { categoriaSeleccionada } = req.body;
   //Modificar en la base de datos
   try {
+    
     const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
     console.log(categoriaSeleccionada)
     habitacion.id_cat = categoriaSeleccionada
