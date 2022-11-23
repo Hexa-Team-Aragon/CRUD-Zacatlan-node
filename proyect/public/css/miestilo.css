@@ -93,32 +93,9 @@ body{
   position: relative;
 }
 
-#card1 {
-  background-color: #ffbe33;
-  border-radius: 8px;
-  color: azure;
-  border-width: 5px;
-  border-color: #ba8b27;
-  text-align: justify;
-  font-family: nunitoSB;
-}
-
-
 p{
   text-align: justify;
   font-family: rubik;
-}
-
-
-
-#card2 {
-  background-color: #cd6ab2;
-  border-radius: 6px;
-  color: azure;
-  border-width: 5px;
-  border-color: #a63889df;
-  text-align: justify;
-  font-family: nunitoSB;
 }
 
 #h2 {
@@ -130,54 +107,6 @@ p{
 }
 
 
-#card3 {
-  background-color: #eb4362;
-  border-radius: 5px 7%;
-  color: azure;
-  border-width: 5px;
-  font-family: nunitoSB;
-}
-
-#li1 {
-  background-color: #eb4362;
-  border-bottom: 5px solid;
-  border-color: #c23751;
-  color: azure;
-  text-align: justify;
-  font-family: nunito;
-}
-
-#li1-2 {
-  background-color: #eb4362;
-  border-radius: 20px 100%;
-  color: azure;
-  text-align: justify;
-  font-family: nunito;
-}
-
-#card4 {
-  background-color: #ff8a3c;
-  border-radius: 5px 7%;
-  color: azure;
-  border-width: 5px;
-  font-family: nunitoSB;
-}
-#li2 {
-  background-color: #ff8a3c;
-  border-bottom: 5px solid;
-  border-color: #d27231;
-  color: azure;
-  text-align: justify;
-  font-family: nunito;
-}
-
-#li2-2 {
-  background-color: #ff8a3c;
-  border-radius: 20px 100%;
-  color: azure;
-  text-align: justify;
-  font-family: nunito;
-}
 
 
 
@@ -193,11 +122,6 @@ p{
   border: groove 10px #a68b39;
 }
 
-#cardGerente {
-  background-color: #fea963;
-  border-radius: 10px 20%;
-  border: groove 10px #c74a24;
-}
 
 #cardHabitacion {
   background-color: #f48e8e;
@@ -227,13 +151,23 @@ p{
   position: relative;
 }
 
-.carousel-control-prev, .carousel-control-next{
+.carousel-control-prev{
   background-color: #efe2e2;
   width: 6vh;
   height: 6vh;
   border-radius: 50%;
   top: 45%;
   margin-left: 5%;
+  border: solid 2px rgb(0, 0, 0);
+  
+}
+
+.carousel-control-next{
+  background-color: #efe2e2;
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  top: 45%;
   margin-right: 5%;
   border: solid 2px rgb(0, 0, 0);
   
@@ -245,7 +179,7 @@ p{
 #des{
   border-radius: 10px;
   border: solid 4px rgb(204, 44, 44);
-  background-color: #EEB4B3;
+  background-color: #f3c9c8;
   /*border: groove 10px #ba8b27;*/
 }
 
@@ -260,40 +194,149 @@ p{
 
 
 #feria{
-  background-color: #FFBF69;
+  background-color: #faf09a;
   border: solid 4px #FF9F1C;
   border-radius: 10px;
 
-}
-
-#atrac{
-  border: solid 4px #a63889df;
-  background-color: #dd93c9;
-}
-
-#res{
-  border: solid 4px #ff8a3c;
-  background-color: #ffb787;
-}
-
-#titulos{
-  margin: 0px;
-  padding-top:5px ;
-  padding-bottom: 5px;
 }
 
 #des1{
   border-radius: 10px;
   border: solid 3px rgb(204, 44, 44);
   padding: 10px;
-  font-size: 95%;
 }
 
 #feria1{
   border-radius: 10px;
   border: solid 3px #FF9F1C;
   padding: 10px;
-  font-size: 95%;
   margin: 0%;
 }
 
+#atrac1{
+  border: solid 4px #a63889df;
+  background-color: #f4c5e7;
+  border-radius: 8px;
+}
+#ba1{
+  border: solid 3px #a63889df;
+  border-radius: 5px;
+}
+
+#atrac2{
+  border: solid 4px #38a67adf;
+  background-color: #c6f8e4df;
+  border-radius: 8px;
+}
+
+#ba2{
+  border: solid 3px #38a67adf;
+  border-radius: 5px;
+}
+
+#atrac3{
+  border: solid 4px #387ca6df;
+  background-color: #bbe4fddf;
+  border-radius: 8px;
+}
+
+#ba3{
+  border: solid 3px #387ca6df;
+  border-radius: 5px;
+}
+
+#atrac4{
+  border: solid 4px #cf487edf;
+  background-color: #ffc2dadf;
+  border-radius: 8px;
+}
+
+#ba4{
+  border: solid 3px #cf487edf;
+  border-radius: 5px;
+}
+
+#atrac5{
+  border: solid 4px #8ed735df;
+  background-color: #cdf39fdf;
+  border-radius: 8px;
+}
+
+#ba5{
+  border: solid 3px #8ed735df;
+  border-radius: 5px;
+}
+
+#res1{
+  border: solid 4px #ff8a3c;
+  background-color: #ffc097;
+  border-radius: 8px;
+}
+
+#br1{
+  border: solid 3px #ff8a3c;
+  border-radius: 5px;
+}
+
+#res2{
+  border: solid 4px #25c3d4;
+  background-color: #b0ebf1;
+  border-radius: 8px;
+}
+
+#br2{
+  border: solid 3px #25c3d4;
+  border-radius: 5px;
+}
+
+#res3{
+  border: solid 4px #9125d4;
+  background-color: #f1bbf9;
+  border-radius: 8px;
+}
+
+#br3{
+  border: solid 3px#9125d4;
+  border-radius: 5px;
+}
+
+#res4{
+  border: solid 4px #25d445;
+  background-color: #ccf3d3;
+  border-radius: 8px;
+}
+
+#br4{
+  border: solid 3px  #25d445;
+  border-radius: 5px;
+}
+
+#hoteles{
+  margin: 0px;
+  padding-top:5px ;
+  padding-bottom: 5px;
+  border: solid 4px #2537d4;
+  background-color: #c9cdef;
+  border-radius: 8px;
+}
+
+#bh{
+  border: solid 3px #2537d4;
+  background-color: #c9cdef;
+  border-radius: 8px;
+}
+
+#ubicacion{
+  margin: 0px;
+  padding-top:5px ;
+  padding-bottom: 5px;
+  border: solid 4px #6e636c;
+  background-color: #cccccc;
+  border-radius: 8px;
+}
+
+#bu{
+  border: solid 3px #6e636c;
+  background-color: #dbdbdb;
+  border-radius: 5px;
+}

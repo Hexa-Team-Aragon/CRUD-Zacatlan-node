@@ -16,5 +16,6 @@ block compartircontenido
                             option(selected='',value=`${categoria.id_cat}`) #{categoria.nombre}
                             each categoria in categorias
                                 option(value=categoria.id_cat) #{categoria.nombre}
+                        .container-fluid.d-flex.justify-content-between.my-4.px-5
                             input.btn.btn-success.btn-block.me-5(type="submit",value="Guardar")
                             a(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-danger btn-clock') Cancelar

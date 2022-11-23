@@ -14,10 +14,11 @@ block compartircontenido
                             option(selected='',value='sin seleccionar') Selecciona una categoria
                             each categoria in categorias
                                 option(value=categoria.id_cat) #{categoria.nombre}
-                        .form-group.mt-2
-                            label(for="Archivo") Imagenes 
-                            input#myFiles(type="file", accept='image/*' multiple)
-                        .container-fluid.d-flex.justify-content-center.my-4
+                        .container-fluid.d-flex
+                            .form-group.mt-4.d-flex
+                                label.pe-4(for="Archivo") Imagenes 
+                                input#myFiles(type="file", accept='image/*' multiple)
+                        .container-fluid.d-flex.justify-content-center.my-4.px-5
                             input.btn.btn-success.btn-block.me-5(type="submit",value="Registrar")
                             a(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-danger btn-clock') Cancelar
 
