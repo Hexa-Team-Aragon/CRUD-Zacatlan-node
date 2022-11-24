@@ -24,8 +24,8 @@ block compartircontenido
                         td=`${gerente.telefono}`
                         td.col-2.align-middle
                             .container-fluid.d-flex.justify-content-between.align-middle
-                                p.m-0=`${gerente.nombre}`
-                                a(href='#')
+                                p.m-0=`${gerente.nombreImagen.slice(3)}`
+                                a(href=`/pagCambiarImagenGerente?id_img=${gerente.id_img}&id_gr=${gerente.id_gr}`)
                                     img.ms-2(src='/images/editar.png', alt='', width='25', height='25')
                         td.col-1.align-middle
                                     .container-fluid.d-flex.justify-content-between

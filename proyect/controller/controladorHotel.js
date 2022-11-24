@@ -1,7 +1,8 @@
 import modeloHoteles from '../models/hoteles.js';
-import { deleteImagenesHotel, deleteImagenGerente, deleteImagenesHabitacion } from './eliminarImagenes.js';
+import { deleteImagenesHotel, deleteImagenGerente, deleteImagenesHabitacion, deleteImagenHotel } from './eliminarImagenes.js';
 import modeloGerente from '../models/gerentes.js';
 import modeloHabitacion from '../models/habitaciones.js';
+import modeloImgHotel from '../models/imgHoteles.js';
 import db from '../config/db.js';
 
 // Metodo para obtener los hoteles
@@ -29,7 +30,7 @@ const putHoteles = async (req, res) => {
   res.redirect('/adminHoteles');
 }
 
-//Método que crea y almacena los hoteles
+// Método que crea y almacena los hoteles
 const postHoteles = async (req, res) => {
   const { nombre, direccion, telefono, correo } = req.body;
   console.log(req.body)
@@ -47,7 +48,7 @@ const postHoteles = async (req, res) => {
   }
 }
 
-//Función para eliminar un objeto del tipo hotel
+// Metodo para eliminar un hotel
 const deleteHoteles = async (req, res) => {
   const idHotel = req.query.id
   const gerente = await db.query(`select * from gerentes where id_ht = ${idHotel};`,
@@ -71,4 +72,12 @@ const deleteHoteles = async (req, res) => {
   res.redirect('/adminHoteles');
 }
 
-export { getHoteles, putHoteles, postHoteles, deleteHoteles };
+// Metodo para eliminar una imagen de un hotel
+const deleteImgHotel = async (req,res) => {
+  const idImg = req.query.id_img;
+  await deleteImagenHotel(idImg);
+  await modeloImgHotel.destroy( {where: {id_img: idImg}} );
+  res.redirect(`/adminDetalles?id=${req.query.id}`);
+}
+ 
+export { getHoteles, putHoteles, postHoteles, deleteHoteles, deleteImgHotel };

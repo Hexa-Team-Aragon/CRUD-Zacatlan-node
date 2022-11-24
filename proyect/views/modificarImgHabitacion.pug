@@ -1,0 +1,19 @@
+extends ./layout/index.pug
+block compartircontenido 
+    h2.text-center.pt-4.fw-bold #{pagina}
+    main.container.mt-5
+        .container-fluid.d-flex.m-0.p-0 
+            table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
+                thead
+                    tr
+                    th.col-2(scope='col') IMAGES
+                tbody
+                    tr
+                    td.py-0
+                        .container-fluid.d-flex.justify-content-between.py-2
+                            p.align-middle.m-0 image
+                            a.navbar-brand.d-flex.align-items-center(href='#')
+                                img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
+    .container-fluid.text-center.mb-4.mt-0
+            a(href=`#`, class='btn btn-primary btn-clock') Añadir imágenes
+            a.mx-2.px-1(href=`#`, class='btn btn-success btn-clock') Regresar

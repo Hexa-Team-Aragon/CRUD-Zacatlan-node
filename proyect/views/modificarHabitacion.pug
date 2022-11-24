@@ -1,13 +1,10 @@
 extends ./layout/index.pug
 block compartircontenido 
     main.container.mt-5
-        .row 
+        .row.justify-content-center 
             .col-md-12 
                 h2.d.block.w-100.text-center.fw-bold #{pagina} 
-                if (errores)
-                    each error in errores
-                        .alert.col.alert-danger.text-center=error.mensaje 
-            .row.justify-content-center
+            .row.justify-content-between.col-9
                 .col-md-5
                     form(action=`/habitacion/modificar?id_habitacion=${habitacion.id_hbt}&id_hotel=${idHotel}`,method="post")
                         .form-group.mt-2    
@@ -16,5 +13,6 @@ block compartircontenido
                             option(selected='',value=`${categoria.id_cat}`) #{categoria.nombre}
                             each categoria in categorias
                                 option(value=categoria.id_cat) #{categoria.nombre}
+                        .container-fluid.d-flex.justify-content-between.my-4.px-5
                             input.btn.btn-success.btn-block.me-5(type="submit",value="Guardar")
                             a(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-danger btn-clock') Cancelar

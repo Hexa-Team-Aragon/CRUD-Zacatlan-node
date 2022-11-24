@@ -3,6 +3,8 @@ import modeloHotel from '../models/hoteles.js';
 import modeloGerente from '../models/gerentes.js';
 import modeloCategoria from '../models/categorias.js';
 import modeloHabitacionCategorias from '../models/habitacionCategorias.js';
+import modeloImgHotel from '../models/imgHoteles.js';
+import modeloImgHabitacion from '../models/imgHabitaciones.js';
 import { deleteImagenesHabitacion } from './eliminarImagenes.js';
 import db from '../config/db.js';
 
@@ -32,7 +34,7 @@ const verMas = async (req, res) => {
   }
 }
 
-// Middleware valida si se selecciona un hotel
+// Middleware que valida si se selecciona un hotel
 const validarSelectorCategoria = async (req, res) => {
   const { id_cat } = req.body;
   if (id_cat == "sin seleccionar") {
@@ -44,26 +46,33 @@ const validarSelectorCategoria = async (req, res) => {
 
 // Metodo que muestra admDetalles
 const adminDetalles = async (req, res) => {
+  const idHotel = req.query.id;
   const hotel = await modeloHotel.findByPk(req.query.id);
   const gerentes = await modeloGerente.findAll({
     attributes: ['id_gr', 'id_ht', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono'],
-    where: { id_ht: req.query.id }
+    where: { id_ht: idHotel }
   });
-  const habitaciones= await db.query(
-    `select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${req.query.id} where a.id_cat = b.id_cat;`
-    ,{ model: modeloHabitacionCategorias, mapToModel: true });
+  const habitaciones = await db.query(
+    `select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${idHotel} where a.id_cat = b.id_cat;`
+    , { model: modeloHabitacionCategorias, mapToModel: true });
+  const imagenesHotel = await db.query(
+    `select * from img_hoteles where id_ht = ${idHotel};`
+    , { model: modeloImgHotel, mapToModel: true });
+
   if (hotel.id_gr != "null") {
     res.render("adminDetalles", {
       pagina: `${hotel.nombre}`,
       hotel,
       gerentes,
-      habitaciones
+      habitaciones,
+      imagenesHotel
     });
   } else {
     res.render("adminDetalles", {
       pagina: `${hotel.nombre}`,
       hotel,
-      habitaciones
+      habitaciones,
+      imagenesHotel
     });
   }
 }
@@ -106,10 +115,8 @@ const getHabitacion = async (req, res) => {
 // Metodo que almacena las modificaciones realizadas de una habitación
 const putHabitacion = async (req, res) => {
   const { categoriaSeleccionada } = req.body;
-  //Modificar en la base de datos
   try {
     const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
-    console.log(categoriaSeleccionada)
     habitacion.id_cat = categoriaSeleccionada
     await habitacion.save();
     res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
@@ -150,4 +157,15 @@ const paginaCraerHabitacion = async (req, res) => {
   });
 };
 
-export { getHabitacion, putHabitacion, deleteHabitacion, verMas, postHabitacion, cancelarHab, paginaCraerHabitacion, validarSelectorCategoria,adminDetalles }
+// Metodo que muestra la pagina de modificar imagenes habitacion
+const pagModificarImgHabitacion = async (req, res) => {
+  const idHabitacion = req.query.id_hbt;
+  const imgHabitacion = await db.query(`select * from img_habitaciones where id_hbt = ${idHabitacion};`
+    , { model: modeloImgHabitacion, mapToModel: true });
+  res.render("modificarImgHabitacion",{
+    pagina: "Imagenes habitacion",
+    imgHabitacion
+  })
+}
+
+export { getHabitacion, putHabitacion, deleteHabitacion, verMas, postHabitacion, cancelarHab, paginaCraerHabitacion, validarSelectorCategoria, adminDetalles, pagModificarImgHabitacion }

@@ -3,17 +3,17 @@ block compartircontenido
     h1.text-center.pt-4.fw-bold #{pagina}
     main.container.mt-4
         .container-fluid.text-center.mb-4.mt-0
-            a(href='#', class='btn btn-primary btn-clock') Añadir imágenes
+            a(href=`pagCrearImagenHotel?id=${hotel.id_ht}`, class='btn btn-primary btn-clock') Añadir imágenes
             a.mx-2.px-1(href=`crearHabitacion?id=${hotel.id_ht}`, class='btn btn-success btn-clock') Registrar habitación
         .container-fluid.d-flex.justify-content-center
             .row.justify-content-center
                 
-                .container-fluid.col-ms.d-flex.align-items-sm-stretch.py-0.justify-content-center
+                .container-fluid.col-ms.d-flex.align-items-sm-stretch.py-0.justify-content-evenly
                     .container-fluid.p-0.m-2.col-4.justify-content-center
                         table.table.table-info.table-striped.table-hover.table-bordered.border-primary.align-middle
                             thead.align-middle.justify-content-center
                                 tr
-                                th.col-6.text-center Nombre del hotel
+                                th.text-center Nombre del hotel
                                 th=`${hotel.nombre}`
                                 tr
                                 th.text-center Dirección
@@ -25,7 +25,7 @@ block compartircontenido
                                 th.text-center Teléfono
                                 th=`${hotel.telefono}`
                                 tr
-                                th.text-center Nombre del gerente
+                                th.text-center Gerente
                                 each gerente in gerentes
                                     th=`${gerente.nombre+' '+gerente.apellido_paterno+' '+gerente.apellido_materno}`
                                 tr                         
@@ -40,93 +40,31 @@ block compartircontenido
                                 td.m-0.p-0  
                                     table.table.table-hover.m-0
                                         tbody
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-
-
-                            
-                
+                                            each imgHotel in imagenesHotel
+                                                tr
+                                                td.py-0
+                                                    .container-fluid.d-flex.justify-content-between.py-1
+                                                        p.align-middle.m-0=`${imgHotel.nombreImagen.slice(3)}`
+                                                        a.navbar-brand.d-flex.align-items-center(href=`/hotel/eliminar/imagen?id_img=${imgHotel.id_img}&id=${hotel.id_ht}`)
+                                                            img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
                                 
                 .container-fluid.m-0.p-0.mb-3.col-5
                     table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
                         thead
                             tr
-                            th(scope='col') Categoria de la habitación:
-                            th.col-2(scope='col') IMAGES
+                            th(scope='col') Categoria de la habitación
+                            th(scope='col') Imagenes
                         tbody
                             each habitacion in habitaciones 
                                 tr
                                 td.col-2.align-middle
-                                    .container-fluid.d-flex.justify-content-between.align-middle
-                                        p.m-0.align-middle=`${habitacion.nombre}`
-                                        a(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
+                                    .container-fluid.d-flex.justify-content-between.py-1
+                                        p.align-middle.m-0=`${habitacion.nombre}`
+                                        a.navbar-brand.d-flex.align-items-center(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
                                             img(src='/images/editar.png', alt='', width='25', height='25')
-                                        a(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
+                                        a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
                                             img(src='/images/eliminar.png', alt='', width='25', height='25')
-                                td.m-0.p-0  
-                                    table.table.table-hover.m-0
-                                        tbody
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-2
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
-                    
-    
-
-
-    
-
+                                td.col-2.align-middle
+                                    .container-fluid.d-flex.justify-content-center.py-1
+                                        a.navbar-brand.d-flex.align-items-center(href=`/pagina/modificarImg/habitacion?id_hbt=${habitacion.id_hbt}`) 
+                                            img(src='/images/editar.png', alt='', width='25', height='25')

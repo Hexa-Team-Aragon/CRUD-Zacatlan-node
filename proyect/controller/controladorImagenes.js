@@ -1,6 +1,7 @@
 import path from 'path';
 import fileUpload from "express-fileupload";
 import {rutaImagenesDataBases} from '../direcciones.js';
+import {deleteImagenGerente} from './eliminarImagenes.js'
 import db from '../config/db.js';
 
 const maximoFiles = (req,res,next) => {
@@ -35,12 +36,30 @@ const postImagenes = (tabla,nombreId,nextRuta) => {
   }
 }
 
+const putImagenes = (modelo,nextRuta) => {
+  return async (req, res) => {
+    const id = req.query.id;
+    const idImg = req.query.id_img;
+    const files = req.files;
+    await deleteImagenGerente(id);
+    Object.keys(files).forEach(async(key) => {
+      const filepath = path.join(rutaImagenesDataBases, `${id}-${files[key].name}`);
+      files[key].mv(filepath, (err) => {
+        if (err) return res.status(500).json({ status: 'error', message: err })
+      })
+      const imgGerente = await modelo.findByPk(idImg);
+      imgGerente.nombreImagen = `${id}-${files[key].name}`;
+      await imgGerente.save()
+    })
+    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
+  }
+}
+
 const MB = 1 //Variable para definir el numero de bytes maximo que puede pesar un archivo
 const FILE_SIZE_LIMIT = MB * 1024 * 1024; //Aquie se calculan los bytes
 const fileSizeLimiter = (req, res, next) => {
-  const files = req.files
-
-  const fileOverLimit = []
+  const files = req.files;
+  const fileOverLimit = [];
   //Que archivos estan fuera del limite
   Object.keys(files).forEach(key => {
     if (files[key].size > FILE_SIZE_LIMIT) {
@@ -57,7 +76,12 @@ const fileSizeLimiter = (req, res, next) => {
 
     return res.status(413).json({ status: 'error', message });
   }
-  return res.json({ status: 'Correcto'});
+  console.log('entro')
+  if (req.query.directo == 'pasa'){
+    next();
+  }else{
+    return res.json({ status: 'Correcto'});
+  }
 }
 
 const fileExtLimiter = (allowedExtArray) => {
@@ -76,4 +100,4 @@ const fileExtLimiter = (allowedExtArray) => {
   }
 }
 
-export { upload, postImagenes, fileExtLimiter, fileSizeLimiter, filesPayloadExists,maximoFiles }
+export { upload,postImagenes,fileExtLimiter,fileSizeLimiter,filesPayloadExists,maximoFiles,putImagenes }

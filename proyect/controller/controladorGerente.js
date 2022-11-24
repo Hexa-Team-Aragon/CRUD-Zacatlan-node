@@ -1,7 +1,8 @@
 import modeloGerentes from '../models/gerentes.js';
 import modeloHotel from '../models/hoteles.js';
+import modeloImgGerente from '../models/imgGerentes.js';
 import db from '../config/db.js';
-import { deleteImagenGerente } from './eliminarImagenes.js'
+import { deleteImagenGerente, deleteImg } from './eliminarImagenes.js'
 
 const getGerentes = async (req, res) => {
   const gerente = await modeloGerentes.findByPk(req.query.id);
@@ -34,7 +35,7 @@ const validarSelector = async (req, res) => {
   }
 }
 
-//Método que crea y almacena los gerentes 
+// Método que crea y almacena los gerentes 
 const postGerente = async (req, res) => {
   const { id_ht, nombre, apellido_paterno, apellido_materno, telefono } = req.body;
   try {
@@ -51,7 +52,7 @@ const postGerente = async (req, res) => {
   }
 }
 
-//Metodo que almacena las modificaciones de gerente
+// Metodo que almacena las modificaciones de gerente
 const putGerente = async (req, res) => {
   const { nombre, apellido_paterno, apellido_materno, telefono, id_ht } = req.body;
   const errores = [];
@@ -91,7 +92,7 @@ const putGerente = async (req, res) => {
   }
 }
 
-//Función para eliminar un objeto del tipo gerente
+// Metodo que elimina un gerente
 const deleteGerente = async (req, res) => {
   await deleteImagenGerente(req.query.id);
   await modeloGerentes.destroy({
@@ -102,4 +103,13 @@ const deleteGerente = async (req, res) => {
   res.redirect('/gerentes');
 }
 
-export { getGerentes, postGerente, putGerente, deleteGerente, validarSelector };
+/*const deleteImgGerente = async (req,res) => {
+  await deleteImg(req.query.nombre);
+  await modeloImgGerente.destroy( {where:{id_img: req.query.id_img}} );
+  res.redirect('/gerentes');
+}*/
+const putImgGerente = async (req, res) => {
+
+}
+
+export { getGerentes, postGerente, putGerente, deleteGerente,validarSelector };

@@ -5,6 +5,16 @@ import modeloImgHotel from '../models/imgHoteles.js';
 import modeloImgHabitacion from '../models/imgHabitaciones.js';
 import db from '../config/db.js';
 
+
+// Metodo que elimina una imagen de img-data-bases
+const deleteImg = async(nombreImagen) => {
+  try {
+    await fs.unlink(`${rutaImagenesDataBases}/${nombreImagen}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Metodo que elimina la imagen del gerente de img-data-bases
 const deleteImagenGerente = async (idGerente) => {
   const img = await db.query( `select * from img_gerentes where id_gr = ${idGerente}`
@@ -64,4 +74,4 @@ const deleteImagenHabitacion = async (idImg) => {
   }
 }
 
-export {deleteImagenGerente,deleteImagenesHotel,deleteImagenesHabitacion,deleteImagenHotel,deleteImagenHabitacion}
+export {deleteImagenGerente,deleteImagenesHotel,deleteImagenesHabitacion,deleteImagenHotel,deleteImagenHabitacion,deleteImg}

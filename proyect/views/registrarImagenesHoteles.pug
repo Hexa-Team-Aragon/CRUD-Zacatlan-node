@@ -1,49 +1,45 @@
 extends ./layout/index.pug
 block compartircontenido 
     main.container.mt-5
-        .row 
-            form(id='uploadForm' enctype='multipart/form-data' method="POST")
-                .form-group
-                    label(for="Archivo") Archivo 
-                    input#myFiles(type="file", accept='image/*' multiple)
-                input.btn.btn-success.btn-block(type="submit" value='Subir Archivo')
-        h2#status
-        h3
+        .row
+            .col-md-12 
+                h2.d.block.w-100.text-center.fw-bold #{pagina} 
+                h5#message.d.block.w-100.text-center.fw-bold
+            .row.justify-content-center
+                .col-md-5
+                    form(id='uploadForm' enctype='multipart/form-data' method="POST")
+                        .form-group
+                            label(for="Archivo") Imagenes 
+                            input#myFiles(type="file", accept='image/*' multiple)
+                        input.btn.btn-success.btn-block(type="submit" value='Registrar')
+
         script.
             const form = document.getElementById('uploadForm')
 
             const sendFiles = async () =>{
-
-                const resId = await fetch('http://localhost:1800/obtenerId',{
-                    method: 'GET'
-                })
 
                 const myFiles = document.getElementById('myFiles').files
 
                 const formData = new FormData()
 
                 Object.keys(myFiles).forEach(key =>{
-                    formData.append(`${resId.json?.id}-${myFiles.item(key).name}`, myFiles.item(key))
+                    formData.append(myFiles.item(key).name, myFiles.item(key))
                 })
 
-                const response = await fetch('http://localhost:1800/pagRegistrarImagenesHoteles', {
+                const response = await fetch(`http://localhost:1800/crearImagenHotel?id_create=${#{idHotel}}&directo=pasa`, {
                     method: 'POST',
                     body: formData
-                }) 
+                })
 
                 const json = await response.json()
 
-                const h2 =  document.querySelector('h2')
-                h2.textContent = json?.status
+                const h5 =  document.getElementById('message')
+                h5.textContent = `${json?.status}, ${json?.message}`
 
-                const h3 =  document.querySelector('h3')
-                h3.textContent = json?.message
-
-                if (json?.status === "success"){
-                    console.log('entro')
-                    location.assign(json?.ruta)
+                if (json?.status == "success"){
+                    console.log('paso')
+                    location.assign(`${json?.ruta}?id=${#{idHotel}}`)
                 }else{
-                    console.log('no entro')
                 }
 
             }

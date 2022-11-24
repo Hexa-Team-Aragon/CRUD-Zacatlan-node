@@ -1,5 +1,5 @@
 import modeloHotel from '../models/hoteles.js';
-import gerente from '../models/gerentes.js';
+import modeloGerentesImagenes from '../models/gerentesImganes.js';
 import db from '../config/db.js';
 
 const paginaInicio = async(req, res) => {
@@ -28,7 +28,9 @@ const crearHoteles = async (req, res) => {
 }
 
 const pagGerentes = async (req, res) => {
-  const gerentes = await gerente.findAll();
+  const gerentes = await db.query(
+    `select g.id_gr, g.nombre, g.apellido_paterno, g.apellido_materno, g.telefono, img.id_img, img.nombreImagen from gerentes as g, img_gerentes as img where g.id_gr = img.id_gr;`
+    , { model: modeloGerentesImagenes, mapToModel: true });
   res.render("gerentes", {
     pagina: "Gerentes",
     gerentes: gerentes,
@@ -57,13 +59,16 @@ const paginaHabitaciones = (req, res) => {
 
 const pagRegistrarImagenesHoteles = async (req, res) => {
   res.render("registrarImagenesHoteles", {
-    pagina: "Registrar Imagenes Hoteles"
+    pagina: "Registrar Imagenes Hoteles",
+    idHotel: req.query.id
   });
 }
 
-const pagRegistarImagenesGerentes = async (req,res) => {
+const pagCambiarImagenGerente = async (req,res) => {
   res.render("registrarImagenesGerentes", {
-    pagina: "Registrar Imagenes Gerentes"
+    pagina: "Modificar imagen gerente",
+    idGerente: req.query.id_gr,
+    idImg: req.query.id_img,
   });
 }
 
@@ -73,5 +78,5 @@ const pagRegistrarImagenesHabitaciones = async (req,res) => {
   })
 }
 
-export {paginaInicio,adminHoteles,pagGerentes,paginaHabitaciones,crearHoteles,crearGerentes}
+export {paginaInicio,adminHoteles,pagGerentes,paginaHabitaciones,crearHoteles,crearGerentes,pagRegistrarImagenesHoteles,pagCambiarImagenGerente}
 
