@@ -7,16 +7,6 @@ block compartircontenido
             a.mx-2.px-1(href=`crearHabitacion?id=${hotel.id_ht}`, class='btn btn-success btn-clock') Registrar habitación
         .container-fluid.d-flex.justify-content-center
             .row.justify-content-center
-                
-<<<<<<< HEAD
-                .container-fluid.col-ms.d-flex.align-items-sm-stretch.py-0.justify-content-evenly
-                    .container-fluid.p-0.m-2.col-4.justify-content-center
-                        table.table.table-info.table-striped.table-hover.table-bordered.border-primary.align-middle
-                            thead.align-middle.justify-content-center
-                                tr
-                                th.text-center Nombre del hotel
-                                th=`${hotel.nombre}`
-=======
                 .container-fluid.col-ms.d-flex.align-items-sm-stretch.py-0.justify-content-between
                     .container-fluid.p-0.m-2.justify-content-center
                         table.table.table-striped.table-bordered.border-primary.align-middle.table-success.border.border-3
@@ -24,7 +14,6 @@ block compartircontenido
                                 tr
                                 th.text-center Nombre del hotel
                                 th.fw-normal=`${hotel.nombre}`
->>>>>>> fd737f99ad84e8d17262007fdd3b56330e2ae98d
                                 tr
                                 th.text-center Dirección
                                 th.fw-normal=`${hotel.direccion}`
@@ -50,7 +39,6 @@ block compartircontenido
                                 td.m-0.p-0  
                                     table.table.table-hover.m-0
                                         tbody
-<<<<<<< HEAD
                                             each imgHotel in imagenesHotel
                                                 tr
                                                 td.py-0
@@ -58,43 +46,17 @@ block compartircontenido
                                                         p.align-middle.m-0=`${imgHotel.nombreImagen.slice(3)}`
                                                         a.navbar-brand.d-flex.align-items-center(href=`/hotel/eliminar/imagen?id_img=${imgHotel.id_img}&id=${hotel.id_ht}`)
                                                             img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                
-=======
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-                                            tr
-                                            td.py-0
-                                                .container-fluid.d-flex.justify-content-between.py-1
-                                                    p.align-middle.m-0=`${hotel.nombre}`
-                                                    a.navbar-brand.d-flex.align-items-center(href='#')
-                                                        img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
-              
->>>>>>> fd737f99ad84e8d17262007fdd3b56330e2ae98d
+                    
                 .container-fluid.m-0.p-0.mb-3.col-5
                     table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
                         thead
                             tr
-<<<<<<< HEAD
                             th(scope='col') Categoria de la habitación
                             th(scope='col') Imagenes
-=======
-                            th(scope='col') Categoria de la habitación:
->>>>>>> fd737f99ad84e8d17262007fdd3b56330e2ae98d
                         tbody
                             each habitacion in habitaciones 
                                 tr
                                 td.col-2.align-middle
-<<<<<<< HEAD
                                     .container-fluid.d-flex.justify-content-between.py-1
                                         p.align-middle.m-0=`${habitacion.nombre}`
                                         a.navbar-brand.d-flex.align-items-center(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
@@ -105,19 +67,3 @@ block compartircontenido
                                     .container-fluid.d-flex.justify-content-center.py-1
                                         a.navbar-brand.d-flex.align-items-center(href=`/pagina/modificarImg/habitacion?id_hbt=${habitacion.id_hbt}`) 
                                             img(src='/images/editar.png', alt='', width='25', height='25')
-=======
-                                    .container-fluid.d-flex.align-middle
-                                        p.m-0.align-middle=`${habitacion.nombre}`
-                                        .container-fluid.d-flex.justify-content-end
-                                            a(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
-                                                img(src='/images/editar.png', alt='', width='25', height='25')
-                                            a(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
-                                                img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
-                                
-                    
-    
-
-
-    
-
->>>>>>> fd737f99ad84e8d17262007fdd3b56330e2ae98d

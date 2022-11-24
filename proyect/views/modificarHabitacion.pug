@@ -4,12 +4,6 @@ block compartircontenido
         .row.justify-content-center 
             .col-md-12 
                 h2.d.block.w-100.text-center.fw-bold #{pagina} 
-<<<<<<< HEAD
-=======
-                if (errores)
-                    each error in errores
-                        .alert.col.alert-danger.text-center=error.mensaje 
->>>>>>> fd737f99ad84e8d17262007fdd3b56330e2ae98d
             .row.justify-content-between.col-9
                 .col-md-5
                     form(action=`/habitacion/modificar?id_habitacion=${habitacion.id_hbt}&id_hotel=${idHotel}`,method="post")
