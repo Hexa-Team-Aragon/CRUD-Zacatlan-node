@@ -116,6 +116,7 @@ const getHabitacion = async (req, res) => {
 const putHabitacion = async (req, res) => {
   const { categoriaSeleccionada } = req.body;
   try {
+    
     const habitacion = await modeloHabitaciones.findByPk(req.query.id_habitacion);
     habitacion.id_cat = categoriaSeleccionada
     await habitacion.save();
