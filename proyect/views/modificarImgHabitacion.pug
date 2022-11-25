@@ -8,12 +8,13 @@ block compartircontenido
                     tr
                     th.col-2(scope='col') IMAGES
                 tbody
-                    tr
-                    td.py-0
-                        .container-fluid.d-flex.justify-content-between.py-2
-                            p.align-middle.m-0 image
-                            a.navbar-brand.d-flex.align-items-center(href='#')
-                                img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
+                    each img in imgHabitacion
+                        tr
+                        td.py-0
+                            .container-fluid.d-flex.justify-content-between.py-2
+                                p.align-middle.m-0 #{img.nombreImagen.slice(3)}
+                                a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar/imagen?id_img=${img.id_img}`)
+                                    img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
     .container-fluid.text-center.mb-4.mt-0
-            a(href=`#`, class='btn btn-primary btn-clock') Añadir imágenes
-            a.mx-2.px-1(href=`#`, class='btn btn-success btn-clock') Regresar
+            a(href=`/pagCrearImagenHabitacion?id_ht=${idHotel}&id_hbt=${idHabitacion}`, class='btn btn-primary btn-clock') Añadir imágenes
+            a.mx-2.px-1(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-success btn-clock') Regresar

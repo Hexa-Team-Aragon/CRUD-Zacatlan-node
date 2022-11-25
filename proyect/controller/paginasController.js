@@ -1,13 +1,31 @@
 import modeloHotel from '../models/hoteles.js';
 import modeloGerentesImagenes from '../models/gerentesImganes.js';
+import modeloNumHoteles from '../models/numeroHoteles.js';
+import modeloImgPublicidad from '../models/imgPublicidad.js';
+import { rutaImagenesDataBases } from '../direcciones.js';
 import db from '../config/db.js';
 
-const paginaInicio = async(req, res) => {
-  const hoteles = await modeloHotel.findAll();
+const paginaInicio = async (req, res) => {
+  //const hoteles = await modeloHotel.findAll(); 
+  const numHoteles = await db.query(`select count(*) as n from hoteles as h inner join img_hoteles as img on h.id_ht = img.id_ht;`,
+    { model: modeloNumHoteles, mapToModel: true });
+  const numero = numHoteles[0].dataValues.n;
+  const hoteles = await db.query(`select h.id_ht, h.nombre, img.nombreImagen from hoteles as h inner join img_hoteles as img on h.id_ht = img.id_ht;`,
+    { model: modeloImgPublicidad, mapToModel: true });
+  let newHoteles = []
+  if (numero > 0) {
+    let id = -1;
+    for (var i = 0; i < numero; i++) {
+      if (id != hoteles[i].dataValues.id_ht) {
+        newHoteles.push(hoteles[i])
+      }
+      id = hoteles[i].dataValues.id_ht;
+    }
+  }
   res.render("inicio", {
     pagina: "Inicio",
-    hoteles: hoteles,
-    selec:"selec",
+    hoteles: newHoteles,
+    selec: "selec",
   });
 }
 
@@ -16,14 +34,14 @@ const adminHoteles = async (req, res) => {
   res.render("adminHoteles", {
     pagina: "Administración de los hoteles",
     hoteles: hoteles,
-    selec2:"selec"
+    selec2: "selec"
   });
 }
 
 const crearHoteles = async (req, res) => {
   res.render('crearHotel', {
     pagina: 'Registro de hotel',
-    
+
   });
 }
 
@@ -34,7 +52,7 @@ const pagGerentes = async (req, res) => {
   res.render("gerentes", {
     pagina: "Gerentes",
     gerentes: gerentes,
-    selec3:"selec"
+    selec3: "selec"
   });
 }
 
@@ -64,7 +82,7 @@ const pagRegistrarImagenesHoteles = async (req, res) => {
   });
 }
 
-const pagCambiarImagenGerente = async (req,res) => {
+const pagCambiarImagenGerente = async (req, res) => {
   res.render("registrarImagenesGerentes", {
     pagina: "Modificar imagen gerente",
     idGerente: req.query.id_gr,
@@ -72,11 +90,13 @@ const pagCambiarImagenGerente = async (req,res) => {
   });
 }
 
-const pagRegistrarImagenesHabitaciones = async (req,res) => {
+const pagRegistrarImagenesHabitaciones = async (req, res) => {
   res.render("registrarImagenesHabitaciones", {
     pagina: "Registrar Imagenes Habitaciones",
+    idHabitacion: req.query.id_hbt,
+    idHotel: req.query.id_ht
   })
 }
 
-export {paginaInicio,adminHoteles,pagGerentes,paginaHabitaciones,crearHoteles,crearGerentes,pagRegistrarImagenesHoteles,pagCambiarImagenGerente}
+export { paginaInicio, adminHoteles, pagGerentes, paginaHabitaciones, crearHoteles, crearGerentes, pagRegistrarImagenesHoteles, pagCambiarImagenGerente, pagRegistrarImagenesHabitaciones }
 

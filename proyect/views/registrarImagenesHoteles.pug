@@ -33,7 +33,7 @@ block compartircontenido
 
                 const json = await response.json()
 
-                const h5 =  document.getElementById('message')
+                const h5 =  document.getElementById('message') 
                 h5.textContent = `${json?.status}, ${json?.message}`
 
                 if (json?.status == "success"){

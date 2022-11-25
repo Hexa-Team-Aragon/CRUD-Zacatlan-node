@@ -13,7 +13,7 @@ const deleteImg = async(nombreImagen) => {
   } catch (err) {
     console.log(err);
   }
-}
+} 
 
 // Metodo que elimina la imagen del gerente de img-data-bases
 const deleteImagenGerente = async (idGerente) => {

@@ -5,7 +5,7 @@ import modeloCategoria from '../models/categorias.js';
 import modeloHabitacionCategorias from '../models/habitacionCategorias.js';
 import modeloImgHotel from '../models/imgHoteles.js';
 import modeloImgHabitacion from '../models/imgHabitaciones.js';
-import { deleteImagenesHabitacion } from './eliminarImagenes.js';
+import { deleteImagenesHabitacion, deleteImagenHabitacion } from './eliminarImagenes.js';
 import db from '../config/db.js';
 
 // Metodo para mostrar todos los detalles del hotel seleccionado - pagina ver mas
@@ -161,12 +161,23 @@ const paginaCraerHabitacion = async (req, res) => {
 // Metodo que muestra la pagina de modificar imagenes habitacion
 const pagModificarImgHabitacion = async (req, res) => {
   const idHabitacion = req.query.id_hbt;
+  const idHotel = req.query.id_ht;
   const imgHabitacion = await db.query(`select * from img_habitaciones where id_hbt = ${idHabitacion};`
     , { model: modeloImgHabitacion, mapToModel: true });
   res.render("modificarImgHabitacion",{
     pagina: "Imagenes habitacion",
-    imgHabitacion
+    imgHabitacion,
+    idHabitacion,
+    idHotel
   })
 }
 
-export { getHabitacion, putHabitacion, deleteHabitacion, verMas, postHabitacion, cancelarHab, paginaCraerHabitacion, validarSelectorCategoria, adminDetalles, pagModificarImgHabitacion }
+// Metodo para eliminar una imagen de una habitacion
+const deleteImgHabitacion = async (req, res) => {
+  const idImg = req.query.id_img;
+  await deleteImagenHabitacion(idImg);
+  await modeloImgHabitacion.destroy( {where: {id_img:idImg}} );
+  res.redirect('back');
+}
+
+export { getHabitacion, putHabitacion, deleteHabitacion, verMas, postHabitacion, cancelarHab, paginaCraerHabitacion, validarSelectorCategoria, adminDetalles, pagModificarImgHabitacion, deleteImgHabitacion }
