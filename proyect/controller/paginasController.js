@@ -2,11 +2,9 @@ import modeloHotel from '../models/hoteles.js';
 import modeloGerentesImagenes from '../models/gerentesImganes.js';
 import modeloNumHoteles from '../models/numeroHoteles.js';
 import modeloImgPublicidad from '../models/imgPublicidad.js';
-import { rutaImagenesDataBases } from '../direcciones.js';
 import db from '../config/db.js';
 
 const paginaInicio = async (req, res) => {
-  //const hoteles = await modeloHotel.findAll(); 
   const numHoteles = await db.query(`select count(*) as n from hoteles as h inner join img_hoteles as img on h.id_ht = img.id_ht;`,
     { model: modeloNumHoteles, mapToModel: true });
   const numero = numHoteles[0].dataValues.n;
@@ -99,4 +97,3 @@ const pagRegistrarImagenesHabitaciones = async (req, res) => {
 }
 
 export { paginaInicio, adminHoteles, pagGerentes, paginaHabitaciones, crearHoteles, crearGerentes, pagRegistrarImagenesHoteles, pagCambiarImagenGerente, pagRegistrarImagenesHabitaciones }
-

@@ -5,11 +5,16 @@ import {getHoteles,putHoteles,postHoteles,deleteHoteles,deleteImgHotel} from '..
 import {getHabitacion,putHabitacion,deleteHabitacion,verMas,postHabitacion,cancelarHab,paginaCraerHabitacion,validarSelectorCategoria,adminDetalles,pagModificarImgHabitacion,deleteImgHabitacion} from '../controller/controladorHabitacion.js';
 import {fileExtLimiter,fileSizeLimiter,postImagenes,upload,filesPayloadExists,maximoFiles,putImagenes} from '../controller/controladorImagenes.js';
 import modeloImgGerente from '../models/imgGerentes.js';
+import { pagLogin,credenciales } from "../controller/controladorIniciarSesion.js";
 
 const rutas = express.Router();
 
+// rutas login
+rutas.get('/',pagLogin);
+rutas.post('/credenciales',credenciales);
+
 //ruta para paginas generales 
-rutas.get("/",paginaInicio);
+rutas.get("/zacatlan",paginaInicio);
 rutas.get("/adminHoteles",adminHoteles);
 rutas.get("/adminDetalles",adminDetalles);
 rutas.get("/verMas",verMas);
