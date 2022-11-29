@@ -103,13 +103,4 @@ const deleteGerente = async (req, res) => {
   res.redirect('/gerentes');
 }
 
-/*const deleteImgGerente = async (req,res) => {
-  await deleteImg(req.query.nombre);
-  await modeloImgGerente.destroy( {where:{id_img: req.query.id_img}} );
-  res.redirect('/gerentes');
-}*/
-const putImgGerente = async (req, res) => {
-
-}
-
 export { getGerentes, postGerente, putGerente, deleteGerente,validarSelector };

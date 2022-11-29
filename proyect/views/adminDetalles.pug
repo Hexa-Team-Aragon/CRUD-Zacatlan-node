@@ -24,10 +24,10 @@ block compartircontenido
                                 th.text-center Teléfono
                                 th.fw-normal=`${hotel.telefono}`
                                 tr
-                                th.text-center Gerente
+                                th.text-center Gerentes
                                 each gerente in gerentes
                                     th.fw-normal=`${gerente.nombre+' '+gerente.apellido_paterno+' '+gerente.apellido_materno}`
-                                tr                         
+                                    tr                         
 
                     .container-fluid.p-0.m-2.col-3
                         table.table.table-striped.table-bordered.border-secondary.align-middle.table-secondary.border.border-3
@@ -44,8 +44,9 @@ block compartircontenido
                                                 td.py-0
                                                     .container-fluid.d-flex.justify-content-between.py-1
                                                         p.align-middle.m-0=`${imgHotel.nombreImagen.slice(3)}`
-                                                        a.navbar-brand.d-flex.align-items-center(href=`/hotel/eliminar/imagen?id_img=${imgHotel.id_img}&id=${hotel.id_ht}`)
-                                                            img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
+                                                        if rol == "administrador"
+                                                            a.navbar-brand.d-flex.align-items-center(href=`/hotel/eliminar/imagen?id_img=${imgHotel.id_img}&id=${hotel.id_ht}`)
+                                                                img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
                     
                 .container-fluid.m-0.p-0.mb-3.col-5
                     table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
@@ -61,8 +62,9 @@ block compartircontenido
                                         p.align-middle.m-0=`${habitacion.nombre}`
                                         a.navbar-brand.d-flex.align-items-center(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
                                             img(src='/images/editar.png', alt='', width='25', height='25')
-                                        a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
-                                            img(src='/images/eliminar.png', alt='', width='25', height='25')
+                                        if rol == "administrador"
+                                            a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
+                                                img(src='/images/eliminar.png', alt='', width='25', height='25')
                                 td.col-2.align-middle
                                     .container-fluid.d-flex.justify-content-center.py-1
                                         a.navbar-brand.d-flex.align-items-center(href=`/pagina/modificarImg/habitacion?id_hbt=${habitacion.id_hbt}&id_ht=${habitacion.id_ht}`) 

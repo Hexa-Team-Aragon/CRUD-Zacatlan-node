@@ -31,6 +31,7 @@ block compartircontenido
                                     .container-fluid.d-flex.justify-content-between
                                         a.pe-3(href=`/modificarGerente?id=${gerente.id_gr}`)
                                             img(src='/images/editar.png', alt='', width='25', height='25')
-                                        a(href=`/gerentes/eliminar?id=${gerente.id_gr}`)
-                                            img(src='/images/eliminar.png', alt='', width='25', height='25')
+                                        if rol == "administrador"
+                                            a(href=`/gerentes/eliminar?id=${gerente.id_gr}`)
+                                                img(src='/images/eliminar.png', alt='', width='25', height='25')
                         

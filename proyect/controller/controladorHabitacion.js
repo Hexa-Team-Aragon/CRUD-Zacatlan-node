@@ -52,11 +52,9 @@ const adminDetalles = async (req, res) => {
     attributes: ['id_gr', 'id_ht', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono'],
     where: { id_ht: idHotel }
   });
-  const habitaciones = await db.query(
-    `select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${idHotel} where a.id_cat = b.id_cat;`
+  const habitaciones = await db.query(`select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${idHotel} where a.id_cat = b.id_cat;`
     , { model: modeloHabitacionCategorias, mapToModel: true });
-  const imagenesHotel = await db.query(
-    `select * from img_hoteles where id_ht = ${idHotel};`
+  const imagenesHotel = await db.query(`select * from img_hoteles where id_ht = ${idHotel};`
     , { model: modeloImgHotel, mapToModel: true });
 
   if (hotel.id_gr != "null") {
@@ -65,14 +63,18 @@ const adminDetalles = async (req, res) => {
       hotel,
       gerentes,
       habitaciones,
-      imagenesHotel
+      imagenesHotel,
+      rol: req.session.rol,
+      isGerente: "si" 
     });
   } else {
     res.render("adminDetalles", {
       pagina: `${hotel.nombre}`,
       hotel,
       habitaciones,
-      imagenesHotel
+      imagenesHotel,
+      rol: req.session.rol,
+      isGerente: "no"
     });
   }
 }

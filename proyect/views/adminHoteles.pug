@@ -28,7 +28,8 @@ block compartircontenido
                                             img(src='/images/ver.png', alt='', width='25', height='25')
                                         a(href=`/modificarHotel?id=${hotel.id_ht}`)
                                             img(src='/images/editar.png', alt='', width='25', height='25')
-                                        a(href=`/hoteles/eliminar?id=${hotel.id_ht}`)
-                                            img(src='/images/eliminar.png', alt='', width='25', height='25')
+                                        if rol == "administrador"
+                                            a(href=`/hoteles/eliminar?id=${hotel.id_ht}`)
+                                                img(src='/images/eliminar.png', alt='', width='25', height='25')
                                 
                             

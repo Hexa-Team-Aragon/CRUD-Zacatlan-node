@@ -32,6 +32,7 @@ const adminHoteles = async (req, res) => {
   res.render("adminHoteles", {
     pagina: "Administración de los hoteles",
     hoteles: hoteles,
+    rol: req.session.rol,
     selec2: "selec"
   });
 }
@@ -50,6 +51,7 @@ const pagGerentes = async (req, res) => {
   res.render("gerentes", {
     pagina: "Gerentes",
     gerentes: gerentes,
+    rol: req.session.rol,
     selec3: "selec"
   });
 }

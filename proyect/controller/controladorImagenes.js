@@ -26,11 +26,11 @@ const postImagenes = (tabla,nombreId,nextRuta) => {
     const idCreate = req.query.id_create;
     const files = req.files
     Object.keys(files).forEach(async (key) => {
-      const filepath = path.join(rutaImagenesDataBases, `${idCreate}-${files[key].name}`);
+      const filepath = path.join(rutaImagenesDataBases, `${idCreate.padStart(2,0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
-      await db.query(`insert into ${tabla}(${nombreId},nombreImagen) values(${idCreate},'${idCreate}-${files[key].name}');`);
+      await db.query(`insert into ${tabla}(${nombreId},nombreImagen) values(${idCreate},'${idCreate.padStart(2,0)}-${files[key].name}');`);
     })
     return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
   }
@@ -38,22 +38,36 @@ const postImagenes = (tabla,nombreId,nextRuta) => {
 
 const putImagenes = (modelo,nextRuta) => {
   return async (req, res) => {
-    const id = req.query.id;
     const idImg = req.query.id_img;
+    const id = req.query.id;
     const files = req.files;
     await deleteImagenGerente(id);
     Object.keys(files).forEach(async(key) => {
-      const filepath = path.join(rutaImagenesDataBases, `${id}-${files[key].name}`);
+      const filepath = path.join(rutaImagenesDataBases, `${id.padStart(2,0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
       const imgGerente = await modelo.findByPk(idImg);
-      imgGerente.nombreImagen = `${id}-${files[key].name}`;
-      await imgGerente.save()
+      imgGerente.nombreImagen = `${id.padStart(2,0)}-${files[key].name}`;
+      imgGerente.save()
     })
     return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
   }
 }
+
+/*const putImgDB = (modelo) => {
+  return (req, res, next) => {
+    const idImg = req.query.id_img;
+    const id = req.query.id;
+    const files = req.files;
+    Object.keys(files).forEach(async (key) => {
+      const imgGerente = await modelo.findByPk(idImg);
+      imgGerente.nombreImagen = `${id}-${files[key].name}`;
+      imgGerente.save()
+    })
+    next()
+  }
+}*/
 
 const MB = 1 //Variable para definir el numero de bytes maximo que puede pesar un archivo
 const FILE_SIZE_LIMIT = MB * 1024 * 1024; //Aquie se calculan los bytes
