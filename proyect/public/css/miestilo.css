@@ -56,11 +56,11 @@ footer{
 }
 
 body{
-  background-image: url(../images/fondo3.jpg);
-  background-size: contain;
+  /*background-image: url(../images/fondo3.jpg);*/
+  /*background-size: contain;*/
   
   font-family: rubik;
-  background-repeat: repeat;
+  /*background-repeat: repeat;*/
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -339,4 +339,33 @@ p{
   border: solid 3px #6e636c;
   background-color: #dbdbdb;
   border-radius: 5px;
+}
+
+#tablaHotel{
+  border: solid 3px #4453da;
+  background-color: #cdd2ff;
+}
+
+#tablaHab{
+  border: solid 3px #6e3e6e;
+  background-color: #e9c5e9;
+}
+
+#tablaImg{
+  border: solid 3px #2c2b29;
+  background-color: #7b7a77;
+}
+
+#borderIni{
+  border: groove 15px #a04545;
+}
+
+#alturaHotel{
+  height: 45vh;
+  
+}
+
+#alturaHab{
+  height: 30vh;
+  
 }

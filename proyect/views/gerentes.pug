@@ -1,10 +1,10 @@
 extends ./layout/index.pug 
 block compartircontenido 
     h1.text-center.pt-4.fw-bold #{pagina}
-    main.container.mt-5#text2
+    main.container.mt-4#text2
         .container.text-center.mb-4.mt-0
                 a(href='/crearGerente', class='btn btn-success btn-clock') Registrar gerente
-        .container-fluid.d-flex.m-0.p-0 
+        .container-fluid.d-flex.m-0.p-0.align-middle 
             table.table.table-info.table-striped.table-bordered.border-info.border.border-2.align-middle.text-center
                 thead
                     tr
@@ -12,7 +12,7 @@ block compartircontenido
                     th(scope='col') Apellido paterno
                     th(scope='col') Apellido materno
                     th(scope='col') Teléfono
-                    th.col-2(scope='col') Foto del gerente
+                    th.col-3(scope='col') Foto del gerente
                     th(scope='col') Acciones
                     
                 tbody
@@ -28,10 +28,10 @@ block compartircontenido
                                 a(href=`/pagCambiarImagenGerente?id_img=${gerente.id_img}&id_gr=${gerente.id_gr}`)
                                     img.ms-2(src='/images/editar.png', alt='', width='25', height='25')
                         td.col-1.align-middle
-                                    .container-fluid.d-flex.justify-content-between
-                                        a.pe-3(href=`/modificarGerente?id=${gerente.id_gr}`)
-                                            img(src='/images/editar.png', alt='', width='25', height='25')
-                                        if rol == "administrador"
-                                            a(href=`/gerentes/eliminar?id=${gerente.id_gr}`)
-                                                img(src='/images/eliminar.png', alt='', width='25', height='25')
+                            .container-fluid.d-flex.justify-content-between.align-middle
+                                a.pe-3(href=`/modificarGerente?id=${gerente.id_gr}`)
+                                    img(src='/images/editar.png', alt='', width='25', height='25')
+                                if rol == "administrador"
+                                    a(href=`/gerentes/eliminar?id=${gerente.id_gr}`)
+                                        img(src='/images/eliminar.png', alt='', width='25', height='25')
                         

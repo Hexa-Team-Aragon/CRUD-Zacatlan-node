@@ -9,7 +9,7 @@ block compartircontenido
             .row.justify-content-center
                 .container-fluid.col-ms.d-flex.align-items-sm-stretch.py-0.justify-content-between
                     .container-fluid.p-0.m-2.justify-content-center
-                        table.table.table-striped.table-bordered.border-primary.align-middle.table-success.border.border-3
+                        table.table.table-bordered.align-middle#tablaHotel
                             thead.align-middle.justify-content-center
                                 tr
                                 th.text-center Nombre del hotel
@@ -24,7 +24,7 @@ block compartircontenido
                                 th.text-center Teléfono
                                 th.fw-normal=`${hotel.telefono}`
                                 tr
-                                th.text-center Gerentes
+                                th.text-center Gerente
                                 each gerente in gerentes
                                     th.fw-normal=`${gerente.nombre+' '+gerente.apellido_paterno+' '+gerente.apellido_materno}`
                                     tr                         
@@ -49,7 +49,7 @@ block compartircontenido
                                                                 img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
                     
                 .container-fluid.m-0.p-0.mb-3.col-5
-                    table.table.table-success.table-striped.table-bordered.border-success.border.border-2.align-middle.text-center
+                    table.table.table-bordered.align-middle.text-center#tablaHab
                         thead
                             tr
                             th(scope='col') Categoria de la habitación
@@ -58,13 +58,14 @@ block compartircontenido
                             each habitacion in habitaciones 
                                 tr
                                 td.col-2.align-middle
-                                    .container-fluid.d-flex.justify-content-between.py-1
+                                    .container-fluid.d-flex.py-1
                                         p.align-middle.m-0=`${habitacion.nombre}`
-                                        a.navbar-brand.d-flex.align-items-center(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
-                                            img(src='/images/editar.png', alt='', width='25', height='25')
-                                        if rol == "administrador"
-                                            a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
-                                                img(src='/images/eliminar.png', alt='', width='25', height='25')
+                                        .container-fluid.d-flex.justify-content-end
+                                            a.navbar-brand.d-flex.align-items-center(href=`/modificarHabitacion?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`)
+                                                img.me-3(src='/images/editar.png', alt='', width='25', height='25')
+                                            if rol == "administrador"
+                                                a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar?id_habitacion=${habitacion.id_hbt}&id_hotel=${hotel.id_ht}`) 
+                                                    img(src='/images/eliminar.png', alt='', width='25', height='25')
                                 td.col-2.align-middle
                                     .container-fluid.d-flex.justify-content-center.py-1
                                         a.navbar-brand.d-flex.align-items-center(href=`/pagina/modificarImg/habitacion?id_hbt=${habitacion.id_hbt}&id_ht=${habitacion.id_ht}`) 

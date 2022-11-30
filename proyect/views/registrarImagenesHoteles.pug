@@ -1,17 +1,20 @@
 extends ./layout/index.pug
 block compartircontenido 
     main.container.mt-5
-        .row
-            .col-md-12 
+        .row.justify-content-center
+            .col-md-12
                 h2.d.block.w-100.text-center.fw-bold #{pagina} 
                 h5#message.d.block.w-100.text-center.fw-bold
             .row.justify-content-center
-                .col-md-5
+                .col-md-6
                     form(id='uploadForm' enctype='multipart/form-data' method="POST")
-                        .form-group
-                            label(for="Archivo") Imagenes 
-                            input#myFiles(type="file", accept='image/*' multiple)
-                        input.btn.btn-success.btn-block(type="submit" value='Registrar')
+                        .container-fluid.d-flex.justify-content-center
+                            .form-group.mt-4.d-flex.justify-content-center
+                                label.pe-4(for="Archivo") Imagenes 
+                                input#myFiles(type="file", accept='image/*' multiple)
+                        .container-fluid.d-flex.justify-content-between.my-4.px-5.col-8
+                            input.btn.btn-success.btn-block(type="submit" value='Registrar')
+                            a(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-danger btn-clock') Cancelar
 
         script.
             const form = document.getElementById('uploadForm')
