@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import db from './config/db.js'
 import rutas from './rutas/index.js'
+import publicidad from './rutas/publicidad.js';
 import session from "express-session";
 import { nanoid } from "nanoid";
 
@@ -24,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 
 //Definiendo carpeta publica
 app.use(express.static("public"));
+
+//Rutas pagina publicidad
+app.use('/',publicidad);
 
 //definiendo la sesion
 app.use(session({

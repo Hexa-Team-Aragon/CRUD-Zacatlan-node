@@ -14,10 +14,10 @@ rutas.get('/',pagLogin);
 rutas.post('/credenciales',credenciales);
 
 //ruta para paginas generales 
-rutas.get("/zacatlan",paginaInicio);
+//rutas.get("/zacatlan",paginaInicio);
 rutas.get("/adminHoteles",adminHoteles);
 rutas.get("/adminDetalles",adminDetalles);
-rutas.get("/verMas",verMas);
+//rutas.get("/verMas",verMas);
 rutas.get('/cancelarHab',cancelarHab);
 rutas.post('/validarImagenes',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter);
 

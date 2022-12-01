@@ -2,27 +2,28 @@ extends ./layout/index.pug
 block compartircontenido 
     h1.text-center.pt-4.fw-bold #{pagina}
     main.container.mt-4.px-5
-        //-.container.text-center.mb-3.mt-0
-            a.mx-2.px-1(href=`crearHabitacion?id=${hotel.id_ht}`, class='btn btn-success btn-clock') Registrar habitación
         .container-fluid.px-5
             .row
-                
                 .card.mb-3
                     .row.g-0
                         .col-md-7.container-fluid
                             #carouselExampleControls.container.carousel.carousel-dark.slide(data-bs-ride='carousel')
                                 .carousel-inner
-                                    .carousel-item.active
-                                        .container-fluid.d-flex.justify-content-center
-                                            img.img-fluid.d-block#alturaHotel(src='/img-data-bases/03-Hotel-Zacatlan.jpeg',alt='')
-                                    .carousel-item
-                                        .container-fluid.d-flex.justify-content-center
-                                            img.img-fluid.d-block#alturaHotel(src='/img-data-bases/03-hamburguesa.png')
-                                    
-                                button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
+                                    - var n = 0;
+                                    while n < imagenesHotel.length
+                                        if n > 0
+                                            .carousel-item(data-bs-interval="2000")
+                                                .container-fluid.d-flex.justify-content-center
+                                                    img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
+                                        else
+                                            .carousel-item.active(data-bs-interval="2000")
+                                                .container-fluid.d-flex.justify-content-center
+                                                    img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
+                                        - n++                                  
+                                //-button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
                                     span.carousel-control-prev-icon(aria-hidden='true')
                                     span.visually-hidden Previous
-                                button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
+                                //-button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
                                     span.carousel-control-next-icon(aria-hidden='true')
                                     span.visually-hidden Next
                         .col-md-5.container-fluid
@@ -41,28 +42,26 @@ block compartircontenido
                             .container-fluid.px-0.border.border-primary.border-5
                                 #carouselExampleControls1.container.carousel.carousel-dark.px-0.slide.border.border-5(data-bs-ride='carousel')
                                     .carousel-inner.px-0.border.border-secondary.border-5
-                                        .carousel-item.active
-                                            .container-fluid.d-flex.justify-content-center
-                                                img.img-fluid.d-block#alturaHab(src='/img-data-bases/03-ap.png',alt='')
-                                        .carousel-item
-                                            .container-fluid.d-flex.justify-content-center
-                                                img.img-fluid.d-block#alturaHab(src='/img-data-bases/03-hamburguesa.png')
-                                        .carousel-item
-                                            .container-fluid.d-flex.justify-content-center
-                                                img.img-fluid.d-block#alturaHab(src='/images/im5.png',alt='')
-                                        .carousel-item
-                                            .container-fluid.d-flex.justify-content-center
-                                                img.img-fluid.d-block#alturaHab(src='/img-data-bases/06-oscurp.jpg',alt='')
-                                        .carousel-item
-                                            .container-fluid.d-flex.justify-content-center
-                                                img.img-fluid.d-block#alturaHab(src='/img-data-bases/07-game.png',alt='')
-                                    button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='prev')
+                                        - var i = 0;
+                                        while i < habitacion.length
+                                            if i > 0
+                                                .carousel-item(data-bs-interval="2000")
+                                                    .container-fluid.d-flex.justify-content-center
+                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${habitacion[i].dataValues.nombreImagen}`,alt='')
+                                            else
+                                                .carousel-item.active(data-bs-interval="2000")
+                                                    .container-fluid.d-flex.justify-content-center
+                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${habitacion[i].dataValues.nombreImagen}`,alt='')
+                                            - i++ 
+
+                                    //-button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='prev')
                                         span.carousel-control-prev-icon(aria-hidden='true')
                                         span.visually-hidden Previous
-                                    button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='next')
+                                    //-button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='next')
                                         span.carousel-control-next-icon(aria-hidden='true')
                                         span.visually-hidden Next
                                     
                             .card-body
                                 p.card-text Categoria de la habitación:
-                                p=`${habitacion.nombre}` 
+                                p=`${habitacion[0].dataValues.nombre}`
+                                 
