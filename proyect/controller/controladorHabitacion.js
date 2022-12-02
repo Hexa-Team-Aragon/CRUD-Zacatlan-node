@@ -15,13 +15,11 @@ const verMas = async (req, res) => {
   const hotel = await modeloHotel.findByPk(idHotel);
   const imagenesHotel = await db.query(`select * from img_hoteles where id_ht = ${idHotel};`,{ model: modeloImgHotel, mapToModel: true });
   const habitaciones = await db.query(`select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${idHotel} where a.id_cat = b.id_cat;`,{ model: modeloHabitacionCategorias, mapToModel: true });
-
   let lista = []
   for (var i = 0; i < habitaciones.length; i++ ){
     let imgCategoriaN = await db.query(`select a.id_cat, a.nombre, b.id_hbt, b.id_ht, c.nombreImagen from categorias as a inner join habitaciones as b on a.id_cat = b.id_cat inner join img_habitaciones as c on b.id_hbt = c.id_hbt where b.id_ht = ${idHotel} and a.id_cat = ${habitaciones[i].dataValues.id_cat};`,{ model: modeloHabitacionCategoriaImg, mapToModel: true });
     lista.push(imgCategoriaN);
   }
-  //const imgCategoriaUno = await db.query(`select a.id_cat, a.nombre, b.id_hbt, b.id_ht, c.nombreImagen from categorias as a inner join habitaciones as b on a.id_cat = b.id_cat inner join img_habitaciones as c on b.id_hbt = c.id_hbt where b.id_ht = ${idHotel} and a.id_cat = 1;`,{ model: modeloHabitacionCategoriaImg, mapToModel: true });
   res.render("verMas", {
     pagina: `${hotel.nombre}`,
     hotel,
@@ -166,7 +164,8 @@ const pagModificarImgHabitacion = async (req, res) => {
     pagina: "Imagenes habitacion",
     imgHabitacion,
     idHabitacion,
-    idHotel
+    idHotel,
+    rol: req.session.rol
   })
 }
 

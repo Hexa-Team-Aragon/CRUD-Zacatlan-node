@@ -369,3 +369,7 @@ p{
   height: 30vh;
   
 }
+.desactivar{
+  pointer-events: none;
+  cursor: default;
+}

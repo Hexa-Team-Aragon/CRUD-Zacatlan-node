@@ -1,6 +1,6 @@
 extends ./layout/index.pug 
 block compartircontenido 
-    h1.text-center.pt-4.fw-bold #{pagina}
+    h1.text-center.pt-4.fw-bold #{pagina} 
     main.container.mt-4
         .container-fluid.text-center.mb-4.mt-0
             a(href=`pagCrearImagenHotel?id=${hotel.id_ht}`, class='btn btn-primary btn-clock') Añadir imágenes
@@ -44,7 +44,10 @@ block compartircontenido
                                                 td.py-0
                                                     .container-fluid.d-flex.justify-content-between.py-1
                                                         p.align-middle.m-0=`${imgHotel.nombreImagen.slice(3)}`
-                                                        if rol == "administrador"
+                                                        if rol == "administrador" && imagenesHotel.length == 1
+                                                            a.navbar-brand.d-flex.align-items-center.desactivar(href=`/hotel/eliminar/imagen?id_img=${imgHotel.id_img}&id=${hotel.id_ht}`)
+                                                                img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
+                                                        else if rol == "administrador"
                                                             a.navbar-brand.d-flex.align-items-center(href=`/hotel/eliminar/imagen?id_img=${imgHotel.id_img}&id=${hotel.id_ht}`)
                                                                 img.ms-2(src='/images/eliminar.png', alt='', width='22', height='22')
                     
