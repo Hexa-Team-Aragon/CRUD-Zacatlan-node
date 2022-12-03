@@ -8,7 +8,7 @@ const paginaInicio = async (req, res) => {
   const numHoteles = await db.query(`select count(*) as n from hoteles as h inner join img_hoteles as img on h.id_ht = img.id_ht;`,
     { model: modeloNumHoteles, mapToModel: true });
   const numero = numHoteles[0].dataValues.n;
-  const hoteles = await db.query(`select h.id_ht, h.nombre, img.nombreImagen from hoteles as h inner join img_hoteles as img on h.id_ht = img.id_ht order by id_img desc;`,
+  const hoteles = await db.query(`select h.id_ht, h.nombre, img.nombreImagen from hoteles as h inner join img_hoteles as img on h.id_ht = img.id_ht order by img.id_img asc;`,
     { model: modeloImgPublicidad, mapToModel: true });
   let newHoteles = []
   if (numero > 0) {

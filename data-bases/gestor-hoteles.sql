@@ -75,3 +75,10 @@ CREATE TABLE usuarios (
     rol VARCHAR(40) NOT NULL,
     PRIMARY KEY (id)
 )DEFAULT CHARACTER SET UTF8MB4;
+
+INSERT INTO usuarios(nombre,contraseña,rol) VALUES('admin','123','administrador');
+INSERT INTO usuarios(nombre,contraseña,rol) VALUES('usuario','123','usuario');
+
+INSERT INTO categorias(nombre) VALUES('Sencilla');
+INSERT INTO categorias(nombre) VALUES('Matrimonial');
+INSERT INTO categorias(nombre) VALUES('Premium');
