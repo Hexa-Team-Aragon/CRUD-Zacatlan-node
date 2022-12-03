@@ -24,12 +24,12 @@ rutas.post('/validarImagenes',upload,filesPayloadExists,fileExtLimiter(['.png','
 rutas.get('/modificarHotel',getHoteles);
 rutas.get('/crearHotel',crearHoteles);
 rutas.post('/hoteles',postHoteles);
-rutas.post('/guardarImagenHotel',upload,postImagenes('img_hoteles','id_ht','/adminHoteles'));
+rutas.post('/guardarImagenHotel',upload,postImagenes('img_hoteles','id_ht','/adminHoteles',rutaImgHoteles));
 rutas.post('/hoteles/modificar',putHoteles);
 rutas.get('/hoteles/eliminar',deleteHoteles);
 rutas.get('/hotel/eliminar/imagen',deleteImgHotel);
 rutas.get('/pagCrearImagenHotel',pagRegistrarImagenesHoteles);
-rutas.post('/crearImagenHotel',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,fileIsExist('img_hoteles'),postImagenes('img_hoteles','id_ht','/adminDetalles'));
+rutas.post('/crearImagenHotel',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,fileIsExist('img_hoteles'),postImagenes('img_hoteles','id_ht','/adminDetalles',rutaImgHoteles));
 
 // rutas crud gerentes
 rutas.get("/gerentes",pagGerentes);
@@ -40,9 +40,9 @@ rutas.get('/gerentes/eliminar',deleteGerente);
 rutas.post('/validarSeleccionarHotel',validarSelector);
 rutas.post('/validarImagenesGerente',upload,filesPayloadExists,maximoFiles,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter);
 rutas.post('/gerentes',postGerente);
-rutas.post('/guardarImagenGerente',upload,postImagenes('img_gerentes','id_gr','/gerentes'));
+rutas.post('/guardarImagenGerente',upload,postImagenes('img_gerentes','id_gr','/gerentes',rutaImgGerentes));
 rutas.get('/pagCambiarImagenGerente',pagCambiarImagenGerente);
-rutas.post('/gerente/modificar/imagen',upload,filesPayloadExists,maximoFiles,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,fileIsExist('img_gerentes'),putImagenes(modeloImgGerente,'/gerentes'));
+rutas.post('/gerente/modificar/imagen',upload,filesPayloadExists,maximoFiles,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,fileIsExist('img_gerentes'),putImagenes(modeloImgGerente,'/gerentes',rutaImgGerentes));
 
 // rutas crud habitaciones
 rutas.get('/crearHabitacion',paginaCraerHabitacion);
@@ -52,9 +52,9 @@ rutas.get('/habitacion/eliminar',deleteHabitacion);
 rutas.get('/pagina/modificarImg/habitacion',pagModificarImgHabitacion);
 rutas.post('/validarSeleccionarHabitacion',validarSelectorCategoria);
 rutas.post('/crearHabitacion',postHabitacion);
-rutas.post('/guardarImagenHabitacion',upload,postImagenes('img_habitaciones','id_hbt','/adminDetalles'));
+rutas.post('/guardarImagenHabitacion',upload,postImagenes('img_habitaciones','id_hbt','/adminDetalles',rutaImghabitaciones));
 rutas.get('/habitacion/eliminar/imagen',deleteImgHabitacion)
 rutas.get('/pagCrearImagenHabitacion',pagRegistrarImagenesHabitaciones);
-rutas.post('/crearImagenHabitacion',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,fileIsExist('img_habitaciones'),postImagenes('img_habitaciones','id_hbt','/pagina/modificarImg/habitacion'));
+rutas.post('/crearImagenHabitacion',upload,filesPayloadExists,fileExtLimiter(['.png','.jpg','.jpeg']),fileSizeLimiter,fileIsExist('img_habitaciones'),postImagenes('img_habitaciones','id_hbt','/pagina/modificarImg/habitacion',rutaImghabitaciones));
 
 export default rutas;

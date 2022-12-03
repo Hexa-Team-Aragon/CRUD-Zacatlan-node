@@ -13,7 +13,7 @@ import db from '../config/db.js';
 const verMas = async (req, res) => {
   const idHotel = req.query.id;
   const hotel = await modeloHotel.findByPk(idHotel);
-  const imagenesHotel = await db.query(`select * from img_hoteles where id_ht = ${idHotel};`,{ model: modeloImgHotel, mapToModel: true });
+  const imagenesHotel = await db.query(`select * from img_hoteles where id_ht = ${idHotel} order by id_img desc;`,{ model: modeloImgHotel, mapToModel: true });
   const habitaciones = await db.query(`select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${idHotel} where a.id_cat = b.id_cat;`,{ model: modeloHabitacionCategorias, mapToModel: true });
   let lista = []
   for (var i = 0; i < habitaciones.length; i++ ){
@@ -48,7 +48,7 @@ const adminDetalles = async (req, res) => {
   });
   const habitaciones = await db.query(`select a.id_cat, a.nombre, b.id_hbt, b.id_ht from categorias as a inner join habitaciones as b on b.id_ht = ${idHotel} where a.id_cat = b.id_cat;`
     , { model: modeloHabitacionCategorias, mapToModel: true });
-  const imagenesHotel = await db.query(`select * from img_hoteles where id_ht = ${idHotel};`
+  const imagenesHotel = await db.query(`select * from img_hoteles where id_ht = ${idHotel} order by id_img desc;`
     , { model: modeloImgHotel, mapToModel: true });
 
   if (hotel.id_gr != "null") {

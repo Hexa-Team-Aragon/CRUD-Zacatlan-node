@@ -21,12 +21,12 @@ const filesPayloadExists = (req, res, next) => {
 
 const upload = fileUpload({ createParentPath: true })
 
-const postImagenes = (tabla, nombreId, nextRuta) => {
+const postImagenes = (tabla, nombreId, nextRuta, ruta) => {
   return async (req, res) => {
     const idCreate = req.query.id_create;
     const files = req.files
     Object.keys(files).forEach(async (key) => {
-      const filepath = path.join(rutaImagenesDataBases, `${idCreate.padStart(2, 0)}-${files[key].name}`);
+      const filepath = path.join(ruta, `${idCreate.padStart(2, 0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
@@ -36,14 +36,14 @@ const postImagenes = (tabla, nombreId, nextRuta) => {
   }
 }
 
-const putImagenes = (modelo, nextRuta) => {
+const putImagenes = (modelo, nextRuta, ruta) => {
   return async (req, res) => {
     const idImg = req.query.id_img;
     const id = req.query.id_create;
     const files = req.files;
     await deleteImagenGerente(id);
     Object.keys(files).forEach(async (key) => {
-      const filepath = path.join(rutaImagenesDataBases, `${id.padStart(2, 0)}-${files[key].name}`);
+      const filepath = path.join(ruta, `${id.padStart(2, 0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })

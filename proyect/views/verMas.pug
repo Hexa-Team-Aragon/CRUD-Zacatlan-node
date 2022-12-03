@@ -14,18 +14,12 @@ block compartircontenido
                                         if n > 0
                                             .carousel-item(data-bs-interval="2000")
                                                 .container-fluid.d-flex.justify-content-center
-                                                    img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
+                                                    img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/hoteles/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
                                         else
                                             .carousel-item.active(data-bs-interval="2000")
                                                 .container-fluid.d-flex.justify-content-center
-                                                    img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
+                                                    img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/hoteles/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
                                         - n++                                  
-                                //-button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='prev')
-                                    span.carousel-control-prev-icon(aria-hidden='true')
-                                    span.visually-hidden Previous
-                                //-button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
-                                    span.carousel-control-next-icon(aria-hidden='true')
-                                    span.visually-hidden Next
                         .col-md-5.container-fluid
                             .card-body
                                 p Dirección:
@@ -47,20 +41,12 @@ block compartircontenido
                                             if i > 0
                                                 .carousel-item(data-bs-interval="2000")
                                                     .container-fluid.d-flex.justify-content-center
-                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${habitacion[i].dataValues.nombreImagen}`,alt='')
+                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/habitaciones/${habitacion[i].dataValues.nombreImagen}`,alt='')
                                             else
                                                 .carousel-item.active(data-bs-interval="2000")
                                                     .container-fluid.d-flex.justify-content-center
-                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/${habitacion[i].dataValues.nombreImagen}`,alt='')
-                                            - i++ 
-
-                                    //-button.carousel-control-prev(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='prev')
-                                        span.carousel-control-prev-icon(aria-hidden='true')
-                                        span.visually-hidden Previous
-                                    //-button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls1', data-bs-slide='next')
-                                        span.carousel-control-next-icon(aria-hidden='true')
-                                        span.visually-hidden Next
-                                    
+                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/habitaciones/${habitacion[i].dataValues.nombreImagen}`,alt='')
+                                            - i++                  
                             .card-body
                                 p.card-text Categoria de la habitación:
                                 p=`${habitacion[0].dataValues.nombre}`
