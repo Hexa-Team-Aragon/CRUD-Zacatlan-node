@@ -4,7 +4,7 @@ import express from "express";
 
 const publicidad = express.Router();
 
-publicidad.get("/zacatlan",paginaInicio);
+publicidad.get("/",paginaInicio);
 publicidad.get("/verMas",verMas);
 
 export default publicidad;

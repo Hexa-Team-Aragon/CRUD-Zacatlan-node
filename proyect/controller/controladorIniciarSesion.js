@@ -15,7 +15,7 @@ const credenciales = async(req, res) => {
         req.session.rol=usuarioDB[0].dataValues.rol;
         res.redirect('/adminHoteles');
     }else{
-        res.redirect('/');
+        res.redirect('/login');
     }
 }
 

@@ -1,12 +1,12 @@
 import path from 'path';
 import fileUpload from "express-fileupload";
-import {rutaImagenesDataBases} from '../direcciones.js';
-import {deleteImagenGerente} from './eliminarImagenes.js'
+import { rutaImagenesDataBases } from '../direcciones.js';
+import { deleteImagenGerente } from './eliminarImagenes.js'
 import db from '../config/db.js';
 
-const maximoFiles = (req,res,next) => {
+const maximoFiles = (req, res, next) => {
   const files = req.files;
-  if (Object.keys(files).length > 1){
+  if (Object.keys(files).length > 1) {
     return res.status(400).json({ status: 'error', message: 'Solo seleccione una imagen' });
   }
   next();
@@ -21,60 +21,45 @@ const filesPayloadExists = (req, res, next) => {
 
 const upload = fileUpload({ createParentPath: true })
 
-const postImagenes = (tabla,nombreId,nextRuta) => {
+const postImagenes = (tabla, nombreId, nextRuta) => {
   return async (req, res) => {
     const idCreate = req.query.id_create;
     const files = req.files
     Object.keys(files).forEach(async (key) => {
-      const filepath = path.join(rutaImagenesDataBases, `${idCreate.padStart(2,0)}-${files[key].name}`);
+      const filepath = path.join(rutaImagenesDataBases, `${idCreate.padStart(2, 0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
-      await db.query(`insert into ${tabla}(${nombreId},nombreImagen) values(${idCreate},'${idCreate.padStart(2,0)}-${files[key].name}');`);
+      await db.query(`insert into ${tabla}(${nombreId},nombreImagen) values(${idCreate},'${idCreate.padStart(2, 0)}-${files[key].name}');`);
     })
-    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
+    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta })
   }
 }
 
-const putImagenes = (modelo,nextRuta) => {
+const putImagenes = (modelo, nextRuta) => {
   return async (req, res) => {
     const idImg = req.query.id_img;
-    const id = req.query.id;
+    const id = req.query.id_create;
     const files = req.files;
     await deleteImagenGerente(id);
-    Object.keys(files).forEach(async(key) => {
-      const filepath = path.join(rutaImagenesDataBases, `${id.padStart(2,0)}-${files[key].name}`);
+    Object.keys(files).forEach(async (key) => {
+      const filepath = path.join(rutaImagenesDataBases, `${id.padStart(2, 0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
       const imgGerente = await modelo.findByPk(idImg);
-      imgGerente.nombreImagen = `${id.padStart(2,0)}-${files[key].name}`;
-      imgGerente.save()
+      imgGerente.nombreImagen = `${id.padStart(2, 0)}-${files[key].name}`;
+      await imgGerente.save()
     })
-    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta})
+    return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta })
   }
 }
-
-/*const putImgDB = (modelo) => {
-  return (req, res, next) => {
-    const idImg = req.query.id_img;
-    const id = req.query.id;
-    const files = req.files;
-    Object.keys(files).forEach(async (key) => {
-      const imgGerente = await modelo.findByPk(idImg);
-      imgGerente.nombreImagen = `${id}-${files[key].name}`;
-      imgGerente.save()
-    })
-    next()
-  }
-}*/
 
 const MB = 1 //Variable para definir el numero de bytes maximo que puede pesar un archivo
 const FILE_SIZE_LIMIT = MB * 1024 * 1024; //Aquie se calculan los bytes
 const fileSizeLimiter = (req, res, next) => {
   const files = req.files;
   const fileOverLimit = [];
-  //Que archivos estan fuera del limite
   Object.keys(files).forEach(key => {
     if (files[key].size > FILE_SIZE_LIMIT) {
       fileOverLimit.push(files[key].name)
@@ -90,11 +75,10 @@ const fileSizeLimiter = (req, res, next) => {
 
     return res.status(413).json({ status: 'error', message });
   }
-  console.log('entro')
-  if (req.query.directo == 'pasa'){
+  if (req.query.directo == 'pasa') {
     next();
-  }else{
-    return res.json({ status: 'Correcto'});
+  } else {
+    return res.json({ status: 'Correcto' });
   }
 }
 
@@ -114,4 +98,20 @@ const fileExtLimiter = (allowedExtArray) => {
   }
 }
 
-export { upload,postImagenes,fileExtLimiter,fileSizeLimiter,filesPayloadExists,maximoFiles,putImagenes }
+const fileIsExist = (nameTable) => {
+  return async(req, res, next) => {
+    const idCreate = req.query.id_create;
+    console.log(idCreate)
+    const files = Object.keys(req.files)
+    for (let i = 0; i < files.length; i++){
+      const existe = await db.query(`select count(*) as size from ${nameTable} where nombreImagen = '${idCreate.padStart(2, 0)}-${files[i]}'`);
+      if (existe[0][0].size == 1) {
+        const message = `ya existe una o mas imagenes`;
+        return res.status(422).json({ status: "Error", message });
+      }
+    }
+    next();
+  }
+}
+
+export { upload, postImagenes, fileExtLimiter, fileSizeLimiter, filesPayloadExists, maximoFiles, putImagenes, fileIsExist }
