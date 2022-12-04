@@ -1,9 +1,9 @@
 import sequelize from 'sequelize';
 
-const db = new sequelize('gestorhotelesv2','root','1234',{
+const db = new sequelize('bzgh3rduxcwv3hlxor6l','u6bzllhsjmzxzi8m','o3GOmQQFLImMA0ey1IGw',{
     dialect: 'mysql',
     dialectOptions: {
-        host: '127.0.0.1',
+        host: 'bzgh3rduxcwv3hlxor6l-mysql.services.clever-cloud.com',
         port: '3306',
         timestamps: false,
         pool: {
