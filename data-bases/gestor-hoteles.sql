@@ -69,15 +69,15 @@ FOREIGN KEY (id_hbt) REFERENCES habitaciones(id_hbt) ON DELETE CASCADE
 )DEFAULT CHARACTER SET UTF8MB4;
 
 CREATE TABLE usuarios (
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(40) NOT NULL,
-    contraseña VARCHAR(60) NOT NULL,
-    rol VARCHAR(40) NOT NULL,
-    PRIMARY KEY (id)
+id 								INTEGER NOT NULL AUTO_INCREMENT,
+nombre 							VARCHAR(40) NOT NULL,
+password 						VARCHAR(60) NOT NULL,
+rol 							VARCHAR(40) NOT NULL,
+PRIMARY KEY (id)
 )DEFAULT CHARACTER SET UTF8MB4;
 
-INSERT INTO usuarios(nombre,contraseña,rol) VALUES('admin','123','administrador');
-INSERT INTO usuarios(nombre,contraseña,rol) VALUES('usuario','123','usuario');
+INSERT INTO usuarios(nombre,password,rol) VALUES('admin','123','administrador');
+INSERT INTO usuarios(nombre,password,rol) VALUES('usuario','123','usuario');
 
 INSERT INTO categorias(nombre) VALUES('Sencilla');
 INSERT INTO categorias(nombre) VALUES('Matrimonial');
