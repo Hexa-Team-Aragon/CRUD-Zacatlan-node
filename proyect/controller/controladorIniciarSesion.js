@@ -8,7 +8,7 @@ const credenciales = async(req, res) => {
         usuario,
         clave
     } = req.body;
-    const usuarioDB = await db.query(`select * from usuarios where nombre = '${usuario}' and contraseña = '${clave}';`
+    const usuarioDB = await db.query(`select * from usuarios where nombre = '${usuario}' and password = '${clave}';`
         , { model: modeloUsuario, mapToModel: true });
     if (usuarioDB.length == 1){
         req.session.nombre=usuario;

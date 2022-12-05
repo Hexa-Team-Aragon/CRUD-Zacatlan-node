@@ -9,7 +9,7 @@ const Usuarios = db.define('usuarios', {
     nombre:{
         type: Sequelize.STRING
     },
-    contraseña:{
+    password:{
         type: Sequelize.STRING
     },
     rol:{
