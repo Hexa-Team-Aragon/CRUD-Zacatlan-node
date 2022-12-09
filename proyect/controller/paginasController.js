@@ -23,7 +23,7 @@ const paginaInicio = async (req, res) => {
   res.render("inicio", {
     pagina: "Inicio",
     hoteles: newHoteles,
-    selec: "selec",
+    selec: "selec"
   });
 }
 

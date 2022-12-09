@@ -142,6 +142,7 @@ const cancelarHab = async (req, res) => {
   res.redirect(`/adminDetalles?id=${req.query.id_hotel}`);
 };
 
+
 // Metodo que muestra el formulario de registrar habitacion
 const paginaCraerHabitacion = async (req, res) => {
   const categorias = await db.query(

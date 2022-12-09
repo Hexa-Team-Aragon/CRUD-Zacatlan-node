@@ -20,6 +20,6 @@ block compartircontenido
                                     else if rol == "administrador"
                                         a.navbar-brand.d-flex.align-items-center(href=`/habitacion/eliminar/imagen?id_img=${img.id_img}`)
                                                 img.ms-2(src='/images/eliminar.png', alt='', width='25', height='25')
-    .container-fluid.text-center.mb-4.mt-0
+        .container-fluid.text-center.mb-4.mt-0.d-flex.justify-content-between.col-4
             a(href=`/pagCrearImagenHabitacion?id_ht=${idHotel}&id_hbt=${idHabitacion}`, class='btn btn-primary btn-clock') Añadir imágenes
-            a.mx-2.px-1(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-success btn-clock') Regresar
+            a.mx-2.px-1(href=`/cancelarHab?id_hotel=${idHotel}`, class='btn btn-danger btn-clock') Cancelar

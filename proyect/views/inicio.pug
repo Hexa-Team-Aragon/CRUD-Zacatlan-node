@@ -1,4 +1,4 @@
-extends ./layout/index.pug
+extends ./layout/indexPublicidad.pug
 block compartircontenido
     main.container-fluid
     .row.d-flex.container-fluid.p-0.m-0
@@ -8,14 +8,15 @@ block compartircontenido
         .container-fluid.p-0#image2 
         .container-fluid.col-12.px-5.container-md
             .container-fluid.d-flex.justify-content-center
-                .card.mx-5.my-4
+                .card.mx-5.my-4.border.border-0
                     .card-body.p-0            
-                        .container-lg.d-flex.align-items-start.align-items-center.m-0#info 
-                            #v-pills-tab.nav.flex-column.nav-pills(role='tablist' aria-orientation='vertical') 
+                        .container-lg.d-flex.align-items-start.align-items-center.m-0 
+                            #v-pills-tab.nav.flex-column.nav-pills(role='tablist' aria-orientation='vertical')
                                 button#v-pills-description-tab.boton.nav-link.active(data-bs-toggle='pill' data-bs-target='#v-pills-description' type='button' role='tab' aria-controls='v-pills-description' aria-selected='true' ) Descripción
                                 button#v-pills-feria-tab.nav-link(data-bs-toggle='pill' data-bs-target='#v-pills-feria' type='button' role='tab' aria-controls='v-pills-feria' aria-selected='false') Feria de la manzana
                                 button#v-pills-atracciones-tab.nav-link(data-bs-toggle='pill' data-bs-target='#v-pills-atracciones' type='button' role='tab' aria-controls='v-pills-atracciones' aria-selected='false') Atracciones
                                 button#v-pills-settings-tab.nav-link(data-bs-toggle='pill' data-bs-target='#v-pills-restaurantes' type='button' role='tab' aria-controls='v-pills-restaurantes' aria-selected='false') Restaurantes
+                            
                             #v-pills-tabContent.tab-content
                                 #v-pills-description.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='des' tabindex='0') 
                                     .row.justify-content-center.py-4.pb-0
@@ -42,7 +43,7 @@ block compartircontenido
                                                         button.carousel-control-next(type='button', data-bs-target='#carouselExampleControls', data-bs-slide='next')
                                                             span.carousel-control-next-icon(aria-hidden='true')
                                                             span.visually-hidden Next
-                                            .container-fluid.d-flex.col-5.ps-0.ms-0.pt-3
+                                            .container-fluid.d-flex.col-5.px-1.ms-0.pt-3
                                                 p#des1 Zacatlán es un Municipio ubicado al borde de la Barranca de los Jilgueros en el estado de Puebla, México. Este municipio se carecteriza por tener un clima frío acompañado de neblina. En este bonito municipio se tienen las costumbres de hornear pan todos los días, fabricar relojes monumentales y cultivar frutas. Este municipio es uno de los principales productores de manzanas del país; esta fruta tiene tanta relevancia en Zacatlán, que anualmente se lleva a cabo la feria de la manzana.
                                             
                                 #v-pills-feria.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-feria-tab' tabindex='0') 
@@ -72,7 +73,7 @@ block compartircontenido
                                                             span.visually-hidden Next
                                         
                                 #v-pills-atracciones.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-atracciones-tab' tabindex='0') 
-                                    .container-sm.col-9
+                                    .container-sm.col-10
                                         .container-fluid
                                             #carouselExampleControls3.carousel.carousel-dark.slide(data-bs-ride='carousel')
                                                 .carousel-inner
@@ -124,7 +125,7 @@ block compartircontenido
                                                     span.visually-hidden Next
                                 
                                 #v-pills-restaurantes.tab-pane.fade(role='tabpanel' aria-labelledby='v-pills-restaurantes-tab' tabindex='0') 
-                                    .container-sm.col-9
+                                    .container-sm.col-10
                                         .container-fluid
                                             #carouselExampleControls4.carousel.carousel-dark.slide(data-bs-ride='carousel')
                                                 .carousel-inner
@@ -167,13 +168,12 @@ block compartircontenido
                                                     span.carousel-control-next-icon(aria-hidden='true')
                                                     span.visually-hidden Next
             .container#barra
-            .container-md.px-3.py-4 
+            .container-md.px-3.py-3 
                 .container-fluid
-                    .container
-                        .card.justify-content-center#hoteles
-                            h4.text-center.fw-bold.m-0 Hoteles
+                    .container#border.d-flex.justify-content-center.mb-2
+                        h4.fw-bold.m-0 HOTELES
                     .container-fluid.d-flexpy-4.justify-content-center  
-                            .container-fluid.pt-4
+                            .container-fluid.pt-1
                                 .row
                                     each hotel in hoteles 
                                         .col-ms.col-lg-4.mv-4.d-flex.align-items-sm-stretch
@@ -188,12 +188,12 @@ block compartircontenido
                                                                         a.stretched-linka.text-white.align-items-end.pb-3(href=`/verMas?id=${hotel.id_ht}`) Detalles
                                     
             .container#barra
-            .container-md.px-5.py-4 
+            .container-md.px-5.py-3 
                 .container-fluid
                     .container-fluid
-                        .card.justify-content-center
-                            h4.text-center.fw-bold#ubicacion ¿Cómo llegar?
-                    .container-fluid.d-flex.py-4.justify-content-center
+                        .container-fluid.d-flex.justify-content-center.mb-0.mb-2#border
+                            h4.fw-bold.m-0 ¿CÓMO LLEGAR?
+                    .container-fluid.d-flex.py-1.justify-content-center
                         .container-md.d-flex.justify-content-center.mx-3.col-8#bu
                             iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7562.5783406230685!2d-97.96679978289356!3d19.931386711727825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d06f0924377771%3A0x8092cbf6e48afbae!2sZacatl%C3%A1n%20de%20las%20Manzanas!5e0!3m2!1ses-419!2smx!4v1668839394194!5m2!1ses-419!2smx' width='100%' height='100%' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade')
                         .container-md-fluid.d-flex.justify-content-center.mx-3

@@ -1,53 +1,54 @@
-extends ./layout/index.pug 
+extends ./layout/indexPublicidad.pug 
 block compartircontenido 
     h1.text-center.pt-4.fw-bold #{pagina}
-    main.container.mt-4.px-5
+    main.container.mt-2.px-5
         .container-fluid.px-5
-            .row
-                .card.mb-3
+            .row.justify-content-center
+                .card.mb-3.px-0.border.border-0.col-11
                     .row.g-0
-                        .col-md-7.container-fluid
+                        .col-md-7.container-fluid.px-0.mx-0#cardP
                             #carouselExampleControls.container.carousel.carousel-dark.slide(data-bs-ride='carousel')
                                 .carousel-inner
                                     - var n = 0;
                                     while n < imagenesHotel.length
                                         if n > 0
                                             .carousel-item(data-bs-interval="2000")
-                                                .container-fluid.d-flex.justify-content-center
+                                                .container-fluid.d-flex.justify-content-center.py-1
                                                     img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/hoteles/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
                                         else
                                             .carousel-item.active(data-bs-interval="2000")
-                                                .container-fluid.d-flex.justify-content-center
+                                                .container-fluid.d-flex.justify-content-center.py-1
                                                     img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/hoteles/${imagenesHotel[n].dataValues.nombreImagen}`,alt='')
                                         - n++                                  
-                        .col-md-5.container-fluid
-                            .card-body
-                                p Dirección:
-                                p=`${hotel.direccion}`
-                                p E-mail: 
-                                p=`${hotel.correo}`
-                                p Teléfono: 
-                                p=`${hotel.telefono}`
+                    
+                        .card-body.col-md-3.py-4#cardD
+                            .container-fluid
+                                p.fw-bold.mb-0 Dirección:
+                                p.mb-2=`${hotel.direccion}` 
+                                p.fw-bold.mb-0 E-mail: 
+                                p.mb-2=`${hotel.correo}`
+                                p.fw-bold.mb-0 Teléfono: 
+                                p.mb-2=`${hotel.telefono}`
         .row
             each habitacion in habitaciones 
-                .col-ms.col-lg-4.mv-4             
-                    .card.mb-4.p-0.container-fluid.px-0(style='width: 18rem;')
-                        .container.px-0.border.border-5.border-danger
-                            .container-fluid.px-0.border.border-primary.border-5
-                                #carouselExampleControls1.container.carousel.carousel-dark.px-0.slide.border.border-5(data-bs-ride='carousel')
-                                    .carousel-inner.px-0.border.border-secondary.border-5
+                .col-ms.col-lg-4.mv-3.px-0           
+                    #cardHab.card.mb-4.p-0.container-fluid.px-0(style='width: 90%;')
+                        .container.px-0
+                            .container-fluid.px-0
+                                #carouselExampleControls1.container.carousel.carousel-dark.px-0.slide(data-bs-ride='carousel')
+                                    .carousel-inner.px-0
                                         - var i = 0;
                                         while i < habitacion.length
                                             if i > 0
                                                 .carousel-item(data-bs-interval="2000")
                                                     .container-fluid.d-flex.justify-content-center
-                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/habitaciones/${habitacion[i].dataValues.nombreImagen}`,alt='')
+                                                        img.img-fluid.d-block#alturaHab(src=`/img-data-bases/habitaciones/${habitacion[i].dataValues.nombreImagen}`,alt='')
                                             else
                                                 .carousel-item.active(data-bs-interval="2000")
                                                     .container-fluid.d-flex.justify-content-center
-                                                        img.img-fluid.d-block#alturaHotel(src=`/img-data-bases/habitaciones/${habitacion[i].dataValues.nombreImagen}`,alt='')
+                                                        img.img-fluid.d-block#alturaHab(src=`/img-data-bases/habitaciones/${habitacion[i].dataValues.nombreImagen}`,alt='')
                                             - i++                  
-                            .card-body
-                                p.card-text Categoria de la habitación:
-                                p=`${habitacion[0].dataValues.nombre}`
+                            .card-body.pt-1
+                                p.card-text.fw-bold.mb-0 Categoria de la habitación: 
+                                p.my-0=`${ habitacion[0].dataValues.nombre}`
                                  

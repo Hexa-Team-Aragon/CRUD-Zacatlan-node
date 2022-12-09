@@ -30,15 +30,19 @@
   font-family: sec;
   font-size: 25px;
 }
-a#titulo:hover{
-  outline: auto;
-  background-color: #a68b39;
 
+#menu{
+  font-family: nunitoSB;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+a#menu:hover{
+  outline: auto;
 }
 
 .selec{
   outline: auto;
-  background-color: #a68b39;
 }
 
 #header {
@@ -137,6 +141,7 @@ p{
 
 #text {
   font-family: nunito;
+  text-align: justify;
 }
 
 #text2 {
@@ -144,10 +149,10 @@ p{
 }
 
 #barra{
-  background-image: url(../images/patron7.jpg);
+  background-image: url(../images/barra2.jpg);
   background-size: contain;
   width: 92%;
-  height: 10px;
+  height: 15px;
   position: relative;
 }
 
@@ -173,19 +178,12 @@ p{
   
 }
 
-#info{
-  background-color: white;
-}
 #des{
   border-radius: 10px;
   border: solid 4px rgb(204, 44, 44);
   background-color: #f3c9c8;
-  /*border: groove 10px #ba8b27;*/
-}
 
-/*button#v-pills-description-tab{
-  background-color:#EEB4B3;
-}*/
+}
 
 .boton{
   background-color:  #f4cecd;
@@ -204,6 +202,7 @@ p{
   border-radius: 10px;
   border: solid 3px rgb(204, 44, 44);
   padding: 10px;
+  background-color: #f3c9c8;
 }
 
 #feria1{
@@ -211,6 +210,7 @@ p{
   border: solid 3px #FF9F1C;
   padding: 10px;
   margin: 0%;
+  background-color: #faf09a;
 }
 
 #atrac1{
@@ -311,28 +311,18 @@ p{
   border-radius: 5px;
 }
 
-#hoteles{
-  margin: 0px;
-  padding-top:5px ;
-  padding-bottom: 5px;
-  border: solid 4px #2537d4;
-  background-color: #c9cdef;
-  border-radius: 8px;
+#border{
+  background-image: url(../images/borde1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height:50px;  
 }
 
 #bh{
-  border: solid 3px #2537d4;
   background-color: #c9cdef;
   border-radius: 8px;
-}
-
-#ubicacion{
-  margin: 0px;
-  padding-top:5px ;
-  padding-bottom: 5px;
-  border: solid 4px #6e636c;
-  background-color: #cccccc;
-  border-radius: 8px;
+  
 }
 
 #bu{
@@ -361,15 +351,38 @@ p{
 }
 
 #alturaHotel{
-  height: 45vh;
-  
+  height: 50vh;
 }
 
 #alturaHab{
-  height: 30vh;
+  height: 35vh;
+  padding-top: 3%;
+  padding-bottom: 3%;
   
 }
 .desactivar{
   pointer-events: none;
   cursor: default;
+}
+
+
+#cardP{ 
+  
+  border: dotted 5px #bb689e;
+  border-right: none;
+  
+}
+#cardD{
+  border-left: solid 10px #bb689e;
+  background-color: #f9dff0;
+  border-right: dotted 5px #bb689e;
+  border-bottom: dotted 5px #bb689e;
+  border-top: dotted 5px #bb689e;
+  border-radius: 0% 10% 10% 0%;
+}
+
+#cardHab{
+  border-radius:0% 0% 5% 5%;
+  background-color: #d8ebf4;
+  border: 10px double #66c3f5;
 }
