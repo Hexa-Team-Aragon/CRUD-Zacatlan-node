@@ -29,7 +29,7 @@ block compartircontenido
                     formData.append(myFiles.item(key).name, myFiles.item(key))
                 })
 
-                const response = await fetch(`http://localhost:1800/crearImagenHotel?id_create=${#{idHotel}}&directo=pasa`, {
+                const response = await fetch(`/crearImagenHotel?id_create=${#{idHotel}}&directo=pasa`, {
                     method: 'POST',
                     body: formData
                 })

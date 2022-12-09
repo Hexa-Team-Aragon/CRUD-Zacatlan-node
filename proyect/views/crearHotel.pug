@@ -51,7 +51,7 @@ block compartircontenido
                     },
                     body: JSON.stringify(hotel)
                 }
-                const resFile = await fetch('http://localhost:1800/validarImagenes', {
+                const resFile = await fetch('/validarImagenes', {
                     method: 'POST',
                     body: formData
                 });
@@ -59,10 +59,10 @@ block compartircontenido
                 if(jsonFile?.status == 'Correcto'){
 
                     // crea el gerente
-                    const resDB = await fetch('http://localhost:1800/hoteles',options);
+                    const resDB = await fetch('/hoteles',options);
                     const jsonDB = await resDB.json();
                     // guarda la imagen
-                    const resImagen = await fetch(`http://localhost:1800/guardarImagenHotel?id_create=${jsonDB?.id_create}`,{
+                    const resImagen = await fetch(`/guardarImagenHotel?id_create=${jsonDB?.id_create}`,{
                         method: 'POST',
                         body: formData
                     });
