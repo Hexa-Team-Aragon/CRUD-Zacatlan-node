@@ -43,11 +43,11 @@ block compartircontenido
                     },
                     body: JSON.stringify(categoria)
                 }
-                const resSeleccionar = await fetch('/validarSeleccionarHabitacion',options);
+                const resSeleccionar = await fetch('http://localhost:1800/validarSeleccionarHabitacion',options);
                 const jsonSeleccionar = await resSeleccionar.json();
                 if (jsonSeleccionar?.status == 'Correcto'){
 
-                    const resFile = await fetch('/validarImagenes', {
+                    const resFile = await fetch('http://localhost:1800/validarImagenes', {
                         method: 'POST',
                         body: formData
                     });
@@ -55,10 +55,10 @@ block compartircontenido
                     if(jsonFile?.status == 'Correcto'){
 
                         // crea el gerente
-                        const resDB = await fetch(`/crearHabitacion?id=${#{idHotel}}`,options);
+                        const resDB = await fetch(`http://localhost:1800/crearHabitacion?id=${#{idHotel}}`,options);
                         const jsonDB = await resDB.json();
                         // guarda la imagen
-                        const resImagen = await fetch(`/guardarImagenHabitacion?id_create=${jsonDB?.id_create}`,{
+                        const resImagen = await fetch(`http://localhost:1800/guardarImagenHabitacion?id_create=${jsonDB?.id_create}`,{
                             method: 'POST',
                             body: formData
                         });

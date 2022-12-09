@@ -33,7 +33,7 @@ const putHoteles = async (req, res) => {
 // Método que crea y almacena los hoteles
 const postHoteles = async (req, res) => {
   const { nombre, direccion, telefono, correo } = req.body;
-  //console.log(req.body)
+  console.log(req.body)
   //Almacenar en la base de datos
   try {
     const query = await modeloHoteles.create({
@@ -42,7 +42,7 @@ const postHoteles = async (req, res) => {
       telefono,
       correo,
     });
-    res.json({ id_create: query.null }); 
+    res.json({ id_create: query.null });
   } catch (error) {
     console.log(error);
   }
