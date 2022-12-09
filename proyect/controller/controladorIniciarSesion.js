@@ -24,4 +24,10 @@ const pagLogin = (req, res) => {
     res.render("login");
 }
 
-export { pagLogin,credenciales }
+// Metodo que cierra la sesion 
+const cerrarSesion = (req, res) => {
+    req.session.destroy()
+    res.redirect('/login');
+}
+
+export { pagLogin,credenciales,cerrarSesion }

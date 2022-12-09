@@ -1,4 +1,4 @@
-extends ./layout/index.pug 
+extends ./layout/indexLogin.pug 
 block compartircontenido 
     main.container.mt-5 
         .row.justify-content-center
@@ -16,4 +16,4 @@ block compartircontenido
                                 label.pb-1(for="clave") Clave: 
                                 input#clave(type="password",placeholder="Tu clave",name="clave",class="form-control")
                             .container-fluid.d-flex.justify-content-center
-                                input.btn.btn-success.btn-block(type="submit") 
+                                input.btn.btn-success.btn-block(type="submit",value="Iniciar Sesión")

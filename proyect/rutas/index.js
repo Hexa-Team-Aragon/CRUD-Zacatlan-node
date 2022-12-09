@@ -5,7 +5,7 @@ import {getHoteles,putHoteles,postHoteles,deleteHoteles,deleteImgHotel} from '..
 import {getHabitacion,putHabitacion,deleteHabitacion,verMas,postHabitacion,cancelarHab,paginaCraerHabitacion,validarSelectorCategoria,adminDetalles,pagModificarImgHabitacion,deleteImgHabitacion} from '../controller/controladorHabitacion.js';
 import {fileExtLimiter,fileSizeLimiter,postImagenes,upload,filesPayloadExists,maximoFiles,putImagenes,fileIsExist} from '../controller/controladorImagenes.js';
 import modeloImgGerente from '../models/imgGerentes.js';
-import { pagLogin,credenciales } from "../controller/controladorIniciarSesion.js";
+import { pagLogin,credenciales, cerrarSesion } from "../controller/controladorIniciarSesion.js";
 import {rutaImgHoteles,rutaImgGerentes,rutaImghabitaciones} from '../direcciones.js'
 
 const rutas = express.Router();
@@ -13,6 +13,7 @@ const rutas = express.Router();
 // rutas login
 rutas.get('/login',pagLogin);
 rutas.post('/credenciales',credenciales);
+rutas.get('/cerrar/sesion',cerrarSesion);
 
 //ruta para paginas generales 
 rutas.get("/adminHoteles",adminHoteles);

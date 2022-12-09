@@ -45,12 +45,6 @@ a#menu:hover{
   outline: auto;
 }
 
-#header {
-  background-image: url(../images/barra3.png);
-  background-size: contain;
-  height: 80px;
-}
-
 footer{
   /*background-image: url(../images/barra3.png);*/
   background-color:#DC3545;
@@ -109,10 +103,6 @@ p{
   color: azure;
   font-family: nunitoBI;
 }
-
-
-
-
 
 #cardHotel {
   background-color: #fae46b;

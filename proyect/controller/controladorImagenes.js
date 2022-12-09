@@ -42,15 +42,20 @@ const putImagenes = (modelo, nextRuta, ruta) => {
     const id = req.query.id_create;
     const files = req.files;
     await deleteImagenGerente(id);
-    Object.keys(files).forEach(async (key) => {
+    let name = "";
+    Object.keys(files).forEach( key => {
       const filepath = path.join(ruta, `${id.padStart(2, 0)}-${files[key].name}`);
       files[key].mv(filepath, (err) => {
         if (err) return res.status(500).json({ status: 'error', message: err })
       })
-      const imgGerente = await modelo.findByPk(idImg);
-      imgGerente.nombreImagen = `${id.padStart(2, 0)}-${files[key].name}`;
-      await imgGerente.save()
+      name = `${id.padStart(2, 0)}-${files[key].name}`;
+      //const imgGerente = await modelo.findByPk(idImg);
+      //imgGerente.nombreImagen = `${id.padStart(2, 0)}-${files[key].name}`;
+      //await imgGerente.save();
     })
+    const imgGerente = await modelo.findByPk(idImg);
+    imgGerente.nombreImagen = name;
+    await imgGerente.save();
     return res.json({ status: 'success', message: Object.keys(files).toString(), ruta: nextRuta })
   }
 }
