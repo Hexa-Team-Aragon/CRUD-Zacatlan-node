@@ -1,6 +1,6 @@
-# fly.toml file generated for zacatlan-equipo-3 on 2022-12-08T23:25:25-06:00
+# fly.toml file generated for proyecto-zacatlan-node on 2022-12-09T23:04:09-06:00
 
-app = "zacatlan-equipo-3"
+app = "proyecto-zacatlan-node"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
